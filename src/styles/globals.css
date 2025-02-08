@@ -5,6 +5,6 @@
 @layer base {
   html,
   body {
-    @apply font-inter font-normal text-[16px] xl:text-[0.7335vw];
+    @apply font-inter font-normal text-[16px] 4xl:text-[0.7335vw];
   }
 }

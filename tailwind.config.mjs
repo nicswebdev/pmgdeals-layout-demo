@@ -13,7 +13,10 @@ export default {
       md: "768px",
       lg: "992px",
       xl: "1200px",
-      xxl: "1400px",
+      "2xl": "1400px",
+      "3xl": "1600px",
+      "4xl": "1800px",
+      "5xl": "2000px",
     },
     fontFamily: {
       inter: ["var(--font-inter)"],
@@ -22,7 +25,6 @@ export default {
       colors: {
         primary: "#670000",
         "gray-dark": "#4A4A4A",
-        "gray-light": "#4A4A4A",
       },
     },
   },
