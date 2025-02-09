@@ -12,3 +12,6 @@ export * from "./SwiperButtonNext";
 // Cards
 export * from "./CardMonthPick";
 export * from "./CardProperty";
+
+// Filter
+export * from "./PropertyFilter";

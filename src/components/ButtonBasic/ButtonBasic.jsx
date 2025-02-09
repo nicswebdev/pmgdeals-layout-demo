@@ -8,7 +8,7 @@ export default function ButtonBasic({
   const Element = ["a", "button"].includes(element) ? element : "a";
 
   const buttonClassNames = [
-    "flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 4xl:px-9 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
+    "w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 4xl:px-9 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
   ];
 
   //   Handle variants
@@ -18,6 +18,8 @@ export default function ButtonBasic({
     buttonClassNames.push("text-primary border border-primary");
   } else if (variant === "white") {
     buttonClassNames.push("text-primary bg-white");
+  } else if (variant === "gray") {
+    buttonClassNames.push("text-white bg-gray-dark");
   }
 
   if (rounded) {
