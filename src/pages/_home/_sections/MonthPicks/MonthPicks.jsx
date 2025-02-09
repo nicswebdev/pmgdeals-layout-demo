@@ -36,7 +36,7 @@ export default function MonthPicks() {
   return (
     <div className="pt-[9.5rem] sm:pt-[11.75rem] xl:pt-[15.25rem] 4xl:pt-[14.5rem] bg-gray-dark">
       <div className="pb-14 xl:pb-20 xl:pt-20">
-        <div className="container">
+        <div className="container 4xl:max-w-[131.25rem]">
           <h1 className="pb-6 xl:pb-20 xl:text-[3rem] text-white">
             <span className="font-bold italic">Most Popular Picks </span>
             <span>This Month</span>

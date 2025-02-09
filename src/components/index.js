@@ -11,3 +11,4 @@ export * from "./SwiperButtonNext";
 
 // Cards
 export * from "./CardMonthPick";
+export * from "./CardProperty";
