@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="pt-9 xl:pt-20 pb-6 xl:pb-14 bg-gray-dark">
+      <div className="fixed top-0 inset-x-0 z-[100] pt-9 xl:pt-20 pb-6 xl:pb-14 ">
         <div className="container xl:max-w-[95vw] 2xl:max-w-[90vw] 4xl:max-w-[82.05vw]">
           <div className="flex flex-wrap justify-between items-start gap-4">
             <img
