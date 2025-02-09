@@ -13,11 +13,13 @@ export default function ButtonHeart({ filled = false }) {
       className="flex justify-center items-center aspect-square w-8 sm:w-12 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
       onClick={handleOnClick}
     >
-      {liked ? (
-        <FaHeart className="w-4 h-4" color="white" />
-      ) : (
-        <FaRegHeart className="w-4 h-4" color="white" />
-      )}
+      <div className="shrink-0">
+        {liked ? (
+          <FaHeart className="w-4 h-4" color="white" />
+        ) : (
+          <FaRegHeart className="w-4 h-4" color="white" />
+        )}
+      </div>
     </button>
   );
 }

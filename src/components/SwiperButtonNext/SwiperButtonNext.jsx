@@ -3,7 +3,7 @@ import { BsChevronRight } from "react-icons/bs";
 export default function SwiperButtonNext({ onClick, disabled }) {
   return (
     <button
-      className="max-md:hidden absolute right-4 top-1/2 -translate-y-1/2 z-[10] disabled:opacity-50"
+      className="max-md:hidden absolute right-4 top-[38.5%] z-[10] disabled:opacity-50"
       onClick={onClick}
       disabled={disabled}
     >

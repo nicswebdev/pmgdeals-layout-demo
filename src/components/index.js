@@ -15,3 +15,5 @@ export * from "./CardProperty";
 
 // Filter
 export * from "./PropertyFilter";
+
+export * from "./SwiperPropertyList";
