@@ -8,7 +8,7 @@ export default function MenuDesktop() {
           <li key={`menu-desktop-${item.id}`}>
             <a
               href={item.url}
-              className="font-bold text-[1rem] transition-all duration-300 hover:opacity-70 text-white"
+              className="font-bold text-[1rem] transition-all duration-300 hover:opacity-70 text-white group-[.active-scroll]:text-primary"
             >
               {item.title}
             </a>

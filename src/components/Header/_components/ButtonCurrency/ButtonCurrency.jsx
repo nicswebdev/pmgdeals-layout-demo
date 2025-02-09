@@ -22,7 +22,7 @@ export default function ButtonCurrency() {
   return (
     <div className="relative" id="currencyOptions">
       <button
-        className="flex items-center gap-2 sm:gap-4 text-white"
+        className="flex items-center gap-2 sm:gap-4 text-white group-[.active-scroll]:text-primary transition-all duration-300"
         onClick={() => setOpen(!open)}
       >
         <span className="font-inter font-semibold text-[0.75rem] lg:text-[1rem]">
