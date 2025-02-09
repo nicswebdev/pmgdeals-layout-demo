@@ -27,17 +27,17 @@ export default function MenuMobile({ isOpen, close }) {
       }`}
     >
       <button
-        class="absolute top-10 right-10 w-6 h-6 cursor-pointer"
+        className="absolute top-10 right-10 w-6 h-6 cursor-pointer"
         onClick={close}
       >
-        <span class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-[0.0625rem] -rotate-45 bg-primary"></span>
-        <span class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-[0.0625rem] rotate-45 bg-primary"></span>
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-[0.0625rem] -rotate-45 bg-primary"></span>
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-[0.0625rem] rotate-45 bg-primary"></span>
       </button>
 
       <div className="px-10 py-20 w-full h-full overflow-y-auto">
         <ul className="flex flex-col gap-6 4xl:gap-9">
           {menuItems.map((item) => (
-            <li key={item.id}>
+            <li key={`menu-mobile-${item.id}`}>
               <a
                 href={item.url}
                 className="font-bold text-[1rem] transition-all duration-300 hover:opacity-70 text-primary"

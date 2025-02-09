@@ -25,6 +25,7 @@ export default {
       colors: {
         primary: "#670000",
         "gray-dark": "#4A4A4A",
+        red: "#F40000",
       },
     },
   },
