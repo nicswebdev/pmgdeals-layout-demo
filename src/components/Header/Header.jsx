@@ -44,11 +44,11 @@ export default function Header() {
   return (
     <>
       <div
-        className="group fixed top-0 inset-x-0 z-[100] pt-9 xl:pt-20 pb-6 xl:pb-14"
+        className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-9 xl:pt-20 pb-6 xl:pb-14 [&.active-scroll]:xl:pt-10 [&.active-scroll]:xl:pb-10"
         id="header"
       >
         {/* Background white */}
-        <span className="absolute inset-0 transition-all duration-500 -translate-y-full group-[.active-scroll]:translate-y-0 bg-white "></span>
+        <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-white"></span>
 
         <div className="relative container xl:max-w-[95vw] 2xl:max-w-[90vw] 4xl:max-w-[82.05vw]">
           <div className="flex flex-wrap justify-between items-start gap-4">
