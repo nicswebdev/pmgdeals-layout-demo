@@ -1,5 +1,6 @@
 // Layouts
 export * from "./Header";
+export * from "./Footer";
 
 // Buttons
 export * from "./ButtonBasic";

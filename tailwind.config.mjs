@@ -20,6 +20,7 @@ export default {
     },
     fontFamily: {
       inter: ["var(--font-inter)"],
+      "open-sans": ["var(--font-open-sans)"],
     },
     extend: {
       colors: {
