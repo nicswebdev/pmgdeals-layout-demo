@@ -43,7 +43,7 @@ export default function Hotels() {
             <SwiperPropertyList />
           </div>
 
-          <div className="pb-20">
+          <div>
             <div className="[&>p]:pb-0 pb-10 4xl:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">
               <SectionHeading>Royal Suites at The Bandha</SectionHeading>
               <ButtonViewAll href="#" />
