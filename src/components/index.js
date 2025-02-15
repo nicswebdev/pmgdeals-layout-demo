@@ -18,3 +18,7 @@ export * from "./CardProperty";
 export * from "./PropertyFilter";
 
 export * from "./SwiperPropertyList";
+
+// Section Heading
+export * from "./SectionHeading";
+export * from "./Hero";
