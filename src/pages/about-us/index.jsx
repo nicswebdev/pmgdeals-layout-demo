@@ -22,11 +22,11 @@ export default function AboutUs() {
 
           <div>
             <SectionHeading>Our Recommendations</SectionHeading>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-3 gap-9">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <CardProperty key={`recommendation-card-property-${item}`} />
-            ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-3 gap-9">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <CardProperty key={`recommendation-card-property-${item}`} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

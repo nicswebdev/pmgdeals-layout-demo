@@ -22,3 +22,6 @@ export * from "./SwiperPropertyList";
 // Section Heading
 export * from "./SectionHeading";
 export * from "./Hero";
+
+// Accordion
+export * from "./AccordionBasic";
