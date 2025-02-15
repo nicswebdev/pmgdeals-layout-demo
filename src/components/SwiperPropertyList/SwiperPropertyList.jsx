@@ -10,7 +10,7 @@ import { useResponsiveWidth } from "@/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-export default function SwiperPropertyList() {
+export default function SwiperPropertyList({ numberOfProperties = 6 }) {
   const { screenSizes } = useResponsiveWidth();
 
   const sliderRef = useRef(null);
@@ -53,14 +53,18 @@ export default function SwiperPropertyList() {
           }}
           onSlideChange={handleSlideChange}
         >
-          {[1, 2, 3, 4, 5].map((item) => (
+          {[...Array(numberOfProperties)].map((item) => (
             <SwiperSlide key={`slide-month-pick-${item}`}>
               <CardProperty />
             </SwiperSlide>
           ))}
         </Swiper>
-        <SwiperButtonPrevious onClick={handlePrev} disabled={isBeginning} />
-        <SwiperButtonNext onClick={handleNext} disabled={isEnding} />
+        {numberOfProperties > 2 && (
+          <>
+            <SwiperButtonPrevious onClick={handlePrev} disabled={isBeginning} />
+            <SwiperButtonNext onClick={handleNext} disabled={isEnding} />
+          </>
+        )}
       </div>
     </div>
   );

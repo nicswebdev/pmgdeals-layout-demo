@@ -5,6 +5,7 @@ export * from "./Footer";
 // Buttons
 export * from "./ButtonBasic";
 export * from "./ButtonHeart";
+export * from "./ButtonViewAll";
 
 // Swiper Buttons
 export * from "./SwiperButtonPrevious";
