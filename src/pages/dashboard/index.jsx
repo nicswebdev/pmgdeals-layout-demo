@@ -32,12 +32,12 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 {[...Array(6)].map((item, index) => (
-                  <tr className="bg-gray-300 even:bg-gray-100">
+                  <tr
+                    className="bg-gray-300 even:bg-gray-100"
+                    key={`row-${index}`}
+                  >
                     {[...Array(7)].map((item, index) => (
-                      <td
-                        className="px-4 py-2 4xl:py-8"
-                        key={`table-body-${index}`}
-                      >
+                      <td className="px-4 py-2 4xl:py-8" key={`col-${index}`}>
                         Sample text
                       </td>
                     ))}
