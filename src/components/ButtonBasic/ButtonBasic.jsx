@@ -20,6 +20,8 @@ export default function ButtonBasic({
     buttonClassNames.push("text-primary bg-white");
   } else if (variant === "gray") {
     buttonClassNames.push("text-white bg-gray-dark");
+  } else if (variant === "gray-light") {
+    buttonClassNames.push("bg-[#D9D9D9]");
   }
 
   if (rounded) {
