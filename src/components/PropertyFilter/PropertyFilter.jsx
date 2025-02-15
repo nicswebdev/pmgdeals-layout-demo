@@ -143,7 +143,7 @@ export default function PropertyFilter() {
             >
               <div className="absolute left-4 top-4">
                 <button
-                  className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-400"
+                  className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-dark"
                   onClick={() => setOpenModal(false)}
                 >
                   <IoCloseOutline className="w-4 h-4" />

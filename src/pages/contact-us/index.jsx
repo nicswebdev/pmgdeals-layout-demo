@@ -97,7 +97,7 @@ function ContactForm() {
             type="text"
             name="fullName"
             placeholder="Full Name"
-            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem] text-gray-700 border-b border-gray-400"
+            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
             value={form.fullName}
             onChange={handleChange}
           />
@@ -105,7 +105,7 @@ function ContactForm() {
             type="email"
             name="email"
             placeholder="Email"
-            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem] text-gray-700 border-b border-gray-400"
+            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
             value={form.email}
             onChange={handleChange}
           />
@@ -114,7 +114,7 @@ function ContactForm() {
         <textarea
           name="message"
           placeholder="Message"
-          className="w-full 4xl:min-h-40 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem] text-gray-700 border-b border-gray-400"
+          className="w-full 4xl:min-h-40 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
           rows="3"
           value={form.message}
           onChange={handleChange}

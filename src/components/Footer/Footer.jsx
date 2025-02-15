@@ -156,7 +156,7 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="E-mail Address"
-                  className="px-4 py-2 w-full font-open-sans text-[0.75rem] lg:text-[1.375rem] placeholder:font-open-sans placeholder:text-[0.75rem] placeholder:lg:text-[1.375rem] placeholder:text-[#A3A3A3] bg-[#D9D9D9] text-gray-700 focus:outline-none"
+                  className="px-4 py-2 w-full font-open-sans text-[0.75rem] lg:text-[1.375rem] placeholder:font-open-sans placeholder:text-[0.75rem] placeholder:lg:text-[1.375rem] placeholder:text-[#A3A3A3] bg-[#D9D9D9] text-black focus:outline-none"
                 />
                 <button className="px-4 py-2 font-open-sans text-white bg-primary">
                   SUBSCRIBE

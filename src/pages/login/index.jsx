@@ -17,7 +17,7 @@ export default function Login() {
         <div className="container xl:max-w-[68.125rem]">
           <div className="rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.1)]">
             <div className="px-4 lg:px-10 4xl:px-36 py-10 4xl:py-20 rounded-lg shadow-[0_80px_50px_rgba(0,0,0,0.1)] w-full">
-              <div className="max-w-[50%] 4xl:max-w-[15.625rem] mx-auto mb-6">
+              <div className="max-w-[50%] md:max-w-[25%] 4xl:max-w-[15.625rem] mx-auto mb-6">
                 <img src="/logo.png" alt="Logo" className="relative w-full" />
               </div>
 
@@ -27,13 +27,13 @@ export default function Login() {
                     type="text"
                     name="fullName"
                     placeholder="Full Name"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem] text-gray-700 border-b border-gray-400"
+                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
                   />
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem] text-gray-700 border-b border-gray-400"
+                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
                   />
 
                   <div className="flex items-center justify-between mb-4">
@@ -74,12 +74,12 @@ export default function Login() {
               </div>
 
               <p className="text-center text-sm text-gray-600 mt-4">
-                Not a member?{" "}
+                Have an account already?{" "}
                 <a
                   href="#"
                   className="font-bold tracking-[1%] text-[#4A4A4A] transition-all duration-300 underline hover:no-underline"
                 >
-                  Sign Up
+                  Login
                 </a>
               </p>
             </div>
