@@ -53,8 +53,8 @@ export default function SwiperPropertyList({ numberOfProperties = 6 }) {
           }}
           onSlideChange={handleSlideChange}
         >
-          {[...Array(numberOfProperties)].map((item) => (
-            <SwiperSlide key={`slide-month-pick-${item}`}>
+          {[...Array(numberOfProperties)].map((item, index) => (
+            <SwiperSlide key={`slide-property-${index}`}>
               <CardProperty />
             </SwiperSlide>
           ))}
