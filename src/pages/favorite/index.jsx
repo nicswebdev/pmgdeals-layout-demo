@@ -1,9 +1,4 @@
-import {
-  Hero,
-  PropertyFilter,
-  SectionHeading,
-  SwiperPropertyList,
-} from "@/components";
+import { Hero, SectionHeading, SwiperPropertyList } from "@/components";
 
 export default function Favorite() {
   return (
