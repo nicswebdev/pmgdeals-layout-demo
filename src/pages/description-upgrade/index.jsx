@@ -309,11 +309,9 @@ function Form() {
                   name=""
                   className="appearance-none w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
                 >
-                  <option value="" selected>
-                    Mr.
-                  </option>
-                  <option value="">Mrs.</option>
-                  <option value="">Ms.</option>
+                  <option value="Mr">Mr.</option>
+                  <option value="Mrs">Mrs.</option>
+                  <option value="Ms">Ms.</option>
                 </select>
                 <GoChevronDown className="absolute top-1/2 -translate-y-1/2 right-0 w-5 h-5 fill-gray-dark" />
               </div>
