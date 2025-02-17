@@ -1,10 +1,4 @@
-import {
-  ButtonBasic,
-  ButtonHeart,
-  Hero,
-  SectionHeading,
-  SwiperPropertyList,
-} from "@/components";
+import { ButtonBasic, ButtonHeart, Hero } from "@/components";
 
 export default function Description() {
   return (

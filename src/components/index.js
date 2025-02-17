@@ -26,3 +26,4 @@ export * from "./Hero";
 
 // Accordion
 export * from "./AccordionBasic";
+export * from "./AccordionCheckout";

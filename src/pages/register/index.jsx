@@ -81,7 +81,7 @@ export default function Register() {
                 <div className="flex items-center justify-center mb-4">
                   <label className="flex items-center gap-4 cursor-pointer">
                     <input type="checkbox" className="peer hidden" />
-                    <span className="relative w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
+                    <span className="relative shrink-0 w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
                       <FaCheck className="absolute w-4 h-4 fill-[inherit]" />
                     </span>
                     <span className="4xl:text-[1.5rem]">
