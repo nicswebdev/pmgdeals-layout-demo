@@ -1,8 +1,4 @@
-import {
-  PiBuildingOfficeDuotone,
-  PiFlowerLotus,
-  PiConfettiLight,
-} from "react-icons/pi";
+import { PiFlowerLotus, PiConfettiLight } from "react-icons/pi";
 import { VscSettings } from "react-icons/vsc";
 import { IoRestaurantOutline, IoCloseOutline } from "react-icons/io5";
 
@@ -15,6 +11,14 @@ import { ButtonBasic } from "../ButtonBasic";
 export default function PropertyFilter() {
   const settingButtonClassName =
     "group aspect-square w-10 4xl:w-[4.375rem] flex justify-center items-center transition-all duration-300 rounded-full border-[0.0625rem] border-gray-dark hover:bg-gray-dark";
+
+  const iconWrapperClassName =
+    "relative w-5 h-5 peer-has-[:checked]:[&>img:first-child]:opacity-0 peer-has-[:checked]:[&>img:last-child]:opacity-100";
+
+  const iconGrayClassName =
+    "absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-0";
+  const iconWhiteClassName =
+    "absolute inset-0 w-full h-full object-contain transition-all duration-300 opacity-0 group-hover:opacity-100";
 
   const iconClassName =
     "w-5 h-5 transition-all duration-300 text-gray-dark group-hover:text-white peer-has-[:checked]:text-white";
@@ -29,25 +33,96 @@ export default function PropertyFilter() {
       id: 1,
       label: "Hotel",
       value: "hotel",
-      icon: <PiBuildingOfficeDuotone className={iconClassName} />,
+      icon: (
+        <div className={iconWrapperClassName}>
+          <img
+            src="/images/icons/hotel-gray.png"
+            alt="Icon"
+            className={iconGrayClassName}
+          />
+          <img
+            src="/images/icons/hotel-white.png"
+            alt="Icon"
+            className={iconWhiteClassName}
+          />
+        </div>
+      ),
     },
     {
       id: 2,
       label: "Food & Beverage",
       value: "food_beverage",
-      icon: <IoRestaurantOutline className={iconClassName} />,
+      icon: (
+        <div className={iconWrapperClassName}>
+          <img
+            src="/images/icons/restaurant-gray.png"
+            alt="Icon"
+            className={iconGrayClassName}
+          />
+          <img
+            src="/images/icons/restaurant-white.png"
+            alt="Icon"
+            className={iconWhiteClassName}
+          />
+        </div>
+      ),
     },
     {
       id: 3,
-      label: "Activity",
-      value: "activity",
-      icon: <PiFlowerLotus className={iconClassName} />,
+      label: "Spa",
+      value: "spa",
+      icon: (
+        <div className={iconWrapperClassName}>
+          <img
+            src="/images/icons/spa-gray.png"
+            alt="Icon"
+            className={iconGrayClassName}
+          />
+          <img
+            src="/images/icons/spa-white.png"
+            alt="Icon"
+            className={iconWhiteClassName}
+          />
+        </div>
+      ),
     },
     {
       id: 4,
+      label: "Activity",
+      value: "activity",
+      icon: (
+        <div className={iconWrapperClassName}>
+          <img
+            src="/images/icons/jogging-gray.png"
+            alt="Icon"
+            className={iconGrayClassName}
+          />
+          <img
+            src="/images/icons/jogging-white.png"
+            alt="Icon"
+            className={iconWhiteClassName}
+          />
+        </div>
+      ),
+    },
+    {
+      id: 5,
       label: "Entertainment",
       value: "entertainment",
-      icon: <PiConfettiLight className={iconClassName} />,
+      icon: (
+        <div className={iconWrapperClassName}>
+          <img
+            src="/images/icons/confetti-gray.png"
+            alt="Icon"
+            className={iconGrayClassName}
+          />
+          <img
+            src="/images/icons/confetti-white.png"
+            alt="Icon"
+            className={iconWhiteClassName}
+          />
+        </div>
+      ),
     },
   ];
 
