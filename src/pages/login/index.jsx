@@ -7,44 +7,42 @@ export default function Login() {
       <Hero />
       <div className="py-32">
         <div className="container">
-          <div className="pb-20">
+          <div className="pb-10">
             <SectionHeading style={{ textAlign: "center" }}>
               Member Login
             </SectionHeading>
           </div>
         </div>
 
-        <div className="container xl:max-w-[68.125rem]">
+        <div className="container sm:max-w-[37.5rem]">
           <div className="rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.1)]">
-            <div className="px-4 lg:px-10 4xl:px-36 py-10 4xl:py-20 rounded-lg shadow-[0_80px_50px_rgba(0,0,0,0.1)] w-full">
-              <div className="max-w-[50%] md:max-w-[25%] 4xl:max-w-[15.625rem] mx-auto mb-6">
+            <div className="px-8 sm:px-10 py-8 sm:py-10 rounded-lg shadow-[0_80px_50px_rgba(0,0,0,0.1)] w-full">
+              <div className="max-w-[40%] md:max-w-[25%]  mx-auto mb-6">
                 <img src="/logo.png" alt="Logo" className="relative w-full" />
               </div>
 
-              <div className="flex flex-col gap-20 4xl:gap-40">
-                <div className="flex flex-col gap-10 4xl:gap-20">
+              <div className="flex flex-col gap-10">
+                <div className="flex flex-col gap-10">
                   <input
                     type="text"
                     name="fullName"
                     placeholder="Full Name"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
 
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-y-4 mb-4">
                     <label className="flex items-center gap-4 cursor-pointer">
                       <input type="checkbox" className="peer hidden" />
                       <span className="relative w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
                         <FaCheck className="absolute w-4 h-4 fill-[inherit]" />
                       </span>
-                      <span className="4xl:text-[1.5rem]">
-                        Keep me logged in
-                      </span>
+                      <span className="">Keep me logged in</span>
                     </label>
 
                     <a
@@ -56,7 +54,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4 4xl:gap-6">
+                <div className="flex flex-col gap-4  lg:max-w-[60%] mx-auto">
                   <ButtonBasic element="button" rounded>
                     LOGIN
                   </ButtonBasic>

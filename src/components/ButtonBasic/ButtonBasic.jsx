@@ -8,7 +8,7 @@ export default function ButtonBasic({
   const Element = ["a", "button"].includes(element) ? element : "a";
 
   const buttonClassNames = [
-    "w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 4xl:px-9 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
+    "w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
   ];
 
   //   Handle variants

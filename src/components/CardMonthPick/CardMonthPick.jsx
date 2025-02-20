@@ -9,16 +9,13 @@ export default function CardMonthPick({ href }) {
         href={href}
         className="group flex flex-col transition-all duration-300 hover:opacity-70"
       >
-        {/* TODO: Add image and scale on hover */}
-        <div className="aspect-video md:aspect-[4/3] 4xl:aspect-[1.85/1] w-full rounded-[1.25rem] bg-gray-600"></div>
-        <div className="pt-4 text-white">
-          <p className="pb-3 xl:pb-8 font-medium max-lg:text-[0.75rem]">
+        <div className="aspect-video md:aspect-[2/1.25] w-full rounded-[1.25rem] bg-gray-600"></div>
+        <div className="pt-8 text-white">
+          <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
             Hitana Restaurant
           </p>
-          <p className="pb-4 xl:pb-6 font-bold lg:text-[1.5rem]">
-            Drag Queen Show
-          </p>
-          <div className="pb-4 xl:pb-12 flex flex-wrap gap-2">
+          <p className="pb-4 font-bold lg:text-[1.5rem]">Drag Queen Show</p>
+          <div className="pb-4 lg:pb-6 flex flex-wrap gap-2">
             <p className="lg:text-[1.5rem]">IDR 223,000</p>
             <p className="relative px-2 lg:text-[1.5rem]">
               <span>IDR 250,000</span>

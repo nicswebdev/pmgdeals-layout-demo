@@ -22,7 +22,7 @@ export default function MenuMobile({ isOpen, close }) {
   return (
     <div
       id="menuMobile"
-      className={`xl:hidden fixed right-0 inset-y-0 w-screen sm:w-[25rem] max-w-[100vw] z-[100] duration-300 bg-white shadow-[-4px_0_16px_rgba(0,0,0,0.3)] translate-x-full [&.active]:translate-x-0 ${
+      className={`lg:hidden fixed right-0 inset-y-0 w-screen sm:w-[25rem] max-w-[100vw] z-[100] duration-300 bg-white shadow-[-4px_0_16px_rgba(0,0,0,0.3)] translate-x-full [&.active]:translate-x-0 ${
         isOpen ? "active" : ""
       }`}
     >

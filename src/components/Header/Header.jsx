@@ -44,15 +44,15 @@ export default function Header() {
   return (
     <>
       <div
-        className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-9 xl:pt-20 pb-6 xl:pb-14 [&.active-scroll]:xl:pt-10 [&.active-scroll]:xl:pb-10"
+        className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-4 lg:pt-10 pb-4 lg:pb-10 [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
         id="header"
       >
         {/* Background white */}
         <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-white"></span>
 
-        <div className="relative container xl:max-w-[95vw] 2xl:max-w-[90vw] 4xl:max-w-[82.05vw]">
+        <div className="relative container xl:max-w-[82.05vw]">
           <div className="flex flex-wrap justify-between items-start gap-4">
-            <div className="relative max-sm:w-12 w-20 xl:w-[8rem] 2xl:w-[10rem] 4xl:w-[11.875rem]">
+            <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
               <img
                 src="/logo-gray.png"
                 alt="Logo"
@@ -67,42 +67,42 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="xl:mt-3 4xl:mt-6 flex items-center gap-4 xl:gap-6 4xl:gap-14 xl:order-last">
+            <div className="xl:mt-3 flex items-center gap-4 lg:gap-6 lg:order-last">
               {/* Currency Button */}
-              <div className="xl:order-last">
+              <div className="lg:order-last">
                 <ButtonCurrency />
               </div>
 
-              <div className="flex items-center gap-6 4xl:gap-8">
+              <div className="flex items-center gap-6 xl:gap-8">
                 {/* Heart Button */}
                 <div className="group-[.active-scroll_button]:bg-gray-dark">
                   <ButtonHeart />
                 </div>
 
-                <div className="hidden xl:flex items-center gap-3 [&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a:last-child]:bg-gray-dark">
+                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a:last-child]:bg-gray-dark">
                   {/* Login Button */}
                   <ButtonBasic href="/login" variant="white" rounded>
-                    <FaUser size={20} />
-                    <span>LOGIN</span>
+                    <FaUser className="w-4 h-4" />
+                    <span className="shrink-0">LOGIN</span>
                   </ButtonBasic>
 
                   {/* Sign Up Button */}
                   <ButtonBasic href="/sign-up" rounded>
-                    SIGN UP
+                    <span className="shrink-0">SIGN UP</span>
                   </ButtonBasic>
                 </div>
               </div>
 
               {/* Hamburger Button */}
-              <div className="xl:hidden">
+              <div className="lg:hidden">
                 <ButtonHamburger onClick={() => setOpenMobileMenu(true)} />
               </div>
             </div>
 
-            <div className="mt-3 4xl:mt-4 px-6 w-full xl:w-[50%] 2xl:w-1/2 4xl:w-[53rem]">
+            <div className="lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
               <SearchBar />
 
-              <div className="max-xl:hidden">
+              <div className="max-lg:hidden">
                 <MenuDesktop />
               </div>
             </div>

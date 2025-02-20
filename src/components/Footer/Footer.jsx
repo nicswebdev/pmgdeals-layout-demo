@@ -33,8 +33,8 @@ export default function Footer() {
   return (
     <footer className="pt-0 lg:pt-20 bg-gray-dark text-white ">
       <div className="container 4xl:max-w-[126.875rem]">
-        <div className="flex max-3xl:flex-col gap-4 pb-10">
-          <div className="shrink-0 grow-0 basis-full 3xl:basis-9/12 4xl:basis-3/4 lg:max-xl:pb-8">
+        <div className="flex max-lg:flex-col gap-4 pb-10">
+          <div className="shrink-0 grow-0 basis-full lg:basis-8/12">
             <div className="flex max-lg:flex-col max-lg:items-center lg:gap-20">
               <div className="max-w-[11.25rem] 4xl:max-w-[23.75rem]">
                 <img
@@ -144,7 +144,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="shrink-0 grow-0 basis-full 3xl:basis-3/12 4xl:basis-1/4 3xl:ml-auto">
+          <div className="shrink-0 grow-0 basis-full lg:basis-4/12">
             <div className="max-lg:text-center">
               <p className="pb-4 lg:pb-6 font-open-sans font-bold lg:text-[2rem]">
                 NEWSLETTER

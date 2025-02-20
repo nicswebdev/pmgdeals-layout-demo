@@ -10,10 +10,10 @@ import { ButtonBasic } from "../ButtonBasic";
 
 export default function PropertyFilter() {
   const settingButtonClassName =
-    "group aspect-square w-10 4xl:w-[4.375rem] flex justify-center items-center transition-all duration-300 rounded-full border-[0.0625rem] border-gray-dark hover:bg-gray-dark";
+    "group shrink-0 aspect-square w-12 xl:w-[4.375rem] flex justify-center items-center transition-all duration-300 rounded-full border-[0.0625rem] border-gray-dark hover:bg-gray-dark";
 
   const iconWrapperClassName =
-    "relative w-5 h-5 peer-has-[:checked]:[&>img:first-child]:opacity-0 peer-has-[:checked]:[&>img:last-child]:opacity-100";
+    "relative w-5 lg:w-8 h-5 lg:h-8 peer-has-[:checked]:[&>img:first-child]:opacity-0 peer-has-[:checked]:[&>img:last-child]:opacity-100";
 
   const iconGrayClassName =
     "absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-0";
@@ -182,7 +182,7 @@ export default function PropertyFilter() {
           </button>
         </div>
 
-        <div className="flex gap-3 lg:gap-4 overflow-x-auto">
+        <div className="flex gap-4 overflow-x-auto">
           <button
             id="openModalFilterDesktop"
             className={`max-lg:hidden ${settingButtonClassName}`}
