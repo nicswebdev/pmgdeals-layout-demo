@@ -44,7 +44,7 @@ export default function Header() {
   return (
     <>
       <div
-        className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-9 xl:pt-20 pb-6 xl:pb-14 [&.active-scroll]:xl:pt-10 [&.active-scroll]:xl:pb-10"
+        className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-4 lg:pt-10 pb-4 lg:pb-10 [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
         id="header"
       >
         {/* Background white */}
@@ -99,7 +99,7 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
+            <div className="lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
               <SearchBar />
 
               <div className="max-lg:hidden">

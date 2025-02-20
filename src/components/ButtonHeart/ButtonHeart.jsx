@@ -10,7 +10,7 @@ export default function ButtonHeart({ filled = false }) {
 
   return (
     <button
-      className="flex justify-center items-center aspect-square w-10 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+      className="flex justify-center items-center aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
       onClick={handleOnClick}
     >
       <div className="shrink-0">
