@@ -44,11 +44,11 @@ export default function Home() {
       <div className="pb-14 xl:pb-20">
         <div className="container">
           <div className="pb-10">
-            <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#645433]">
+            <p className="font-medium text-[1.25rem] lg:text-[2.25rem] text-[#645433]">
               Why Choose PMG Deals?
             </p>
           </div>
-          <div className="grid grid-cols-1 4xl:grid-cols-3 gap-4 4xl:gap-8 md:max-4xl:max-w-[40rem] md:max-4xl:mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 md:max-lg:max-w-[40rem] md:max-lg:mx-auto">
             {[
               {
                 id: 1,
@@ -71,14 +71,14 @@ export default function Home() {
             ].map(({ id, icon, label }) => (
               <div
                 key={`card-deal-${id}`}
-                className="flex flex-col items-center justify-center gap-6 my-2 mx-2 px-4 4xl:px-10 py-6 4xl:py-14 rounded-[1.25rem] shadow-[0px_4px_6.7px_rgba(0,0,0,0.25)] bg-white"
+                className="flex flex-col items-center justify-center gap-6 my-2 mx-2 px-4 xl:px-10 py-6 xl:py-14 rounded-[1.25rem] shadow-[0px_4px_6.7px_rgba(0,0,0,0.25)] bg-white"
               >
-                {/* TODO: Put icon here */}
                 <div className="w-[6.25rem] aspect-square">
                   <img src={icon} alt="Icon" className="w-full" />
                 </div>
+
                 <p
-                  className="font-medium text-[0.875rem] lg:text-[1.5rem] text-center text-primary"
+                  className="font-medium text-[0.875rem] lg:text-[1.25rem] text-center text-primary"
                   style={{ whiteSpace: "pre-line" }}
                 >
                   {label}

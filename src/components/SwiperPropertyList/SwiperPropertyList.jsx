@@ -46,9 +46,9 @@ export default function SwiperPropertyList({ numberOfProperties = 6 }) {
               slidesPerView: 2,
               spaceBetween: 12,
             },
-            [screenSizes["4xl"]]: {
+            [screenSizes["lg"]]: {
               slidesPerView: 3,
-              spaceBetween: 24,
+              spaceBetween: 8,
             },
           }}
           onSlideChange={handleSlideChange}

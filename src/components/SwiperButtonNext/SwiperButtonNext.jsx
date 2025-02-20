@@ -7,8 +7,8 @@ export default function SwiperButtonNext({ onClick, disabled }) {
       onClick={onClick}
       disabled={disabled}
     >
-      <div className="flex justify-center items-center w-14 4xl:w-[4.375rem] aspect-square rounded-full bg-white/80">
-        <BsChevronRight className="w-5 h-5" color="#000" />
+      <div className="flex justify-center items-center w-10 lg:w-16 aspect-square rounded-full bg-white/80">
+        <BsChevronRight className="w-3 lg:w-5 h-3 lg:h-5" color="#000" />
       </div>
     </button>
   );

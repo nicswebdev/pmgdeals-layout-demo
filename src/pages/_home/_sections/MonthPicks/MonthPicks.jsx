@@ -53,9 +53,9 @@ export default function MonthPicks() {
                   slidesPerView: 2,
                   spaceBetween: 20,
                 },
-                [screenSizes["4xl"]]: {
+                [screenSizes["lg"]]: {
                   slidesPerView: 3,
-                  spaceBetween: 50,
+                  spaceBetween: 24,
                 },
               }}
               //   className="mySwiper"
