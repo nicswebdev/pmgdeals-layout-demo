@@ -8,13 +8,13 @@ export default function Description() {
       <div className="py-32">
         <div className="container">
           <div className="flex flex-wrap justify-between gap-y-10 py-20">
-            <div className="max-md:basis-full flex gap-4 lg:gap-8 4xl:gap-12">
+            <div className="max-md:basis-full flex gap-4 lg:gap-8 xl:gap-12">
               {/* Title */}
               <div>
                 <h2 className="font-medium text-[1.5rem] lg:text-[2.5rem] text-primary">
                   Splendid 3-Night Package
                 </h2>
-                <p className="font-medium text-[1rem] lg:text-[1.5rem]">
+                <p className="font-medium text-[1rem] lg:text-[1.25rem]">
                   Bali Niksoma Boutique Beach Resort
                 </p>
               </div>
@@ -30,7 +30,7 @@ export default function Description() {
               <p className="font-medium text-[1.5rem] lg:text-[2.5rem] text-primary">
                 IDR 7,300,000
               </p>
-              <p className="relative font-medium text-[1rem] lg:text-[1.5rem] px-2 lg:px-4">
+              <p className="relative font-medium text-[1rem] lg:text-[1.25rem] px-2 lg:px-4">
                 <span>IDR 8,536,000</span>
                 <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[0.0625rem] bg-red"></span>
               </p>
@@ -39,18 +39,18 @@ export default function Description() {
           </div>
 
           <div className="pb-10">
-            <p className="pb-4 font-bold lg:text-[1.5rem]">Description</p>
-            <p className="font-light lg:text-[1.5rem]">
+            <p className="pb-4 font-bold lg:text-[1.25rem]">Description</p>
+            <p className="font-light lg:text-[1.25rem]">
               Splendidly hassle-free 3 nights at Bali Niksoma Boutique Beach
               Resort for 2 persons. Spend less and enjoy more!
             </p>
           </div>
 
           <div className="pb-10">
-            <h3 className="pb-4 font-bold lg:text-[1.5rem]">
+            <h3 className="pb-4 font-bold lg:text-[1.25rem]">
               Package Inclusions
             </h3>
-            <ul className="pl-6 list-disc font-light lg:text-[1.5rem]">
+            <ul className="pl-6 list-disc font-light lg:text-[1.25rem]">
               <li>3-Night Stay at Deluxe Room with Double Bed</li>
               <li>Daily Breakfast</li>
               <li>Airport pick-up service</li>
@@ -65,10 +65,10 @@ export default function Description() {
           </div>
 
           <div className="pb-10">
-            <h3 className="pb-4 font-bold lg:text-[1.5rem]">
+            <h3 className="pb-4 font-bold lg:text-[1.25rem]">
               Voucher Utilization
             </h3>
-            <ul className="pl-6 list-disc font-light lg:text-[1.5rem]">
+            <ul className="pl-6 list-disc font-light lg:text-[1.25rem]">
               <li>
                 Voucher utilization is subject to room availability during the
                 requested period
@@ -110,8 +110,10 @@ export default function Description() {
           </div>
 
           <div className="pb-20">
-            <h3 className="pb-4 font-bold lg:text-[1.5rem]">Room Surcharge:</h3>
-            <ul className="pl-6 list-disc font-light lg:text-[1.5rem]">
+            <h3 className="pb-4 font-bold lg:text-[1.25rem]">
+              Room Surcharge:
+            </h3>
+            <ul className="pl-6 list-disc font-light lg:text-[1.25rem]">
               <li>
                 An additional charge of IDR 450,000 nett/room/night is required
                 for stays during the high season between  1st July - 30th

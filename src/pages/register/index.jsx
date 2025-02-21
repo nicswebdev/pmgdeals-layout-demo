@@ -7,14 +7,14 @@ export default function Register() {
     <main>
       <Hero />
       <div className="py-32">
-        <div className="container">
+        <div className="container xl:max-2xl:max-w-[61.25rem]">
           <div className="pb-20">
             <SectionHeading style={{ textAlign: "center" }}>
               Member Register
             </SectionHeading>
           </div>
           <div className="">
-            <div className="max-w-[50%] md:max-w-[25%] 4xl:max-w-[15.625rem] mx-auto mb-6">
+            <div className="max-w-[40%] md:max-w-[25%] mx-auto mb-6">
               <img src="/logo.png" alt="Logo" className="relative w-full" />
             </div>
 
@@ -24,7 +24,7 @@ export default function Register() {
                   <div className="relative">
                     <select
                       name=""
-                      className="appearance-none w-full 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                      className="appearance-none w-full lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                     >
                       <option value="" selected>
                         Mr.
@@ -38,43 +38,43 @@ export default function Register() {
                     type="text"
                     name="firstName"
                     placeholder="First Name"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="text"
                     name="lastName"
                     placeholder="Last Name"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="text"
                     name="phone"
                     placeholder="Phone"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="text"
                     name="dateOfBirth"
                     placeholder="Date Of Birth"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="text"
                     name="email"
                     placeholder="Email"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                   <input
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
-                    className=" 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+                    className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
                   />
                 </div>
 
