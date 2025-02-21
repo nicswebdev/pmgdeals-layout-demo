@@ -56,15 +56,15 @@ export default function Faq() {
             {faqs.map((faq, index) => (
               <AccordionBasic
                 key={`faq-accordion-basic-${index}`}
-                title={<p className="4xl:text-[1.75rem]">{faq.question}</p>}
-                description={<p className="4xl:text-[1.75rem]">{faq.answer}</p>}
+                title={<p className="xl:text-[1.25rem]">{faq.question}</p>}
+                description={<p className="xl:text-[1.25rem]">{faq.answer}</p>}
               />
             ))}
           </div>
 
           <div>
             <SectionHeading>Our Recommendations</SectionHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-3 gap-9">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-4">
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <CardProperty
                   key={`faq-recommendation-card-property-${item}`}

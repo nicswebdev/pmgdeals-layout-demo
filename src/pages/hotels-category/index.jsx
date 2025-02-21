@@ -15,13 +15,13 @@ export default function HotelsCategory() {
             <PropertyFilter />
           </div>
           <div>
-            <div className="[&>p]:pb-0 pb-10 4xl:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">
+            <div className="[&>p]:pb-0 pb-10 lg:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">
               <SectionHeading>
                 Bali Niksoma Boutique Beach Resort
               </SectionHeading>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-3 gap-9">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-4">
               {[...Array(5)].map((item) => (
                 <CardProperty key={`recommendation-card-property-${item}`} />
               ))}

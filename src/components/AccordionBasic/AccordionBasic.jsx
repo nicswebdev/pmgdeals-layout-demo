@@ -15,17 +15,17 @@ export default function AccordionBasic({
       }`}
     >
       <button
-        className="w-full text-left px-4 4xl:px-9 py-3 4xl:py-6 flex justify-between items-start"
+        className="w-full text-left px-4 lg:px-9 py-3 lg:py-6 flex justify-between items-start"
         onClick={() => setOpen(!open)}
       >
-        {title}
+        <span className="lg:pt-1">{title}</span>
 
-        <div className="shrink-0 h-6 4xl:h-[2.625rem] flex justify-center items-center">
-          <GoChevronDown className="w-5 4xl:w-8 h-5 4xl:h-8 transition-all duration-300 group-[.active]:rotate-180" />
+        <div className="shrink-0 h-6 lg:h-[2.625rem] flex justify-center items-center">
+          <GoChevronDown className="w-5 lg:w-8 h-5 lg:h-8 transition-all duration-300 group-[.active]:rotate-180" />
         </div>
       </button>
       <div className="max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-screen">
-        <div className="px-4 4xl:px-9 pb-4 4xl:pb-6">{description}</div>
+        <div className="px-4 lg:px-9 pb-4 lg:pb-6">{description}</div>
       </div>
     </div>
   );

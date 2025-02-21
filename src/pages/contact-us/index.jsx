@@ -50,12 +50,12 @@ function ContactForm() {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row w-full max-4xl:space-y-16">
+    <div className="flex flex-col xl:flex-row w-full max-xl:space-y-16">
       <div className="xl:w-1/3">
-        <h2 className="font-inter font-medium text-[3rem] 4xl:text-[6rem] text-primary">
+        <h2 className="font-inter font-medium text-[2rem] text-primary">
           Let’s talk
         </h2>
-        <p className="pb-10 4xl:pb-20 font-medium text-[1.5rem] 4xl:text-[2.25rem]">
+        <p className="pb-10 xl:pb-20 font-medium text-[1.25rem]">
           Ask us anything or just say hi.....
         </p>
         <div className="flex flex-col items-start gap-2">
@@ -90,14 +90,14 @@ function ContactForm() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="xl:w-2/3 4xl:pl-32 space-y-16 4xl:space-y-32"
+        className="xl:w-2/3 xl:pl-32 space-y-6 lg:space-y-32"
       >
-        <div className="flex gap-x-16 gap-y-32">
+        <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
           <input
             type="text"
             name="fullName"
             placeholder="Full Name"
-            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+            className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
             value={form.fullName}
             onChange={handleChange}
           />
@@ -105,7 +105,7 @@ function ContactForm() {
             type="email"
             name="email"
             placeholder="Email"
-            className="w-1/2 4xl:h-16 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+            className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
             value={form.email}
             onChange={handleChange}
           />
@@ -114,7 +114,7 @@ function ContactForm() {
         <textarea
           name="message"
           placeholder="Message"
-          className="w-full 4xl:min-h-40 focus:outline-none 4xl:text-[2.25rem] placeholder:4xl:text-[2.25rem]  border-b border-gray-dark"
+          className="w-full xl:min-h-40 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
           rows="3"
           value={form.message}
           onChange={handleChange}

@@ -15,7 +15,7 @@ export default function Description() {
 
       <div className="py-32">
         <div className="container">
-          <div className="flex flex-col xl:flex-row w-full max-4xl:space-y-16">
+          <div className="flex flex-col xl:flex-row w-full max-lg:space-y-16">
             <div className="xl:w-2/3 xl:pr-20">
               <UpgradingExtras />
               <Form />
@@ -295,7 +295,7 @@ function Form() {
       </div>
 
       <form className="pt-20">
-        <div className="flex flex-col gap-4 lg:gap-8 pb-20">
+        <div className="flex flex-col gap-6 lg:gap-8 pb-20">
           <div className="grid grid-cols-12 gap-4 gap-y-3">
             <div className="col-span-12 lg:col-span-2 flex items-center">
               <label className="font-light lg:text-[1.25rem]">

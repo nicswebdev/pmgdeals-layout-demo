@@ -10,7 +10,7 @@ export default function AboutUs() {
             About PMG Deals
           </SectionHeading>
 
-          <p className="text-center 4xl:text-[2rem] pb-20">
+          <p className="text-center text-[0.875rem] lg:text-[1.25rem] pb-20">
             PMG Deals presents an exclusive opportunity with limited-time
             package deals at Bali Niksoma Boutique Beach Resort, The Magani
             Hotel and Spa, and The Bandha Hotel & Suites. Enjoy great savings on
@@ -22,7 +22,7 @@ export default function AboutUs() {
 
           <div>
             <SectionHeading>Our Recommendations</SectionHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-3 gap-9">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-4">
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <CardProperty key={`recommendation-card-property-${item}`} />
               ))}

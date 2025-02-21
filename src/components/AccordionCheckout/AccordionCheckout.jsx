@@ -22,7 +22,7 @@ export default function AccordionCheckout({
       >
         {title}
 
-        <div className="relative shrink-0 h-6 4xl:h-[2.625rem] flex justify-center items-center">
+        <div className="relative shrink-0 h-6 lg:h-[2.625rem] flex justify-center items-center">
           <FaMinus className="absolute w-4 h-4 transition-all duration-300 rotate-90 group-[.active]:rotate-180" />
           <FaMinus className="w-4 h-4 transition-all duration-300" />
         </div>

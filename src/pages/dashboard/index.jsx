@@ -22,7 +22,7 @@ export default function Dashboard() {
                     "Voucher ",
                   ].map((heading, index) => (
                     <th
-                      className="px-4 4xl:px-10 py-6 4xl:py-12 font-normal whitespace-nowrap text-white bg-primary"
+                      className="px-4 py-2 xl:py-4 font-normal whitespace-nowrap text-left text-white bg-primary"
                       key={`table-heading-${index}`}
                     >
                       {heading}
@@ -37,7 +37,7 @@ export default function Dashboard() {
                     key={`row-${index}`}
                   >
                     {[...Array(7)].map((item, index) => (
-                      <td className="px-4 py-2 4xl:py-8" key={`col-${index}`}>
+                      <td className="px-4 py-2 xl:py-4" key={`col-${index}`}>
                         Sample text
                       </td>
                     ))}

@@ -35,7 +35,7 @@ export default function MenuMobile({ isOpen, close }) {
       </button>
 
       <div className="px-10 py-20 w-full h-full overflow-y-auto">
-        <ul className="flex flex-col gap-6 4xl:gap-9">
+        <ul className="flex flex-col gap-6">
           {menuItems.map((item) => (
             <li key={`menu-mobile-${item.id}`}>
               <a
