@@ -7,8 +7,8 @@ import {
 } from "./_components";
 import { ButtonBasic } from "../ButtonBasic";
 import { FaUser } from "react-icons/fa6";
-import { ButtonHeart } from "../ButtonHeart";
 import { useEffect, useState } from "react";
+import { LuHeart } from "react-icons/lu";
 
 export default function Header() {
   // Check on scroll
@@ -75,8 +75,18 @@ export default function Header() {
 
               <div className="flex items-center gap-6 xl:gap-8">
                 {/* Heart Button */}
-                <div className="group-[.active-scroll_button]:bg-gray-dark">
-                  <ButtonHeart />
+                <div className="group-[.active-scroll_a]:bg-gray-dark">
+                  <a
+                    href=""
+                    className="flex justify-center items-center aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+                  >
+                    <div className="shrink-0">
+                      <LuHeart
+                        className="w-3 lg:w-5 h-3 lg:h-5"
+                        color="white"
+                      />
+                    </div>
+                  </a>
                 </div>
 
                 <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a:last-child]:bg-gray-dark">
