@@ -15,7 +15,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector("#header");
-      if (window.scrollY > 100) {
+      if (window.scrollY > 0) {
         header.classList.add("active-scroll");
       } else {
         header.classList.remove("active-scroll");

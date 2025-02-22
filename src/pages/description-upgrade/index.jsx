@@ -10,10 +10,8 @@ import { GoChevronDown, GoChevronRight } from "react-icons/go";
 
 export default function Description() {
   return (
-    <main>
-      <Hero image="/property.png" />
-
-      <div className="py-32">
+    <main className="pt-28 sm:pt-40 lg:pt-56 bg-gray-dark">
+      <div className="py-32 bg-white">
         <div className="container">
           <div className="flex flex-col xl:flex-row w-full max-lg:space-y-16">
             <div className="xl:w-2/3 xl:pr-20">
