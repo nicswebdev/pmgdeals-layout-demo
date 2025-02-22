@@ -80,16 +80,19 @@ export default function ButtonCurrency() {
         <GoChevronDown className="w-3 lg:w-4 h-3 lg:h-4" />
       </button>
       {open && (
-        <div className="absolute z-20 mt-2 w-16 rounded-md shadow-md border border-gray-300 bg-white">
+        <div className="absolute z-20 mt-2 w-24 lg:w-32 rounded-md shadow-md border border-gray-300 bg-white">
           {currencies.map((currency) => (
             <button
               key={currency.label}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              className="flex items-center gap-2 lg:gap-4 w-full text-left px-4 py-2 hover:bg-gray-100"
               onClick={() => {
                 setSelected(currency);
                 setOpen(false);
               }}
             >
+              <div className="shrink-0 grow-0 w-4 lg:w-8 h-4 lg:h-8 rounded-full overflow-hidden">
+                {currency.icon}
+              </div>
               {currency.label}
             </button>
           ))}
