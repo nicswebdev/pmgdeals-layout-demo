@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { MonthPicks } from "./_sections/MonthPicks";
 import { PropertyFilter, SwiperPropertyList } from "@/components";
+import MonthPicks from "./_sections/MonthPicks";
 
 export default function Home() {
   return (

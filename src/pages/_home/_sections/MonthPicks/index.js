@@ -1,1 +1,1 @@
-export { default as MonthPicks } from "./MonthPicks";
+export { default } from "./MonthPicks";
