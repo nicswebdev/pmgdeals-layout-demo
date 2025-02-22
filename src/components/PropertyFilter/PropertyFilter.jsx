@@ -2,7 +2,7 @@ import { PiFlowerLotus, PiConfettiLight } from "react-icons/pi";
 import { VscSettings } from "react-icons/vsc";
 import { IoRestaurantOutline, IoCloseOutline } from "react-icons/io5";
 
-import { CheckBox } from "./_components";
+import { ButtonCategory, CheckBox } from "./_components";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import { use, useEffect, useState } from "react";
@@ -13,7 +13,7 @@ export default function PropertyFilter() {
     "group shrink-0 aspect-square w-12 xl:w-[4.375rem] flex justify-center items-center transition-all duration-300 rounded-full border-[0.0625rem] border-gray-dark hover:bg-gray-dark";
 
   const iconWrapperClassName =
-    "relative w-5 lg:w-8 h-5 lg:h-8 peer-has-[:checked]:[&>img:first-child]:opacity-0 peer-has-[:checked]:[&>img:last-child]:opacity-100";
+    "relative w-5 lg:w-8 h-5 lg:h-8 group-[&.button-active]:[&>img:first-child]:opacity-0 group-[&.button-active]:[&>img:last-child]:opacity-100";
 
   const iconGrayClassName =
     "absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-0";
@@ -21,7 +21,7 @@ export default function PropertyFilter() {
     "absolute inset-0 w-full h-full object-contain transition-all duration-300 opacity-0 group-hover:opacity-100";
 
   const iconClassName =
-    "w-5 h-5 transition-all duration-300 text-gray-dark group-hover:text-white peer-has-[:checked]:text-white";
+    "w-5 h-5 transition-all duration-300 text-gray-dark group-hover:text-white group-[&.button-active]:text-white";
 
   const categories = [
     {
@@ -191,13 +191,14 @@ export default function PropertyFilter() {
             <VscSettings className={iconClassName} />
           </button>
 
-          {categories.map(({ id, label, icon, value }) => (
-            <CheckBox
+          {categories.map(({ id, label, icon }) => (
+            <ButtonCategory
               key={`category-${id}`}
               id={`filter-category-${id}`}
               label={label}
               icon={icon}
-              value={value}
+              href="#"
+              isActive={id === 0}
             />
           ))}
         </div>
