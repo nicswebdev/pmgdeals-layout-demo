@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { LuHeart, LuHeartOff } from "react-icons/lu";
 
 export default function ButtonHeart({ filled = false }) {
   const [liked, setLiked] = useState(filled);
@@ -15,9 +15,9 @@ export default function ButtonHeart({ filled = false }) {
     >
       <div className="shrink-0">
         {liked ? (
-          <FaHeart className="w-3 lg:w-5 h-3 lg:h-5" color="white" />
+          <LuHeartOff className="w-3 lg:w-5 h-3 lg:h-5" color="white" />
         ) : (
-          <FaRegHeart className="w-3 lg:w-5 h-3 lg:h-5" color="white" />
+          <LuHeart className="w-3 lg:w-5 h-3 lg:h-5" color="white" />
         )}
       </div>
     </button>
