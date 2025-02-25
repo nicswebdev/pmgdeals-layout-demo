@@ -78,7 +78,7 @@ export default function Home() {
                 </div>
 
                 <p
-                  className="font-medium text-[0.875rem] lg:text-[1.25rem] text-center text-primary"
+                  className="font-medium text-[0.875rem] lg:text-[1.25rem] text-center text-[#660000]"
                   style={{ whiteSpace: "pre-line" }}
                 >
                   {label}

@@ -11,7 +11,7 @@ export default function Description() {
             <div className="max-md:basis-full flex gap-4 lg:gap-8 xl:gap-12">
               {/* Title */}
               <div>
-                <h2 className="font-medium text-[1.5rem] lg:text-[2.5rem] text-primary">
+                <h2 className="font-medium text-[1.5rem] lg:text-[2.5rem] text-[#660000]">
                   Splendid 3-Night Package
                 </h2>
                 <p className="font-medium text-[1rem] lg:text-[1.25rem]">
@@ -27,7 +27,7 @@ export default function Description() {
 
             {/* Price */}
             <div className="max-md:basis-full flex flex-col items-start">
-              <p className="font-medium text-[1.5rem] lg:text-[2.5rem] text-primary">
+              <p className="font-medium text-[1.5rem] lg:text-[2.5rem] text-[#660000]">
                 IDR 7,300,000
               </p>
               <p className="relative font-medium text-[1rem] lg:text-[1.25rem] px-2 lg:px-4">

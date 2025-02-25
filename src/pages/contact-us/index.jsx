@@ -52,7 +52,7 @@ function ContactForm() {
   return (
     <div className="flex flex-col xl:flex-row w-full max-xl:space-y-16">
       <div className="xl:w-1/3">
-        <h2 className="font-inter font-medium text-[2rem] text-primary">
+        <h2 className="font-inter font-medium text-[2rem] text-[#660000]">
           Let’s talk
         </h2>
         <p className="pb-10 xl:pb-20 font-medium text-[1.25rem]">

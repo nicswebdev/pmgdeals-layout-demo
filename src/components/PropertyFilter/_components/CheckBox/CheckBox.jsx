@@ -16,7 +16,7 @@ export default function CheckBox({ id, label, icon, value }) {
 
       {icon && icon}
 
-      <span className="shrink-0 transition-all duration-300 lg:text-[1.25rem] text-primary group-hover:text-white peer-has-[:checked]:text-white">
+      <span className="shrink-0 transition-all duration-300 lg:text-[1.25rem] text-[#660000] group-hover:text-white peer-has-[:checked]:text-white">
         {label}
       </span>
     </label>

@@ -86,7 +86,7 @@ function PaymentSummary() {
               </p>
               <p className="font-light">Bali Niksoma Boutique Beach Resort</p>
             </div>
-            <p className="font-bold lg:text-[1.25rem] text-primary">
+            <p className="font-bold lg:text-[1.25rem] text-[#660000]">
               IDR 7,300,000
             </p>
           </div>
@@ -131,7 +131,7 @@ function PaymentSummary() {
                   Buy One Get One FREE Cocktail
                 </p>
               </div>
-              <p className="font-bold text-primary">IDR 1,050,000</p>
+              <p className="font-bold text-[#660000]">IDR 1,050,000</p>
             </div>
 
             <div className="">
@@ -165,7 +165,7 @@ function PaymentSummary() {
                   Drag Queen Show | 1 Person
                 </p>
               </div>
-              <p className="font-bold text-primary">IDR 1,050,000</p>
+              <p className="font-bold text-[#660000]">IDR 1,050,000</p>
             </div>
 
             <div className="">
@@ -199,7 +199,7 @@ function PaymentSummary() {
               <p className="font-medium lg:text-[1.5rem]">Total</p>
               <p className="font-light">Including Taxes & Service</p>
             </div>
-            <p className="font-bold lg:text-[1.25rem] text-primary">
+            <p className="font-bold lg:text-[1.25rem] text-[#660000]">
               IDR 9,400,000
             </p>
           </div>
