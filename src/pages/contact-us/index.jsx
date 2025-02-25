@@ -6,10 +6,6 @@ export default function ContactUs() {
       <Hero />
       <div className="py-32">
         <div className="container">
-          <SectionHeading style={{ textAlign: "center" }}>
-            Contact Us
-          </SectionHeading>
-
           <div className="pb-20">
             <ContactForm />
           </div>
@@ -50,15 +46,17 @@ function ContactForm() {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row w-full max-xl:space-y-16">
-      <div className="xl:w-1/3">
-        <h2 className="font-inter font-medium text-[2rem] text-[#660000]">
-          Let’s talk
-        </h2>
-        <p className="pb-10 xl:pb-20 font-medium text-[1.25rem]">
-          Ask us anything or just say hi.....
-        </p>
-        <div className="flex flex-col items-start gap-2">
+    <div className="flex flex-col lg:flex-row w-full max-lg:space-y-16">
+      <div className="lg:w-1/3 flex flex-col">
+        <div>
+          <h2 className="font-inter font-medium text-[2rem] lg:text-[3rem] text-[#660000]">
+            Let’s talk
+          </h2>
+          <p className="pb-10 xl:pb-20 font-medium text-[1.25rem]">
+            Ask us anything or just say hi.....
+          </p>
+        </div>
+        <div className="flex flex-col items-start gap-2 my-auto">
           {[
             {
               icon: (
@@ -90,8 +88,9 @@ function ContactForm() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="xl:w-2/3 xl:pl-32 space-y-6 lg:space-y-32"
+        className="lg:w-2/3 lg:pl-32 space-y-6 lg:space-y-32"
       >
+        <p className="font-medium text-[1.5rem] lg:text-[2rem]">Contact Us</p>
         <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
           <input
             type="text"
