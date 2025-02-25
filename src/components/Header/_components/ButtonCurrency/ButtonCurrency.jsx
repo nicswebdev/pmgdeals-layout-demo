@@ -68,7 +68,7 @@ export default function ButtonCurrency() {
   return (
     <div className="relative" id="currencyOptions">
       <button
-        className="flex items-center gap-2 sm:gap-4 text-white group-[.active-scroll]:text-primary transition-all duration-300"
+        className="flex items-center gap-2 sm:gap-4 text-white transition-all duration-300"
         onClick={() => setOpen(!open)}
       >
         <div className="shrink-0 grow-0 w-4 lg:w-8 aspect-square rounded-full overflow-hidden">
