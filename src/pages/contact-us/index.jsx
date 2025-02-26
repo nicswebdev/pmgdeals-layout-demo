@@ -90,7 +90,9 @@ function ContactForm() {
         onSubmit={handleSubmit}
         className="lg:w-2/3 lg:pl-32 space-y-6 lg:space-y-32"
       >
-        <p className="font-medium text-[1.5rem] lg:text-[2rem]">Contact Us</p>
+        <p className="font-medium text-[1.5rem] lg:text-[2rem] text-[#660000]">
+          Contact Us
+        </p>
         <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
           <input
             type="text"

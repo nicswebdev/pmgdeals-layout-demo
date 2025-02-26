@@ -5,7 +5,7 @@ export default function SectionHeading({ element = "p", children, ...props }) {
 
   return (
     <Element
-      className="font-medium text-[1.5rem] lg:text-[2.25rem] pb-10 lg:pb-16"
+      className="font-medium text-[1.5rem] lg:text-[2.25rem] pb-10 lg:pb-16 text-[#660000]"
       {...props}
     >
       {children}
