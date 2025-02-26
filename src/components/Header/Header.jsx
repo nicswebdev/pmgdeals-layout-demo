@@ -84,7 +84,7 @@ export default function Header() {
                   </a>
                 </div>
 
-                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a:last-child]:bg-gray-dark">
+                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
                   {/* Login Button */}
                   <ButtonBasic href="/login" variant="white" rounded>
                     <FaUser className="w-4 h-4" />
