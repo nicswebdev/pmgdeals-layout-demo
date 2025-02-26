@@ -1,7 +1,7 @@
 import { HiMagnifyingGlass } from "react-icons/hi2";
 export default function SearchBar() {
   return (
-    <div className="relative w-full lg:mx-12">
+    <div className="relative lg:mx-12">
       <input
         type="text"
         placeholder="Search for special offers....."
