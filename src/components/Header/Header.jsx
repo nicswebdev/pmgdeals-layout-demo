@@ -48,21 +48,16 @@ export default function Header() {
                 id="header"
             >
                 {/* Background white */}
-                <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-white"></span>
+                <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-[#660000]"></span>
 
-                <div className="relative container xl:max-w-[82.05vw]">
+                <div className="relative container 4xl:max-w-[131.25rem]">
                     <div className="flex flex-wrap justify-between items-start gap-4">
                         <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
-                            <img
-                                src="/logo-gray.png"
-                                alt="Logo"
-                                className="relative opacity-0 group-[.active-scroll]:opacity-100 transition-all duration-300 w-full"
-                            />
                             <div className="absolute inset-0">
                                 <img
                                     src="/logo-white.png"
                                     alt="Logo"
-                                    className="group-[.active-scroll]:opacity-0 transition-all duration-300 w-full"
+                                    className="transition-all duration-300 w-full"
                                 />
                             </div>
                         </div>
@@ -117,7 +112,7 @@ export default function Header() {
                             </div>
                         </div>
 
-                        <div className="lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
+                        <div className="sm:mt-4 lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
                             <SearchBar />
 
                             <div className="max-lg:hidden">

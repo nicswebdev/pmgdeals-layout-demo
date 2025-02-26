@@ -16,9 +16,9 @@ export default function ButtonBasic({
     if (variant === "primary") {
         buttonClassNames.push("text-white bg-primary");
     } else if (variant === "primary-outline") {
-        buttonClassNames.push("text-primary border border-primary");
+        buttonClassNames.push("text-[#660000] border border-primary");
     } else if (variant === "white") {
-        buttonClassNames.push("text-primary bg-white");
+        buttonClassNames.push("text-[#660000] bg-white");
     } else if (variant === "gray") {
         buttonClassNames.push("text-white bg-gray-dark");
     } else if (variant === "gray-light") {
