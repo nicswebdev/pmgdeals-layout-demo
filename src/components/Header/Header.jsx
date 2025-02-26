@@ -50,7 +50,7 @@ export default function Header() {
         {/* Background white */}
         <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-[#660000]"></span>
 
-        <div className="relative container 4xl:max-w-[131.25rem]">
+        <div className="relative container">
           <div className="flex flex-wrap justify-between items-start gap-4">
             <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
               <div className="absolute inset-0">
