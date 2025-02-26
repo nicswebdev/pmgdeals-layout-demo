@@ -14,7 +14,7 @@ export default function Home() {
       <div className="py-20">
         <div className="container">
           <div className="pb-10">
-            <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#645433]">
+            <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#660000]">
               Unbeatable PMG Deals!
             </p>
           </div>
@@ -25,7 +25,7 @@ export default function Home() {
 
       <div className="pb-10">
         <div className="container">
-          <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem]">
+          <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
             Best Stay Packages
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function Home() {
 
       <div className="pb-10">
         <div className="container">
-          <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem]">
+          <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
             Our Recommendations
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function Home() {
       <div className="pb-14 xl:pb-20">
         <div className="container">
           <div className="pb-10">
-            <p className="font-medium text-[1.25rem] lg:text-[2.25rem] text-[#645433]">
+            <p className="font-medium text-[1.25rem] lg:text-[2.25rem] text-[#660000]">
               Why Choose PMG Deals?
             </p>
           </div>
