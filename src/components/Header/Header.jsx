@@ -50,7 +50,7 @@ export default function Header() {
                 {/* Background white */}
                 <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-[#660000]"></span>
 
-                <div className="relative container 4xl:max-w-[131.25rem]">
+                <div className="relative container">
                     <div className="flex flex-wrap justify-between items-start gap-4">
                         <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
                             <div className="absolute inset-0">
@@ -84,7 +84,7 @@ export default function Header() {
                                     </a>
                                 </div>
 
-                                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a:last-child]:bg-gray-dark">
+                                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
                                     {/* Login Button */}
                                     <ButtonBasic
                                         href="/login"

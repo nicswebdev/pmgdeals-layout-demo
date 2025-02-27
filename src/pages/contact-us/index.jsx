@@ -79,7 +79,7 @@ function ContactForm() {
               className="group flex items-center"
             >
               {item.icon}
-              <span className="font-open-sans font-semibold underline group-hover:no-underline transition-all duration-300">
+              <span className="font-open-sans font-semibold lg:text-[1.25rem] underline group-hover:no-underline transition-all duration-300">
                 {item.text}
               </span>
             </a>
@@ -90,7 +90,9 @@ function ContactForm() {
         onSubmit={handleSubmit}
         className="lg:w-2/3 lg:pl-32 space-y-6 lg:space-y-32"
       >
-        <p className="font-medium text-[1.5rem] lg:text-[2rem]">Contact Us</p>
+        <p className="font-medium text-[1.5rem] lg:text-[2rem] text-[#660000]">
+          Contact Us
+        </p>
         <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
           <input
             type="text"
@@ -120,7 +122,7 @@ function ContactForm() {
         ></textarea>
         <button
           type="submit"
-          className="bg-red-900 text-white px-6 py-2 flex items-center space-x-2 bg-primary"
+          className="leading-none lg:text-[1.25rem] text-white px-6 py-3 lg:py-4 flex items-center space-x-2 bg-primary"
         >
           <span>SEND</span>
           <IoMdSend className="w-5 h-5" />
