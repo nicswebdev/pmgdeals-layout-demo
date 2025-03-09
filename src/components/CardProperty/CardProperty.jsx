@@ -2,14 +2,22 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 import { ButtonHeart } from "../ButtonHeart";
 export default function CardProperty({ href }) {
   const randomString = Math.random().toString(36).substring(2, 9);
+  // Get random between 1 and 3
+  const random = Math.floor(Math.random() * 3) + 1;
 
   return (
     <div className="relative">
       <a
-        href="#"
+        href={href || "#"}
         className="group flex flex-col mx-2 my-2 px-3 py-4 lg:py-6 shadow-[-0.0625rem_0.0625rem_0.5rem_rgba(0,0,0,0.25)] transition-all duration-300 hover:opacity-70 "
       >
-        <div className="aspect-video w-full rounded-[1.25rem] bg-gray-600"></div>
+        <div className="aspect-video w-full rounded-[1.25rem] overflow-hidden">
+          <img
+            src={`/images/property/${random}.png`}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
 
         <div className="pt-4">
           <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
