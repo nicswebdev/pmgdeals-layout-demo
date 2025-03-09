@@ -45,9 +45,12 @@ function UpgradingExtras() {
                 key={`room-${index}`}
                 className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
               >
-                <div className="max-md:w-full w-32 aspect-[2/1] mr-4 bg-gray-400">
-                  {/* TODO: Update with real image */}
-                  <span className="w-full h-full object-cover"></span>
+                <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
+                  <img
+                    src="/images/property/1.png"
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold">
@@ -74,8 +77,12 @@ function PaymentSummary() {
   return (
     <>
       <div className="border-[0.0625rem] border-gray-dark">
-        <div className="aspect-[1.35/1] bg-gray-400">
-          <span className="w-full h-full object-cover"></span>
+        <div className="aspect-[1.35/1] overflow-hidden">
+          <img
+            src="/property.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div className="px-4 lg:px-10 py-6 lg:py-16 border-b border-dashed border-gray-dark">
