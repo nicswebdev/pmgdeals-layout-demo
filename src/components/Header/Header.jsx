@@ -112,7 +112,7 @@ export default function Header() {
                             </div>
                         </div>
 
-                        <div className="sm:mt-4 lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[45rem]">
+                        <div className="sm:mt-4 lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[42rem]">
                             <SearchBar />
 
                             <div className="max-lg:hidden">

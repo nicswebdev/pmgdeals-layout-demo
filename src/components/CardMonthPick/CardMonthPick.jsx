@@ -6,13 +6,19 @@ export default function CardMonthPick({deals}) {
     return (
         <div className="relative">
             <a
-                href="/description"
+                href={href}
                 className="group flex flex-col transition-all duration-300 hover:opacity-70"
             >
-                <div className="aspect-video md:aspect-[2/1.25] w-full rounded-[1.25rem] bg-gray-600"></div>
+                <div className="aspect-video md:aspect-[2/1.25] w-full rounded-[1.25rem] overflow-hidden">
+                    <img
+                        src={`/images/property/${random}.png`}
+                        alt=""
+                        className="w-full h-full object-cover"
+                    />
+                </div>
                 <div className="pt-8 text-white">
                     <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
-                        {deals.property_name}
+                        Hitana Restaurant
                     </p>
                     <p className="pb-4 font-bold lg:text-[1.5rem]">
                         Drag Queen Show
