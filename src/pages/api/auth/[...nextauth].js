@@ -42,11 +42,20 @@ export default NextAuth({
             },
         }),
         GoogleProvider({
+<<<<<<< HEAD
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
+=======
+            clientId:
+                "774119745658-lbt5bbc05mf7nov32pcj5nksvt4aogto.apps.googleusercontent.com",
+            clientSecret: "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",
+        }),
+    ],
+    secret: "D4TnSIfP+AA1uUOlBo0OVOjqHuJjpYGlHnfve7/ZPPg=",
+>>>>>>> 121054d (connect data from API)
     pages: {
         signIn: "/login", // Custom sign-in page
     },
