@@ -3,6 +3,7 @@ import {
   ButtonBasic,
   ButtonHeart,
   Hero,
+  NumberCounter,
 } from "@/components";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
@@ -30,46 +31,142 @@ export default function Description() {
 }
 
 function UpgradingExtras() {
+  const extraItems = [
+    {
+      title: "Room",
+      children: <ExtraRooms />,
+      defaultOpen: true,
+    },
+    {
+      title: "Meals",
+      children: <ExtraMeals />,
+    },
+    {
+      title: "Spa",
+      children: <ExtraSpa />,
+    },
+    {
+      title: "Transport",
+      children: <></>,
+    },
+    {
+      title: "Others",
+      children: <></>,
+    },
+  ];
+
   return (
     <div>
       <p className="text-2xl font-bold mb-4">Upgrading & Extras</p>
       <div>
-        {["Room", "Meals", "Spa", "Transport", "Others"].map((item, index) => (
+        {extraItems.map((item, index) => (
           <AccordionCheckout
-            title={<p className="font-bold lg:text-[1.5rem]">{item}</p>}
+            title={<p className="font-bold lg:text-[1.5rem]">{item.title}</p>}
             style={{ borderTop: "0px" }}
             key={`accordion-${index}`}
+            defaultOpen={item?.defaultOpen && item.defaultOpen}
           >
-            {[...Array(3)].map((item, index) => (
-              <div
-                key={`room-${index}`}
-                className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
-              >
-                <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
-                  <img
-                    src="/images/property/1.png"
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold">
-                    Upgrade to Deluxe Room Twin Bed
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    38 sqm | Twin Bed | Private Balcony | Seating Area
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <input type="radio" name="roomUpgrade" className="mr-2" />
-                  <span className="text-gray-700">+ IDR 150,000</span>
-                </div>
-              </div>
-            ))}
+            {item.children}
           </AccordionCheckout>
         ))}
       </div>
     </div>
+  );
+}
+
+function ExtraRooms() {
+  return (
+    <>
+      {[...Array(3)].map((item, index) => (
+        <div
+          key={`extra-room-${index}`}
+          className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
+        >
+          <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
+            <img
+              src="/images/property/1.png"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold">Upgrade to Deluxe Room Twin Bed</h3>
+            <p className="text-sm text-gray-600">
+              38 sqm | Twin Bed | Private Balcony | Seating Area
+            </p>
+          </div>
+          <div className="flex items-center">
+            <input type="radio" name="roomUpgrade" className="mr-2" />
+            <span className="text-gray-700">+ IDR 150,000</span>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+function ExtraMeals() {
+  return (
+    <>
+      {[...Array(3)].map((item, index) => (
+        <div
+          key={`extra-meal-${index}`}
+          className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
+        >
+          <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
+            <img
+              src="/images/property/1.png"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold">
+              Romantic Candlelight Dinner for Two
+            </h3>
+            <p className="text-sm text-gray-600">
+              Beachfront Setting | 4-Course Menu | Wine Pairing | Private Butler
+              Service
+            </p>
+          </div>
+          <div className="flex items-center">
+            <input type="checkbox" name="extraMeal" className="mr-2" />
+            <span className="text-gray-700">+ IDR 150,000</span>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+function ExtraSpa() {
+  return (
+    <>
+      {[...Array(3)].map((item, index) => (
+        <div
+          key={`extra-spa-${index}`}
+          className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
+        >
+          <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
+            <img
+              src="/images/property/1.png"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold">Luxury Couples Spa Journey</h3>
+            <p className="text-sm text-gray-600">
+              2-Hour Treatment | Hot Stone Massage | Aromatic Bath |
+              Refreshments
+            </p>
+          </div>
+          <div className="flex items-center">
+            <NumberCounter name="extraSpa" />
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -132,7 +229,7 @@ function PaymentSummary() {
             Upgrading & Extras
           </p>
           <div>
-            <div className="flex max-sm:flex-col justify-between gap-4">
+            <div className="flex max-sm:flex-col justify-between sm:items-center gap-4">
               <div className="">
                 <p className="font-medium lg:text-[1.5rem]">
                   Buy One Get One FREE Cocktail
@@ -166,7 +263,7 @@ function PaymentSummary() {
             </button>
           </div>
           <div>
-            <div className="flex max-sm:flex-col justify-between gap-4">
+            <div className="flex max-sm:flex-col justify-between sm:items-center gap-4">
               <div className="">
                 <p className="font-medium lg:text-[1.5rem]">
                   Drag Queen Show | 1 Person
