@@ -9,8 +9,16 @@ import {ButtonBasic} from "../ButtonBasic";
 import {FaUser} from "react-icons/fa6";
 import {useEffect, useState} from "react";
 import {LuHeart} from "react-icons/lu";
+import {MdLogout} from "react-icons/md";
+import {FaUserCog} from "react-icons/fa";
+import {signOut, useSession} from "next-auth/react";
+import {useRouter} from "next/router";
+import Link from "next/link";
 
 export default function Header() {
+    const {data: session, status} = useSession();
+
+    const router = useRouter();
     // Check on scroll
     useEffect(() => {
         const handleScroll = () => {
@@ -54,11 +62,13 @@ export default function Header() {
                     <div className="flex flex-wrap justify-between items-start gap-4">
                         <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
                             <div className="absolute inset-0">
-                                <img
-                                    src="/logo-white.png"
-                                    alt="Logo"
-                                    className="transition-all duration-300 w-full"
-                                />
+                                <Link href={`/`}>
+                                    <img
+                                        src="/logo-white.png"
+                                        alt="Logo"
+                                        className="transition-all duration-300 w-full"
+                                    />
+                                </Link>
                             </div>
                         </div>
 
@@ -84,24 +94,61 @@ export default function Header() {
                                     </a>
                                 </div>
 
-                                <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
-                                    {/* Login Button */}
-                                    <ButtonBasic
-                                        href="/login"
-                                        variant="white"
-                                        rounded
-                                    >
-                                        <FaUser className="w-4 h-4" />
-                                        <span className="shrink-0">LOGIN</span>
-                                    </ButtonBasic>
+                                {!session ? (
+                                    <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
+                                        {/* Login Button */}
+                                        <ButtonBasic
+                                            href="/login"
+                                            variant="white"
+                                            rounded
+                                        >
+                                            <FaUser className="w-4 h-4" />
+                                            <span className="shrink-0">
+                                                LOGIN
+                                            </span>
+                                        </ButtonBasic>
 
-                                    {/* Sign Up Button */}
-                                    <ButtonBasic href="/register" rounded>
-                                        <span className="shrink-0">
-                                            SIGN UP
-                                        </span>
-                                    </ButtonBasic>
-                                </div>
+                                        {/* Sign Up Button */}
+                                        <ButtonBasic href="/register" rounded>
+                                            <span className="shrink-0">
+                                                SIGN UP
+                                            </span>
+                                        </ButtonBasic>
+                                    </div>
+                                ) : (
+                                    <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
+                                        {/* Sign Up Button */}
+                                        <div className="group-[.active-scroll_a]:bg-gray-dark">
+                                            <a
+                                                href="/dashboard"
+                                                className="flex justify-center items-center cursor-pointer aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+                                            >
+                                                <div className="shrink-0">
+                                                    <FaUserCog
+                                                        className="w-3 lg:w-5 h-3 lg:h-5"
+                                                        color="white"
+                                                    />
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div className="group-[.active-scroll_a]:bg-gray-dark">
+                                            <a
+                                                onClick={() => {
+                                                    signOut({redirect: false});
+                                                    router.push("/");
+                                                }}
+                                                className="flex justify-center items-center cursor-pointer aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+                                            >
+                                                <div className="shrink-0">
+                                                    <MdLogout
+                                                        className="w-3 lg:w-5 h-3 lg:h-5"
+                                                        color="white"
+                                                    />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Hamburger Button */}

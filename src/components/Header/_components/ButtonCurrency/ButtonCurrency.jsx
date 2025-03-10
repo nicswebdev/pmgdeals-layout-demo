@@ -1,7 +1,9 @@
+import {useCurrency} from "@/context/CurrencyContext";
 import {useEffect, useState} from "react";
 import {GoChevronDown} from "react-icons/go";
 
 export default function ButtonCurrency() {
+    const {currency, setCurrency} = useCurrency();
     const currencies = [
         {
             label: "IDR",
@@ -65,6 +67,10 @@ export default function ButtonCurrency() {
         }
     }, []);
 
+    const handleCurrencyChange = (newCurrency) => {
+        setCurrency(newCurrency);
+    };
+
     return (
         <div className="relative" id="currencyOptions">
             <button
@@ -88,6 +94,7 @@ export default function ButtonCurrency() {
                             onClick={() => {
                                 setSelected(currency);
                                 setOpen(false);
+                                handleCurrencyChange(currency.label);
                             }}
                         >
                             <div className="shrink-0 grow-0 w-4 lg:w-8 h-4 lg:h-8 rounded-full overflow-hidden">

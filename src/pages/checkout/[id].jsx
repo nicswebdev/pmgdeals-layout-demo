@@ -1,21 +1,76 @@
 import {AccordionCheckout, ButtonBasic, ButtonHeart, Hero} from "@/components";
-import {useState} from "react";
+import Head from "next/head";
+import {useMemo, useState} from "react";
 import {FaCheck} from "react-icons/fa";
 import {GoChevronDown, GoChevronRight} from "react-icons/go";
+import parse from "html-react-parser";
+import {useCurrency} from "@/context/CurrencyContext";
+import {useRouter} from "next/router";
 
-export default function Description() {
+export default function Description({
+    dealsData,
+    dealsAddonCategoryData,
+    dealsAddonData,
+    staticPage,
+}) {
+    const formatter = useMemo(
+        () =>
+            new Intl.NumberFormat("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }),
+        []
+    );
+
+    const idrFormatter = useMemo(() => new Intl.NumberFormat("en-US"), []);
+
+    const {currency, rates} = useCurrency();
+
+    const router = useRouter();
+
     return (
         <main className="pt-28 sm:pt-40 lg:pt-56 bg-gray-dark">
+            <Head>
+                <title>{staticPage.content.checkout_seo_title}</title>
+                <meta
+                    name="description"
+                    content={staticPage.content.checkout_seo_descriptions}
+                />
+                <meta
+                    name="keyword"
+                    content={staticPage.content.checkout_seo_keyword}
+                />
+                <meta
+                    property="og:title"
+                    content={staticPage.content.checkout_seo_title}
+                />
+                <meta
+                    property="og:description"
+                    content={staticPage.content.checkout_seo_descriptions}
+                />
+                <meta
+                    property="og:image"
+                    content={`https://cms.pmgdeals.com/uploads/og-image.png`}
+                />
+            </Head>
             <div className="py-32 bg-white">
                 <div className="container">
                     <div className="flex flex-col xl:flex-row w-full max-lg:space-y-16">
                         <div className="xl:w-2/3 xl:pr-20">
-                            <UpgradingExtras />
+                            {dealsAddonCategoryData.addon_category.length >
+                                0 && (
+                                <UpgradingExtras
+                                    dealsAddonCategoryData={
+                                        dealsAddonCategoryData
+                                    }
+                                    dealsAddonData={dealsAddonData}
+                                />
+                            )}
                             <Form />
                         </div>
 
                         <div className="xl:w-1/3">
-                            <PaymentSummary />
+                            <PaymentSummary dealsData={dealsData} />
                         </div>
                     </div>
                 </div>
@@ -24,42 +79,72 @@ export default function Description() {
     );
 }
 
-function UpgradingExtras() {
+function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
+    const formatter = useMemo(
+        () =>
+            new Intl.NumberFormat("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }),
+        []
+    );
+
+    const idrFormatter = useMemo(() => new Intl.NumberFormat("en-US"), []);
+
+    const {currency, rates} = useCurrency();
+
+    const router = useRouter();
+
     return (
         <div>
             <p className="text-2xl font-bold mb-4">Upgrading & Extras</p>
             <div>
-                {["Room", "Meals", "Spa", "Transport", "Others"].map(
-                    (item, index) => (
-                        <AccordionCheckout
-                            title={
-                                <p className="font-bold lg:text-[1.5rem]">
-                                    {item}
-                                </p>
-                            }
-                            style={{borderTop: "0px"}}
-                            key={`accordion-${index}`}
-                        >
-                            {[...Array(3)].map((item, index) => (
+                {dealsAddonCategoryData.addon_category.map((item, index) => (
+                    <AccordionCheckout
+                        title={
+                            <p className="font-bold lg:text-[1.5rem]">
+                                {item.deals_addon_category_name}
+                            </p>
+                        }
+                        style={{borderTop: "0px"}}
+                        key={`accordion-${index}`}
+                    >
+                        {dealsAddonData.addon
+                            .filter(
+                                (addon) =>
+                                    addon.deals_addon_category ===
+                                    item.deals_addon_category_id
+                            )
+                            .sort((a, b) =>
+                                a.deals_addon_price === "0" &&
+                                b.deals_addon_price !== "0"
+                                    ? -1
+                                    : a.deals_addon_price !== "0" &&
+                                      b.deals_addon_price === "0"
+                                    ? 1
+                                    : 0
+                            )
+                            .map((addon, index) => (
                                 <div
                                     key={`room-${index}`}
                                     className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
                                 >
                                     <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
                                         <img
-                                            src="/images/property/1.png"
+                                            src={`https://cms.pmgdeals.com/uploads/addon/${addon.deals_addon_image}`}
                                             alt=""
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="font-semibold">
-                                            Upgrade to Deluxe Room Twin Bed
+                                            {addon.deals_addon_name}
                                         </h3>
-                                        <p className="text-sm text-gray-600">
-                                            38 sqm | Twin Bed | Private Balcony
-                                            | Seating Area
-                                        </p>
+                                        <div className="text-sm text-gray-600">
+                                            {parse(
+                                                addon.deals_addon_descriptions
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="flex items-center">
                                         <input
@@ -68,26 +153,66 @@ function UpgradingExtras() {
                                             className="mr-2"
                                         />
                                         <span className="text-gray-700">
-                                            + IDR 150,000
+                                            {addon.deals_addon_price === "0"
+                                                ? "FREE"
+                                                : currency === "IDR"
+                                                ? `+ ${currency} ${idrFormatter.format(
+                                                      Number(
+                                                          rates[currency]
+                                                              ? (
+                                                                    addon.deals_addon_price *
+                                                                    rates[
+                                                                        currency
+                                                                    ]
+                                                                ).toFixed(2)
+                                                              : addon.deals_addon_price
+                                                      )
+                                                  )}`
+                                                : `+ ${currency} ${formatter.format(
+                                                      Number(
+                                                          rates[currency]
+                                                              ? (
+                                                                    addon.deals_addon_price *
+                                                                    rates[
+                                                                        currency
+                                                                    ]
+                                                                ).toFixed(2)
+                                                              : addon.deals_addon_price
+                                                      )
+                                                  )}`}
                                         </span>
                                     </div>
                                 </div>
                             ))}
-                        </AccordionCheckout>
-                    )
-                )}
+                    </AccordionCheckout>
+                ))}
             </div>
         </div>
     );
 }
 
-function PaymentSummary() {
+function PaymentSummary({dealsData}) {
+    const formatter = useMemo(
+        () =>
+            new Intl.NumberFormat("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }),
+        []
+    );
+
+    const idrFormatter = useMemo(() => new Intl.NumberFormat("en-US"), []);
+
+    const {currency, rates} = useCurrency();
+
+    const router = useRouter();
+
     return (
         <>
             <div className="border-[0.0625rem] border-gray-dark">
                 <div className="aspect-[1.35/1] overflow-hidden">
                     <img
-                        src="/property.png"
+                        src={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
                         alt=""
                         className="w-full h-full object-cover"
                     />
@@ -97,58 +222,61 @@ function PaymentSummary() {
                     <div className="flex max-sm:flex-col justify-between">
                         <div className="">
                             <p className="font-medium lg:text-[1.5rem]">
-                                Splendid 3-Night Package
+                                {dealsData.deals_detail.deals_name}
                             </p>
                             <p className="font-light">
-                                Bali Niksoma Boutique Beach Resort
+                                {dealsData.deals_detail.property_name}
                             </p>
                         </div>
                         <p className="font-bold lg:text-[1.25rem] text-[#660000]">
-                            IDR 7,300,000
+                            {currency}{" "}
+                            {currency === "IDR"
+                                ? idrFormatter.format(
+                                      rates[currency]
+                                          ? (
+                                                dealsData.deals_detail
+                                                    .deals_promo_price *
+                                                rates[currency]
+                                            ).toFixed(2)
+                                          : dealsData.deals_detail
+                                                .deals_promo_price
+                                  )
+                                : formatter.format(
+                                      rates[currency]
+                                          ? (
+                                                dealsData.deals_detail
+                                                    .deals_promo_price *
+                                                rates[currency]
+                                            ).toFixed(2)
+                                          : dealsData.deals_detail
+                                                .deals_promo_price
+                                  )}
                         </p>
                     </div>
 
-                    <div className="">
+                    <div className="details">
                         <AccordionDetail>
                             <div className="pb-6 lg:pb-10">
                                 <p className="font-bold text-[1.25rem]">
                                     Description
                                 </p>
-                                <p className="font-light">
-                                    Splendidly hassle-free 3 nights at Bali
-                                    Niksoma Boutique Beach Resort for 2 persons.
-                                    Spend less and enjoy more!
-                                </p>
+                                <div className="font-light">
+                                    {parse(
+                                        dealsData.deals_detail
+                                            .deals_descriptions
+                                    )}
+                                </div>
                             </div>
 
                             <div>
                                 <p className="font-bold text-[1.25rem]">
                                     Package Inclusions
                                 </p>
-                                <ul className="list-disc pl-5 font-light">
-                                    <li>
-                                        3-Night Stay at Deluxe Room with Double
-                                        Bed
-                                    </li>
-                                    <li>Daily Breakfast</li>
-                                    <li>Airport pick-up service</li>
-                                    <li>One-time minibar</li>
-                                    <li>
-                                        One-time 60 minutes Balinese massage
-                                    </li>
-                                    <li>
-                                        Save up to 10% on non-alcoholic
-                                        beverages
-                                    </li>
-                                    <li>
-                                        Save up to 10% on Visala Spa treatments
-                                    </li>
-                                    <li>Welcome drinks upon arrival</li>
-                                    <li>Wi-Fi in all hotel area</li>
-                                    <li>
-                                        Free usage of pool and fitness center
-                                    </li>
-                                </ul>
+                                <div className="pl-5 font-light">
+                                    {parse(
+                                        dealsData.deals_detail.deals_inclusions
+                                    )}
+                                </div>
                             </div>
                         </AccordionDetail>
                     </div>
@@ -248,7 +376,31 @@ function PaymentSummary() {
                             </p>
                         </div>
                         <p className="font-bold lg:text-[1.25rem] text-[#660000]">
-                            IDR 9,400,000
+                            {currency === "IDR"
+                                ? `${currency}
+                                                ${idrFormatter.format(
+                                                    rates[currency]
+                                                        ? (
+                                                              dealsData
+                                                                  .deals_detail
+                                                                  .deals_promo_price *
+                                                              rates[currency]
+                                                          ).toFixed(2)
+                                                        : dealsData.deals_detail
+                                                              .deals_promo_price
+                                                )}`
+                                : `${currency}
+                                                ${formatter.format(
+                                                    rates[currency]
+                                                        ? (
+                                                              dealsData
+                                                                  .deals_detail
+                                                                  .deals_promo_price *
+                                                              rates[currency]
+                                                          ).toFixed(2)
+                                                        : dealsData.deals_detail
+                                                              .deals_promo_price
+                                                )}`}
                         </p>
                     </div>
 
@@ -584,4 +736,33 @@ function Form() {
             </form>
         </div>
     );
+}
+
+export async function getServerSideProps({params}) {
+    const id = params.id;
+
+    const staticPage = await fetch(
+        `https://cms.pmgdeals.com/api/public/content?page=checkout`
+    ).then((res) => res.json());
+
+    const dealsData = await fetch(
+        `https://cms.pmgdeals.com/api/public/deals/detail?id=` + id
+    ).then((res) => res.json());
+
+    const dealsAddonCategoryData = await fetch(
+        `https://cms.pmgdeals.com/api/public/deals/addoncategory?id=` + id
+    ).then((res) => res.json());
+
+    const dealsAddonData = await fetch(
+        `https://cms.pmgdeals.com/api/public/deals/addon?id=` + id
+    ).then((res) => res.json());
+
+    return {
+        props: {
+            dealsData,
+            dealsAddonCategoryData,
+            dealsAddonData,
+            staticPage,
+        },
+    };
 }

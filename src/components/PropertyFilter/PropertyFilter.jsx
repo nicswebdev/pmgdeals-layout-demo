@@ -27,12 +27,13 @@ export default function PropertyFilter() {
         {
             id: 0,
             label: "Highlight",
+            link: "/",
             value: "highlight",
         },
         {
             id: 1,
             label: "Hotel",
-            link: "/hotels",
+            link: "/category/1",
             value: "hotel",
             icon: (
                 <div className={iconWrapperClassName}>
@@ -52,7 +53,7 @@ export default function PropertyFilter() {
         {
             id: 2,
             label: "Food & Beverage",
-            link: "/food-beverage",
+            link: "/category/2",
             value: "food_beverage",
             icon: (
                 <div className={iconWrapperClassName}>
@@ -72,7 +73,7 @@ export default function PropertyFilter() {
         {
             id: 3,
             label: "Spa",
-            link: "/spa",
+            link: "/category/3",
             value: "spa",
             icon: (
                 <div className={iconWrapperClassName}>
@@ -92,7 +93,7 @@ export default function PropertyFilter() {
         {
             id: 4,
             label: "Activity",
-            link: "/activity",
+            link: "/category/10",
             value: "activity",
             icon: (
                 <div className={iconWrapperClassName}>
@@ -112,7 +113,7 @@ export default function PropertyFilter() {
         {
             id: 5,
             label: "Entertainment",
-            link: "/entertainment",
+            link: "/category/11",
             value: "entertainment",
             icon: (
                 <div className={iconWrapperClassName}>

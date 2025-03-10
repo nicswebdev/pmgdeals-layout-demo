@@ -128,19 +128,19 @@ export default function Home({
             <div className="pb-10">
                 <div className="container">
                     <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                        Best Stay Packages
+                        {homepageDeals.homepage.section1_title}
                     </p>
                 </div>
-                <SwiperPropertyList />
+                <SwiperPropertyList deals={filteredSection1Deals} />
             </div>
 
             <div className="pb-10">
                 <div className="container">
                     <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                        Our Recommendations
+                        {homepageDeals.homepage.section2_title}
                     </p>
                 </div>
-                <SwiperPropertyList />
+                <SwiperPropertyList deals={filteredSection2Deals} />
             </div>
 
             <div className="pb-14 xl:pb-20">
