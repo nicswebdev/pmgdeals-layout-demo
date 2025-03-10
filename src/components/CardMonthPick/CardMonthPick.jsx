@@ -1,6 +1,6 @@
 import {FaRegStar, FaStar} from "react-icons/fa6";
 import {ButtonHeart} from "../ButtonHeart";
-export default function CardMonthPick({href}) {
+export default function CardMonthPick({deals}) {
     const randomString = Math.random().toString(36).substring(2, 9);
 
     return (
@@ -12,7 +12,7 @@ export default function CardMonthPick({href}) {
                 <div className="aspect-video md:aspect-[2/1.25] w-full rounded-[1.25rem] bg-gray-600"></div>
                 <div className="pt-8 text-white">
                     <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
-                        Hitana Restaurant
+                        {deals.property_name}
                     </p>
                     <p className="pb-4 font-bold lg:text-[1.5rem]">
                         Drag Queen Show
