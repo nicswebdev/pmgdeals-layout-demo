@@ -64,14 +64,17 @@ export default function MonthPicks({deals}) {
                             onSlideChange={handleSlideChange}
                             //   onSwiper={(swiper) => console.log(swiper)}
                         >
-                            {deals.map((item, index) => (
-                                <SwiperSlide key={`slide-month-pick-${index}`}>
-                                    <CardMonthPick
-                                        key={`card-month-pick-${index}`}
-                                        deals={item}
-                                    />
-                                </SwiperSlide>
-                            ))}
+                            {deals &&
+                                deals.map((item, index) => (
+                                    <SwiperSlide
+                                        key={`slide-month-pick-${index}`}
+                                    >
+                                        <CardMonthPick
+                                            key={`card-month-pick-${index}`}
+                                            deals={item}
+                                        />
+                                    </SwiperSlide>
+                                ))}
                         </Swiper>
 
                         <SwiperButtonPrevious
