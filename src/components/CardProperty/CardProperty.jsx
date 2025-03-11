@@ -6,10 +6,10 @@ export default function CardProperty({ href }) {
   const random = Math.floor(Math.random() * 3) + 1;
 
   return (
-    <div className="relative">
+    <div className="relative h-full flex items-stretch">
       <a
         href={href || "#"}
-        className="group flex flex-col mx-2 my-2 px-3 py-4 lg:py-6 shadow-[-0.0625rem_0.0625rem_0.5rem_rgba(0,0,0,0.25)] transition-all duration-300 hover:opacity-70 "
+        className="group basis-full flex flex-col mx-2 my-2 px-3 py-4 lg:py-6 shadow-[-0.0625rem_0.0625rem_0.5rem_rgba(0,0,0,0.25)] transition-all duration-300 hover:opacity-70"
       >
         <div className="aspect-video w-full rounded-[1.25rem] overflow-hidden">
           <img

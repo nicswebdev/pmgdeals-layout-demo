@@ -54,7 +54,7 @@ export default function SwiperPropertyList({ numberOfProperties = 6 }) {
           onSlideChange={handleSlideChange}
         >
           {[...Array(numberOfProperties)].map((item, index) => (
-            <SwiperSlide key={`slide-property-${index}`}>
+            <SwiperSlide key={`slide-property-${index}`} className="!h-auto">
               <CardProperty />
             </SwiperSlide>
           ))}
