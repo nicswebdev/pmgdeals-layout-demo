@@ -77,14 +77,18 @@ export default function MonthPicks({deals}) {
                                 ))}
                         </Swiper>
 
-                        <SwiperButtonPrevious
-                            onClick={handlePrev}
-                            disabled={isBeginning}
-                        />
-                        <SwiperButtonNext
-                            onClick={handleNext}
-                            disabled={isEnding}
-                        />
+                        {deals.length > 3 && (
+                            <>
+                                <SwiperButtonPrevious
+                                    onClick={handlePrev}
+                                    disabled={isBeginning}
+                                />
+                                <SwiperButtonNext
+                                    onClick={handleNext}
+                                    disabled={isEnding}
+                                />
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

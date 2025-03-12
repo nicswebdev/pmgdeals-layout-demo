@@ -239,8 +239,6 @@ export async function getServerSideProps() {
         `https://cms.pmgdeals.com/api/public/deals/randomdealshighlight`
     ).then((res) => res.json());
 
-    console.log(homepageDeals.homepage);
-
     return {
         props: {
             categoryData,
