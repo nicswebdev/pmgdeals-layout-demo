@@ -94,7 +94,11 @@ export default function Hotels({
             <div className="py-32">
                 <div className="container">
                     <div className="pb-20">
-                        <PropertyFilter />
+                        <PropertyFilter
+                            currency={currency}
+                            rates={rates}
+                            onPriceChange={handlePriceRangeChange}
+                        />
                     </div>
 
                     {propertyData.property.map((propertyItem, index) => {

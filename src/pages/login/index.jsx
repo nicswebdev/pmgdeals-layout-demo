@@ -197,7 +197,7 @@ export default function Login({homepageDeals}) {
                                     </div>
                                     <button
                                         class="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer bg-[#D9D9D9] rounded-full"
-                                        onClick={handleGoogleSignIn}
+                                        // onClick={handleGoogleSignIn}
                                     >
                                         <FcGoogle className="w-5 h-5" />
                                         <span>LOGIN WITH GOOGLE</span>
@@ -206,12 +206,12 @@ export default function Login({homepageDeals}) {
                             </div>
 
                             <p className="text-center text-sm text-gray-600 mt-4">
-                                Have an account already?{" "}
+                                Not a member?{" "}
                                 <a
-                                    href="#"
+                                    href="/register"
                                     className="font-bold tracking-[1%] text-[#4A4A4A] transition-all duration-300 underline hover:no-underline"
                                 >
-                                    Login
+                                    Sign Up
                                 </a>
                             </p>
                         </div>

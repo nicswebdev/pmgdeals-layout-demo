@@ -2,6 +2,7 @@ import Head from "next/head";
 import {PropertyFilter, SwiperPropertyList} from "@/components";
 import {useEffect, useState} from "react";
 import MonthPicks from "./_home/_sections/MonthPicks";
+import {useCurrency} from "@/context/CurrencyContext";
 
 export default function Home({
     categoryData,
@@ -11,6 +12,8 @@ export default function Home({
     randomDeals3,
     randomDeals4,
 }) {
+    const {currency, rates} = useCurrency();
+
     const [filteredSection1Deals, setFilteredSection1Deals] = useState([]);
     const [filteredSection2Deals, setFilteredSection2Deals] = useState([]);
     const [filteredSection3Deals, setFilteredSection3Deals] = useState([]);
@@ -134,7 +137,11 @@ export default function Home({
                                 </p>
                             </div>
 
-                            <PropertyFilter />
+                            <PropertyFilter
+                                currency={currency}
+                                rates={rates}
+                                onPriceChange={handlePriceRangeChange}
+                            />
                         </div>
                     </div>
 

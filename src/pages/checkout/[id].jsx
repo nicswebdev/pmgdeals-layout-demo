@@ -1,4 +1,10 @@
-import {AccordionCheckout, ButtonBasic, ButtonHeart, Hero} from "@/components";
+import {
+    AccordionCheckout,
+    ButtonBasic,
+    ButtonHeart,
+    Hero,
+    NumberCounter,
+} from "@/components";
 import Head from "next/head";
 import {useMemo, useState} from "react";
 import {FaCheck} from "react-icons/fa";
@@ -27,6 +33,18 @@ export default function Description({
     const {currency, rates} = useCurrency();
 
     const router = useRouter();
+
+    // Create state to store the selected extras.
+    const [selectedExtras, setSelectedExtras] = useState([]);
+
+    // Base price from deals data.
+    const basePrice = Number(dealsData.deals_detail.deals_promo_price);
+    // Sum of extra items (each extra: price * quantity).
+    const extrasTotal = selectedExtras.reduce(
+        (acc, extra) => acc + extra.price * extra.quantity,
+        0
+    );
+    const totalPrice = basePrice + extrasTotal;
 
     return (
         <main className="pt-28 sm:pt-40 lg:pt-56 bg-gray-dark">
@@ -64,13 +82,20 @@ export default function Description({
                                         dealsAddonCategoryData
                                     }
                                     dealsAddonData={dealsAddonData}
+                                    selectedExtras={selectedExtras}
+                                    setSelectedExtras={setSelectedExtras}
                                 />
                             )}
                             <Form />
                         </div>
 
                         <div className="xl:w-1/3">
-                            <PaymentSummary dealsData={dealsData} />
+                            <PaymentSummary
+                                dealsData={dealsData}
+                                selectedExtras={selectedExtras}
+                                setSelectedExtras={setSelectedExtras}
+                                totalPrice={totalPrice}
+                            />
                         </div>
                     </div>
                 </div>
@@ -79,7 +104,12 @@ export default function Description({
     );
 }
 
-function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
+function UpgradingExtras({
+    dealsAddonCategoryData,
+    dealsAddonData,
+    selectedExtras,
+    setSelectedExtras,
+}) {
     const formatter = useMemo(
         () =>
             new Intl.NumberFormat("en-US", {
@@ -95,6 +125,78 @@ function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
 
     const router = useRouter();
 
+    // For radio (max one extra per category).
+    const handleRadioSelect = (categoryId, addon) => {
+        setSelectedExtras((prev) => {
+            const newExtras = prev.filter((e) => e.categoryId !== categoryId);
+            return [
+                ...newExtras,
+                {
+                    addonId: addon.deals_addon_id,
+                    categoryId,
+                    name: addon.deals_addon_name,
+                    desc: addon.deals_addon_descriptions,
+                    price: Number(addon.deals_addon_price),
+                    quantity: 1,
+                },
+            ];
+        });
+    };
+
+    // For checkboxes (toggle extra on/off).
+    const handleCheckboxChange = (categoryId, addon, checked) => {
+        if (checked) {
+            setSelectedExtras((prev) => {
+                if (prev.some((e) => e.addonId === addon.deals_addon_id))
+                    return prev;
+                return [
+                    ...prev,
+                    {
+                        addonId: addon.deals_addon_id,
+                        categoryId,
+                        name: addon.deals_addon_name,
+                        desc: addon.deals_addon_descriptions,
+                        price: Number(addon.deals_addon_price),
+                        quantity: 1,
+                    },
+                ];
+            });
+        } else {
+            setSelectedExtras((prev) =>
+                prev.filter((e) => e.addonId !== addon.deals_addon_id)
+            );
+        }
+    };
+
+    // For number counter (update quantity).
+    const handleCounterChange = (categoryId, addon, newValue) => {
+        setSelectedExtras((prev) => {
+            if (newValue <= 0) {
+                return prev.filter((e) => e.addonId !== addon.deals_addon_id);
+            }
+            const exists = prev.find((e) => e.addonId === addon.deals_addon_id);
+            if (exists) {
+                return prev.map((e) =>
+                    e.addonId === addon.deals_addon_id
+                        ? {...e, quantity: newValue}
+                        : e
+                );
+            } else {
+                return [
+                    ...prev,
+                    {
+                        addonId: addon.deals_addon_id,
+                        categoryId,
+                        name: addon.deals_addon_name,
+                        desc: addon.deals_addon_descriptions,
+                        price: Number(addon.deals_addon_price),
+                        quantity: newValue,
+                    },
+                ];
+            }
+        });
+    };
+
     return (
         <div>
             <p className="text-2xl font-bold mb-4">Upgrading & Extras</p>
@@ -108,6 +210,7 @@ function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
                         }
                         style={{borderTop: "0px"}}
                         key={`accordion-${index}`}
+                        defaultOpen={index === 0 ? true : false}
                     >
                         {dealsAddonData.addon
                             .filter(
@@ -124,9 +227,9 @@ function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
                                     ? 1
                                     : 0
                             )
-                            .map((addon, index) => (
+                            .map((addon, index2) => (
                                 <div
-                                    key={`room-${index}`}
+                                    key={`room-${index2}`}
                                     className="flex max-md:flex-col md:items-center py-4 first:pt-0 last:pb-0 border-b-[0.0625rem] last:border-none border-gray-dark"
                                 >
                                     <div className="max-md:w-full w-32 aspect-[2/1] mr-4 overflow-hidden">
@@ -147,11 +250,67 @@ function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
                                         </div>
                                     </div>
                                     <div className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="roomUpgrade"
-                                            className="mr-2"
-                                        />
+                                        {item.deals_addon_max_selected_items ===
+                                        "One" ? (
+                                            <input
+                                                type="radio"
+                                                name={`extra_${item.deals_addon_category_id}`}
+                                                onChange={() =>
+                                                    handleRadioSelect(
+                                                        item.deals_addon_category_id,
+                                                        addon
+                                                    )
+                                                }
+                                                checked={selectedExtras.some(
+                                                    (e) =>
+                                                        e.addonId ===
+                                                        addon.deals_addon_id
+                                                )}
+                                                className="mr-2"
+                                            />
+                                        ) : (
+                                            <>
+                                                {addon.deals_addon_qty_type ===
+                                                "Single" ? (
+                                                    <input
+                                                        type="checkbox"
+                                                        name={`extra_${item.deals_addon_category_id}`}
+                                                        onChange={(e) =>
+                                                            handleCheckboxChange(
+                                                                item.deals_addon_category_id,
+                                                                addon,
+                                                                e.target.checked
+                                                            )
+                                                        }
+                                                        checked={selectedExtras.some(
+                                                            (e) =>
+                                                                e.addonId ===
+                                                                addon.deals_addon_id
+                                                        )}
+                                                        className="mr-2"
+                                                    />
+                                                ) : (
+                                                    <NumberCounter
+                                                        name={`extraCount_${addon.deals_addon_id}`}
+                                                        value={
+                                                            selectedExtras.find(
+                                                                (e) =>
+                                                                    e.addonId ===
+                                                                    addon.deals_addon_id
+                                                            )?.quantity || 0
+                                                        }
+                                                        onChange={(newValue) =>
+                                                            handleCounterChange(
+                                                                item.deals_addon_category_id,
+                                                                addon,
+                                                                newValue
+                                                            )
+                                                        }
+                                                    />
+                                                )}
+                                            </>
+                                        )}
+
                                         <span className="text-gray-700">
                                             {addon.deals_addon_price === "0"
                                                 ? "FREE"
@@ -191,7 +350,12 @@ function UpgradingExtras({dealsAddonCategoryData, dealsAddonData}) {
     );
 }
 
-function PaymentSummary({dealsData}) {
+function PaymentSummary({
+    dealsData,
+    selectedExtras,
+    setSelectedExtras,
+    totalPrice,
+}) {
     const formatter = useMemo(
         () =>
             new Intl.NumberFormat("en-US", {
@@ -206,6 +370,10 @@ function PaymentSummary({dealsData}) {
     const {currency, rates} = useCurrency();
 
     const router = useRouter();
+
+    const handleRemoveExtra = (addonId) => {
+        setSelectedExtras((prev) => prev.filter((e) => e.addonId !== addonId));
+    };
 
     return (
         <>
@@ -284,86 +452,110 @@ function PaymentSummary({dealsData}) {
 
                 <div className="px-4 lg:px-10 py-6 lg:py-16 border-b border-dashed border-gray-dark">
                     <p className="font-bold text-[1.5rem] pb-10 lg:pb-16">
-                        Upgrading & Extras
+                        Selected Upgrading & Extras
                     </p>
-                    <div>
-                        <div className="flex max-sm:flex-col justify-between gap-4">
-                            <div className="">
-                                <p className="font-medium lg:text-[1.5rem]">
-                                    Buy One Get One FREE Cocktail
-                                </p>
-                            </div>
-                            <p className="font-bold text-[#660000]">
-                                IDR 1,050,000
-                            </p>
-                        </div>
+                    {selectedExtras.length === 0 ? (
+                        <p className="font-light">No extras selected</p>
+                    ) : (
+                        selectedExtras.map((extra) => (
+                            <>
+                                {/* <div
+                                    key={extra.addonId}
+                                    className="flex max-sm:flex-col justify-between gap-4 mb-4"
+                                >
+                                    <div>
+                                        <p className="font-medium lg:text-[1.5rem]">
+                                            {extra.name}{" "}
+                                            {extra.quantity > 1 &&
+                                                `| ${extra.quantity} pcs`}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <p className="font-bold text-[#660000]">
+                                            {currency === "IDR"
+                                                ? `IDR ${idrFormatter.format(
+                                                      rates[currency]
+                                                          ? (
+                                                                extra.price *
+                                                                rates[currency]
+                                                            ).toFixed(2)
+                                                          : extra.price
+                                                  )}`
+                                                : `${currency} ${formatter.format(
+                                                      rates[currency]
+                                                          ? (
+                                                                extra.price *
+                                                                rates[currency]
+                                                            ).toFixed(2)
+                                                          : extra.price
+                                                  )}`}
+                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                handleRemoveExtra(extra.addonId)
+                                            }
+                                            className="font-medium text-[0.75rem]"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div> */}
 
-                        <div className="">
-                            <AccordionDetail>
-                                <div>
-                                    <ul className="list-disc pl-5 font-light">
-                                        <li>
-                                            Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do
-                                            eiusmod tempor{" "}
-                                        </li>
-                                        <li>
-                                            incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamc
-                                        </li>
-                                        <li>
-                                            incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamc
-                                        </li>
-                                    </ul>
-                                </div>
-                            </AccordionDetail>
-                        </div>
-                        <button className="font-medium text-[0.75rem] pt-3 lg:pt-6">
-                            Remove
-                        </button>
-                    </div>
-                    <div>
-                        <div className="flex max-sm:flex-col justify-between gap-4">
-                            <div className="">
-                                <p className="font-medium lg:text-[1.5rem]">
-                                    Drag Queen Show | 1 Person
-                                </p>
-                            </div>
-                            <p className="font-bold text-[#660000]">
-                                IDR 1,050,000
-                            </p>
-                        </div>
+                                <div key={extra.addonId}>
+                                    <div className="flex max-sm:flex-col justify-between sm:items-center gap-4">
+                                        <div className="">
+                                            <p className="font-medium lg:text-[1.5rem]">
+                                                {extra.name}{" "}
+                                                {extra.quantity > 1 &&
+                                                    `| ${extra.quantity} pcs`}
+                                            </p>
+                                        </div>
+                                        <p className="font-bold text-[#660000]">
+                                            {currency === "IDR"
+                                                ? `IDR ${idrFormatter.format(
+                                                      rates[currency]
+                                                          ? (
+                                                                extra.price *
+                                                                extra.quantity *
+                                                                rates[currency]
+                                                            ).toFixed(2)
+                                                          : extra.price *
+                                                                extra.quantity
+                                                  )}`
+                                                : `${currency} ${formatter.format(
+                                                      rates[currency]
+                                                          ? (
+                                                                extra.price *
+                                                                extra.quantity *
+                                                                rates[currency]
+                                                            ).toFixed(2)
+                                                          : extra.price *
+                                                                extra.quantity
+                                                  )}`}
+                                        </p>
+                                    </div>
 
-                        <div className="">
-                            <AccordionDetail>
-                                <div>
-                                    <ul className="list-disc pl-5 font-light">
-                                        <li>
-                                            Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do
-                                            eiusmod tempor{" "}
-                                        </li>
-                                        <li>
-                                            incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamc
-                                        </li>
-                                        <li>
-                                            incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamc
-                                        </li>
-                                    </ul>
+                                    <div className="">
+                                        <AccordionDetail>
+                                            <div>
+                                                <div className="list-disc pl-5 font-light">
+                                                    {parse(extra.desc)}
+                                                </div>
+                                            </div>
+                                        </AccordionDetail>
+                                    </div>
+                                    <button
+                                        onClick={() =>
+                                            handleRemoveExtra(extra.addonId)
+                                        }
+                                        className="font-medium text-[0.75rem] pt-3 lg:pt-6"
+                                    >
+                                        Remove
+                                    </button>
                                 </div>
-                            </AccordionDetail>
-                        </div>
-                        <button className="font-medium text-[0.75rem] pt-3 lg:pt-6">
-                            Remove
-                        </button>
-                    </div>
+                            </>
+                        ))
+                    )}
                 </div>
                 <div className="px-4 lg:px-10 py-6 lg:py-16">
                     <div className="flex max-sm:flex-col justify-between">
@@ -377,30 +569,20 @@ function PaymentSummary({dealsData}) {
                         </div>
                         <p className="font-bold lg:text-[1.25rem] text-[#660000]">
                             {currency === "IDR"
-                                ? `${currency}
-                                                ${idrFormatter.format(
-                                                    rates[currency]
-                                                        ? (
-                                                              dealsData
-                                                                  .deals_detail
-                                                                  .deals_promo_price *
-                                                              rates[currency]
-                                                          ).toFixed(2)
-                                                        : dealsData.deals_detail
-                                                              .deals_promo_price
-                                                )}`
-                                : `${currency}
-                                                ${formatter.format(
-                                                    rates[currency]
-                                                        ? (
-                                                              dealsData
-                                                                  .deals_detail
-                                                                  .deals_promo_price *
-                                                              rates[currency]
-                                                          ).toFixed(2)
-                                                        : dealsData.deals_detail
-                                                              .deals_promo_price
-                                                )}`}
+                                ? `${currency} ${idrFormatter.format(
+                                      rates[currency]
+                                          ? (
+                                                totalPrice * rates[currency]
+                                            ).toFixed(2)
+                                          : totalPrice
+                                  )}`
+                                : `${currency} ${formatter.format(
+                                      rates[currency]
+                                          ? (
+                                                totalPrice * rates[currency]
+                                            ).toFixed(2)
+                                          : totalPrice
+                                  )}`}
                         </p>
                     </div>
 

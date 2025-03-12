@@ -5,10 +5,32 @@ import {IoRestaurantOutline, IoCloseOutline} from "react-icons/io5";
 import {ButtonCategory, CheckBox} from "./_components";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-import {use, useEffect, useState} from "react";
+import {use, useEffect, useMemo, useState} from "react";
 import {ButtonBasic} from "../ButtonBasic";
+import {useRouter} from "next/router";
 
-export default function PropertyFilter() {
+export default function PropertyFilter({onPriceChange, currency, rates}) {
+    const formatter = useMemo(() => new Intl.NumberFormat("en-US"), []);
+
+    const router = useRouter();
+    // const {id} = router.query;
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    useEffect(() => {
+        const path = router.asPath; // Get full path
+        if (path === "/") {
+            setSelectedCategory(0); // Default to Highlight if on homepage
+        } else {
+            const match = path.match(/^\/category\/(\d+)$/); // Match `/category/{id}`
+            if (match) {
+                setSelectedCategory(parseInt(match[1], 10)); // Set selected category from URL
+            } else {
+                setSelectedCategory(null); // Reset if not in `/category/{id}` or `/`
+            }
+        }
+    }, [router.asPath]);
+
     const settingButtonClassName =
         "group shrink-0 aspect-square w-12 xl:w-[4.375rem] flex justify-center items-center transition-all duration-300 rounded-full border-[0.0625rem] border-gray-dark hover:bg-gray-dark";
 
@@ -91,7 +113,7 @@ export default function PropertyFilter() {
             ),
         },
         {
-            id: 4,
+            id: 10,
             label: "Activity",
             link: "/category/10",
             value: "activity",
@@ -111,7 +133,7 @@ export default function PropertyFilter() {
             ),
         },
         {
-            id: 5,
+            id: 11,
             label: "Entertainment",
             link: "/category/11",
             value: "entertainment",
@@ -175,6 +197,16 @@ export default function PropertyFilter() {
         }
     }, [openModal]);
 
+    const applyPriceFilter = () => {
+        onPriceChange(rangeStartValue, rangeEndValue);
+        setOpenModal(false);
+    };
+
+    const handleReset = () => {
+        setRangeStartValue(0);
+        setRangeEndValue(100 * baseRangeValue);
+    };
+
     return (
         <>
             <div>
@@ -204,7 +236,8 @@ export default function PropertyFilter() {
                             label={label}
                             icon={icon}
                             href={link}
-                            isActive={id === 0}
+                            isActive={selectedCategory === id}
+                            onClick={() => setSelectedCategory(id)}
                         />
                     ))}
                 </div>
@@ -225,22 +258,22 @@ export default function PropertyFilter() {
                         >
                             <div className="absolute left-4 top-4">
                                 <button
-                                    className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-dark"
+                                    className="w-6 h-6 flex justify-center items-center rounded-full bg-white"
                                     onClick={() => setOpenModal(false)}
                                 >
-                                    <IoCloseOutline className="w-4 h-4" />
+                                    <IoCloseOutline className="w-8 h-8" />
                                 </button>
                             </div>
                             <div className="flex justify-end pb-4">
-                                <a
-                                    href="#"
+                                <button
+                                    onClick={handleReset}
                                     className="font-medium max-lg:text-[0.75rem] text-gray-dark"
                                 >
                                     Reset
-                                </a>
+                                </button>
                             </div>
 
-                            <div className="pb-6">
+                            {/* <div className="pb-6">
                                 <p className="font-bold max-lg:text-[0.75rem] pb-6">
                                     Category:
                                 </p>
@@ -258,9 +291,9 @@ export default function PropertyFilter() {
                                             />
                                         ))}
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="pb-6">
+                            {/* <div className="pb-6">
                                 <p className="font-bold max-lg:text-[0.75rem] pb-6">
                                     Sub Category:
                                 </p>
@@ -278,7 +311,7 @@ export default function PropertyFilter() {
                                             />
                                         ))}
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="pb-10">
                                 <p className="font-bold max-lg:text-[0.75rem] pb-6">
@@ -287,12 +320,29 @@ export default function PropertyFilter() {
                                 <div>
                                     <div className="flex justify-between pb-6 text-gray-dark">
                                         <p className="font-medium max-lg:text-[0.75rem]">
-                                            From: IDR{" "}
-                                            {rangeStartValue.toLocaleString()}
+                                            From: {currency}{" "}
+                                            {formatter.format(
+                                                convertToSelectedCurrency(
+                                                    rangeStartValue,
+                                                    rates,
+                                                    currency
+                                                )
+                                            )}
+                                            {/* IDR{" "}
+                                            {rangeStartValue.toLocaleString()} */}
                                         </p>
                                         <p className="font-medium max-lg:text-[0.75rem]">
-                                            To: IDR{" "}
-                                            {rangeEndValue.toLocaleString()}
+                                            To:
+                                            {currency}{" "}
+                                            {formatter.format(
+                                                convertToSelectedCurrency(
+                                                    rangeEndValue,
+                                                    rates,
+                                                    currency
+                                                )
+                                            )}
+                                            {/* IDR{" "}
+                                            {rangeEndValue.toLocaleString()} */}
                                         </p>
                                     </div>
 
@@ -309,13 +359,12 @@ export default function PropertyFilter() {
                             </div>
 
                             <div>
-                                <ButtonBasic
-                                    element="button"
-                                    variant="gray"
-                                    rounded
+                                <button
+                                    onClick={applyPriceFilter}
+                                    className="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer text-white bg-gray-dark rounded-full"
                                 >
                                     Apply
-                                </ButtonBasic>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -325,3 +374,7 @@ export default function PropertyFilter() {
         </>
     );
 }
+
+const convertToSelectedCurrency = (amount, rates, currency) => {
+    return rates[currency] ? amount * rates[currency] : amount;
+};

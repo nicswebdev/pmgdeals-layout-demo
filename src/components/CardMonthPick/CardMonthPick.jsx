@@ -245,7 +245,7 @@ export default function CardMonthPick({deals}) {
                 </div>
             </a>
             <div className="absolute top-3 lg:top-6 right-3 lg:right-6">
-                <ButtonHeart />
+                <ButtonHeart dealsId={deals.deals_id} />
             </div>
         </div>
     );

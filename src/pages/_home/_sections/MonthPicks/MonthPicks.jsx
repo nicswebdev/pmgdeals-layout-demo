@@ -77,7 +77,7 @@ export default function MonthPicks({deals}) {
                                 ))}
                         </Swiper>
 
-                        {deals.length > 3 && (
+                        {deals && deals.length > 3 && (
                             <>
                                 <SwiperButtonPrevious
                                     onClick={handlePrev}

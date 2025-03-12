@@ -8,24 +8,31 @@ export default function Footer() {
     const {screenSizes} = useResponsiveWidth();
     const brands = [
         {
+            href: "https://baliniksoma.com",
             image: "/images/footer/bali-niksoma.png",
         },
         {
+            href: "https://themagani.com",
             image: "/images/footer/the-magani.png",
         },
         {
+            href: "https://thebandha.com",
             image: "/images/footer/the-bandha.png",
         },
         {
+            href: "https://royalsuitesatthebandha.com",
             image: "/images/footer/royal-suites.png",
         },
         {
+            href: "https://visalaspa.com",
             image: "/images/footer/visala-spa.png",
         },
         {
+            href: "https://mozzarella-resto.com",
             image: "/images/footer/mozzarella-restaurant-bar.png",
         },
         {
+            href: "https://mozzarella-resto.com",
             image: "/images/footer/mozzarella-by-the-sea.png",
         },
     ];
@@ -36,20 +43,20 @@ export default function Footer() {
                 <div className="flex max-lg:flex-col gap-4 pb-10">
                     <div className="shrink-0 grow-0 basis-full lg:basis-8/12">
                         <div className="flex max-lg:flex-col max-lg:items-center lg:gap-20">
-                            <div className="max-w-[11.25rem] 4xl:max-w-[23.75rem]">
+                            {/* <div className="max-w-[11.25rem] 4xl:max-w-[23.75rem]">
                                 <img
                                     src="/images/footer/logo.png"
                                     alt="Logo"
                                     className="w-full"
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="max-lg:pb-8">
                                 <div className="max-lg:text-center">
                                     <p className="pb-4 lg:pb-6 font-open-sans font-bold lg:text-[2rem]">
                                         GET IN TOUCH
                                     </p>
-                                    <p className="pb-4 lg:pb-6 font-open-sans lg:text-[1.375rem]">
+                                    <p className="pb-0 lg:pb-0 font-open-sans lg:text-[1.375rem]">
                                         PMG Hotels & Resorts
                                     </p>
                                     <p className="pb-4 lg:pb-6 font-open-sans text-[0.75rem] lg:text-[1.375rem]">
@@ -70,7 +77,7 @@ export default function Footer() {
                                         <br />
                                         WhatsApp: 
                                         <a
-                                            href="tel:+6281510449090"
+                                            href="https://wa.me/+6281510449090"
                                             className="underline"
                                         >
                                             +62 815 1044 9090
@@ -88,32 +95,29 @@ export default function Footer() {
                                     <ul className="flex max-lg:justify-center items-center gap-4">
                                         {[
                                             {
-                                                href: "#",
+                                                href: "https://www.facebook.com/pmghotelsresorts/",
                                                 icon: (
                                                     <FaFacebookF className="w-6 lg:w-8 h-6 lg:h-8" />
                                                 ),
                                             },
                                             {
-                                                href: "#",
+                                                href: "https://www.instagram.com/pmghotelsresortsbali/",
                                                 icon: (
                                                     <FaInstagram className="w-6 lg:w-8 h-6 lg:h-8" />
                                                 ),
                                             },
                                             {
-                                                href: "#",
+                                                href: "https://wa.me/6281510449090",
                                                 icon: (
                                                     <FaWhatsapp className="w-6 lg:w-8 h-6 lg:h-8" />
                                                 ),
                                             },
-                                            {
-                                                href: "#",
-                                                icon: (
-                                                    <FaTiktok className="w-6 lg:w-8 h-6 lg:h-8" />
-                                                ),
-                                            },
                                         ].map((item, index) => (
                                             <li key={`social-${index}`}>
-                                                <a href={item.href}>
+                                                <a
+                                                    href={item.href}
+                                                    target="_blank"
+                                                >
                                                     {item.icon}
                                                 </a>
                                             </li>
@@ -124,30 +128,30 @@ export default function Footer() {
 
                             <div className="max-lg:pb-8">
                                 <div className="max-lg:text-center">
-                                    <p className="pb-4 lg:pb-6 font-open-sans font-bold lg:text-[2rem]">
+                                    {/* <p className="pb-4 lg:pb-6 font-open-sans font-bold lg:text-[2rem]">
                                         HELP
-                                    </p>
+                                    </p> */}
 
-                                    <ul className="flex flex-col gap-1 lg:gap-2">
+                                    <ul className="flex flex-col gap-1 lg:gap-4">
                                         {[
                                             {
-                                                href: "#",
+                                                href: "/about-us",
                                                 label: "About us",
                                             },
                                             {
-                                                href: "#",
+                                                href: "/contact-us",
                                                 label: "Contact Us",
                                             },
                                             {
-                                                href: "#",
+                                                href: "/terms-conditions",
                                                 label: "Terms & Conditions",
                                             },
                                             {
-                                                href: "#",
+                                                href: "/privacy",
                                                 label: "Privacy & Policy",
                                             },
                                             {
-                                                href: "#",
+                                                href: "/refund-policy",
                                                 label: "Refund Policy",
                                             },
                                         ].map((item, index) => (
@@ -208,7 +212,9 @@ export default function Footer() {
                                 key={`footer-brand-${index}`}
                                 className="basis-6/12 md:basis-4/12 xl:basis-3/12"
                             >
-                                <img src={item.image} alt="" />
+                                <a href={item.href} target="_blank">
+                                    <img src={item.image} alt="" />
+                                </a>
                             </li>
                         ))}
                     </ul>

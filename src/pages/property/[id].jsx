@@ -1,4 +1,5 @@
 import {CardProperty, Hero, PropertyFilter, SectionHeading} from "@/components";
+import {useCurrency} from "@/context/CurrencyContext";
 import Head from "next/head";
 import {useState} from "react";
 
@@ -8,6 +9,8 @@ export default function HotelsCategory({
     propertyData,
     defaultImage,
 }) {
+    const {currency, rates} = useCurrency();
+
     const showToast = (message, type = "default") => {
         switch (type) {
             case "success":
@@ -69,7 +72,11 @@ export default function HotelsCategory({
             <div className="py-32">
                 <div className="container">
                     <div className="pb-20">
-                        <PropertyFilter />
+                        <PropertyFilter
+                            currency={currency}
+                            rates={rates}
+                            onPriceChange={handlePriceRangeChange}
+                        />
                     </div>
                     <div>
                         <div className="[&>p]:pb-0 pb-10 lg:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">

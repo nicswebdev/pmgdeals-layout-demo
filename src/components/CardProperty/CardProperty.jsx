@@ -155,14 +155,14 @@ export default function CardProperty({deals}) {
     }
 
     return (
-        <div className="relative">
+        <div className="relative h-full flex items-stretch">
             <a
-                href={href || "#"}
+                href={`/details/${deals.deals_id}`}
                 className="group flex flex-col mx-2 my-2 px-3 py-4 lg:py-6 shadow-[-0.0625rem_0.0625rem_0.5rem_rgba(0,0,0,0.25)] transition-all duration-300 hover:opacity-70 "
             >
                 <div className="aspect-video w-full rounded-[1.25rem] overflow-hidden">
                     <img
-                        src={`/images/property/${random}.png`}
+                        src={`https://cms.pmgdeals.com/uploads/deals/${deals.deals_image}`}
                         alt=""
                         className="w-full h-full object-cover"
                     />
@@ -245,7 +245,7 @@ export default function CardProperty({deals}) {
                 </div>
             </a>
             <div className="absolute top-6 lg:top-10 right-6 lg:right-10">
-                <ButtonHeart />
+                <ButtonHeart dealsId={deals.deals_id} />
             </div>
         </div>
     );

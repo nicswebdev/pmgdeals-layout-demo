@@ -9,7 +9,7 @@ export default function Favorite({homepageDeals, defaultImage}) {
     const [dealsData, setDealsData] = useState(null);
     const router = useRouter();
 
-    console.log("sgefwef", status);
+    // console.log("sgefwef", status);
 
     useEffect(() => {
         if (status === "unauthenticated") {
