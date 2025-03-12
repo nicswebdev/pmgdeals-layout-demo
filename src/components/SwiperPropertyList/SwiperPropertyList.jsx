@@ -54,7 +54,10 @@ export default function SwiperPropertyList({deals}) {
                     onSlideChange={handleSlideChange}
                 >
                     {deals.map((item, index) => (
-                        <SwiperSlide key={`slide-property-${index}`}>
+                        <SwiperSlide
+                            key={`slide-property-${index}`}
+                            className="!h-auto"
+                        >
                             <CardProperty deals={item} />
                         </SwiperSlide>
                     ))}

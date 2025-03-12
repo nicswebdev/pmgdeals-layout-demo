@@ -157,12 +157,12 @@ export default function CardProperty({deals}) {
     return (
         <div className="relative">
             <a
-                href={`/details/${deals.deals_id}`}
+                href={href || "#"}
                 className="group flex flex-col mx-2 my-2 px-3 py-4 lg:py-6 shadow-[-0.0625rem_0.0625rem_0.5rem_rgba(0,0,0,0.25)] transition-all duration-300 hover:opacity-70 "
             >
                 <div className="aspect-video w-full rounded-[1.25rem] overflow-hidden">
                     <img
-                        src={`https://cms.pmgdeals.com/uploads/deals/${deals.deals_image}`}
+                        src={`/images/property/${random}.png`}
                         alt=""
                         className="w-full h-full object-cover"
                     />
