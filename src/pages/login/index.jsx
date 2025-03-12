@@ -137,9 +137,9 @@ export default function Login({homepageDeals}) {
                 <div className="container sm:max-w-[37.5rem]">
                     <div className="rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.1)]">
                         <div className="px-8 sm:px-10 py-8 sm:py-10 rounded-lg shadow-[0_80px_50px_rgba(0,0,0,0.1)] w-full">
-                            <div className="max-w-[40%] md:max-w-[25%]  mx-auto mb-6">
+                            <div className="max-w-[40%] md:max-w-[45%]  mx-auto mb-6">
                                 <img
-                                    src="/logo.png"
+                                    src="/deals-logo-brown.png"
                                     alt="Logo"
                                     className="relative w-full"
                                 />

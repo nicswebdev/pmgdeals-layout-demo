@@ -30,14 +30,6 @@ export default function Register() {
                         </SectionHeading>
                     </div>
                     <div className="">
-                        <div className="max-w-[40%] md:max-w-[25%] mx-auto mb-6">
-                            <img
-                                src="/logo.png"
-                                alt="Logo"
-                                className="relative w-full"
-                            />
-                        </div>
-
                         <div className="flex flex-col gap-20 4xl:gap-40">
                             <div className="flex flex-col gap-10 4xl:gap-20">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-10 4xl:gap-x-52">
