@@ -73,6 +73,15 @@ export default function Description({
             </Head>
             <div className="py-32 bg-white">
                 <div className="container">
+                    <div className="pb-10">
+                        <a
+                            href={`/details/${dealsData.deals_detail.deals_id}`}
+                            className="underline text-[#660000]"
+                        >
+                            Back to details
+                        </a>
+                    </div>
+
                     <div className="flex flex-col xl:flex-row w-full max-lg:space-y-16">
                         <div className="xl:w-2/3 xl:pr-20">
                             {dealsAddonCategoryData.addon_category.length >
@@ -198,7 +207,7 @@ function UpgradingExtras({
     };
 
     return (
-        <div>
+        <div className="pb-20">
             <p className="text-2xl font-bold mb-4">Upgrading & Extras</p>
             <div>
                 {dealsAddonCategoryData.addon_category.map((item, index) => (
@@ -651,7 +660,7 @@ function Form() {
         useState(false);
 
     return (
-        <div className="pt-20">
+        <div className="">
             <h2 className="text-lg font-semibold mb-4">
                 Who are you booking for?
             </h2>
