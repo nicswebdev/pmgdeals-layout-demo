@@ -121,36 +121,36 @@ export default function Dashboard({homepageDeals, defaultImage}) {
                                             key={`row-${index}`}
                                         >
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.order_code}
+                                                {item.order_code}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.deals_name}
+                                                {item.deals_name}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.created}
+                                                {item.created}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
                                                 {currency}{" "}
                                                 {formatter.format(
                                                     rates[currency]
-                                                        ? deal.total_amount *
+                                                        ? item.total_amount *
                                                               rates[currency]
-                                                        : deal.total_amount
+                                                        : item.total_amount
                                                 )}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.status}
+                                                {item.status}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.usage_status}
+                                                {item.usage_status}
                                             </td>
                                             <td className="px-4 py-2 xl:py-4">
-                                                {deal.status === "PAID" ? (
+                                                {item.status === "PAID" ? (
                                                     <button
                                                         onClick={() =>
                                                             handleDownload(
-                                                                deal.order_id,
-                                                                deal.order_code
+                                                                item.order_id,
+                                                                item.order_code
                                                             )
                                                         }
                                                         className="px-2 py-1 bg-[#dba628] text-white rounded-md"

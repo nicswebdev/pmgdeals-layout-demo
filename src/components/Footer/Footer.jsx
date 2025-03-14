@@ -3,6 +3,7 @@ import {FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok} from "react-icons/fa";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import {useResponsiveWidth} from "@/hooks";
+import {useState} from "react";
 
 export default function Footer() {
     const {screenSizes} = useResponsiveWidth();
@@ -36,6 +37,48 @@ export default function Footer() {
             image: "/images/footer/mozzarella-by-the-sea.png",
         },
     ];
+
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState(null);
+    const [message, setMessage] = useState("");
+
+    const subscribe = async (e) => {
+        e.preventDefault();
+
+        setStatus("sending");
+
+        setMessage("");
+
+        try {
+            const response = await fetch("/api/mailchimp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    tags: ["PMG Deals Website Subscriber"], // Add your tag(s) here
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setStatus("success");
+                setMessage(
+                    data.message || "Successfully subscribed to the newsletter."
+                );
+            } else {
+                const errorData = await response.json();
+                setStatus("error");
+                setMessage(
+                    errorData.error || "Something went wrong. Please try again."
+                );
+            }
+        } catch (error) {
+            setStatus("error");
+            setMessage("An unexpected error occurred.");
+        }
+    };
 
     return (
         <footer className="pt-0 lg:pt-20 bg-gray-dark text-white ">
@@ -181,16 +224,46 @@ export default function Footer() {
                             <p className="pb-4 lg:pb-6 font-open-sans text-[0.75rem] lg:text-[1.375rem]">
                                 Receive our latest stories direct to your inbox.
                             </p>
-                            <div className="flex">
-                                <input
-                                    type="email"
-                                    placeholder="E-mail Address"
-                                    className="px-4 py-2 w-full font-open-sans text-[0.75rem] lg:text-[1.375rem] placeholder:font-open-sans placeholder:text-[0.75rem] placeholder:lg:text-[1.375rem] placeholder:text-[#A3A3A3] bg-[#D9D9D9] text-black focus:outline-none"
-                                />
-                                <button className="px-4 py-2 font-open-sans text-white bg-primary">
-                                    SUBSCRIBE
-                                </button>
-                            </div>
+                            <form onSubmit={subscribe}>
+                                <div className="flex">
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        placeholder="E-mail Address"
+                                        className="px-4 py-2 w-full font-open-sans text-[0.75rem] lg:text-[1.375rem] placeholder:font-open-sans placeholder:text-[0.75rem] placeholder:lg:text-[1.375rem] placeholder:text-[#A3A3A3] bg-[#D9D9D9] text-black focus:outline-none"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2 font-open-sans text-white bg-primary"
+                                    >
+                                        SUBSCRIBE
+                                    </button>
+                                </div>
+                                {status === "sending" && (
+                                    <div style={{color: "white"}}>
+                                        sending...
+                                    </div>
+                                )}
+                                {status === "error" && (
+                                    <div
+                                        style={{color: "white"}}
+                                        dangerouslySetInnerHTML={{
+                                            __html: message,
+                                        }}
+                                    />
+                                )}
+                                {status === "success" && (
+                                    <div
+                                        style={{color: "white"}}
+                                        dangerouslySetInnerHTML={{
+                                            __html: message,
+                                        }}
+                                    />
+                                )}
+                            </form>
                         </div>
                     </div>
                 </div>

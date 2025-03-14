@@ -6,12 +6,34 @@ import {
     NumberCounter,
 } from "@/components";
 import Head from "next/head";
-import {useMemo, useState} from "react";
+import {useMemo, useState, useEffect, useRef} from "react";
 import {FaCheck} from "react-icons/fa";
 import {GoChevronDown, GoChevronRight} from "react-icons/go";
 import parse from "html-react-parser";
 import {useCurrency} from "@/context/CurrencyContext";
 import {useRouter} from "next/router";
+import {useForm, Controller} from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
+import {useSession} from "next-auth/react";
+
+const initValues = {
+    salutation: "",
+    firstname: "",
+    lastname: "",
+    note: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    zipcode: "",
+    country: "",
+    other_firstname: "",
+    other_lastname: "",
+    other_email: "",
+    other_phone: "",
+};
+
+const initState = {values: initValues};
 
 export default function Description({
     dealsData,
@@ -19,6 +41,8 @@ export default function Description({
     dealsAddonData,
     staticPage,
 }) {
+    const submitRef = useRef(null);
+
     const formatter = useMemo(
         () =>
             new Intl.NumberFormat("en-US", {
@@ -95,7 +119,12 @@ export default function Description({
                                     setSelectedExtras={setSelectedExtras}
                                 />
                             )}
-                            <Form />
+                            <Form
+                                submitRef={submitRef}
+                                dealsData={dealsData}
+                                selectedExtras={selectedExtras}
+                                totalPrice={totalPrice}
+                            />
                         </div>
 
                         <div className="xl:w-1/3">
@@ -104,6 +133,7 @@ export default function Description({
                                 selectedExtras={selectedExtras}
                                 setSelectedExtras={setSelectedExtras}
                                 totalPrice={totalPrice}
+                                submitRef={submitRef}
                             />
                         </div>
                     </div>
@@ -364,6 +394,7 @@ function PaymentSummary({
     selectedExtras,
     setSelectedExtras,
     totalPrice,
+    submitRef,
 }) {
     const formatter = useMemo(
         () =>
@@ -382,6 +413,15 @@ function PaymentSummary({
 
     const handleRemoveExtra = (addonId) => {
         setSelectedExtras((prev) => prev.filter((e) => e.addonId !== addonId));
+    };
+
+    const handleSubmitClick = () => {
+        if (submitRef.current) {
+            console.log("Submitting form:", submitRef.current); // Debugging
+            submitRef.current.requestSubmit();
+        } else {
+            console.error("submitRef is not assigned yet!");
+        }
     };
 
     return (
@@ -597,25 +637,21 @@ function PaymentSummary({
 
                     <div className="pt-10 lg:pt-20 flex items-center justify-center mb-4">
                         <label className="flex items-center gap-4 cursor-pointer">
-                            <input type="checkbox" className="peer hidden" />
-                            <span className="relative shrink-0 w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
-                                <FaCheck className="absolute w-4 h-4 fill-[inherit]" />
-                            </span>
                             <span className="text-[0.75rem]">
                                 By confirming this registrations i am agreeing
                                 to the{" "}
                                 <a
-                                    href=""
+                                    href="/terms-conditions"
                                     className="font-bold tracking-[1%] text-[#4A4A4A] transition-all duration-300 underline hover:no-underline"
                                 >
                                     Terms & Conditions
                                 </a>{" "}
                                 and{" "}
                                 <a
-                                    href=""
+                                    href="/refund-policy"
                                     className="font-bold tracking-[1%] text-[#4A4A4A] transition-all duration-300 underline hover:no-underline"
                                 >
-                                    Privacy Policy
+                                    Refund Policy
                                 </a>
                             </span>
                         </label>
@@ -626,9 +662,13 @@ function PaymentSummary({
                             Payment will be processed in IDR
                         </p>
 
-                        <ButtonBasic element="button" rounded>
-                            Continue to Checkout
-                        </ButtonBasic>
+                        <button
+                            type="submit"
+                            onClick={handleSubmitClick}
+                            className="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer text-white bg-primary rounded-full"
+                        >
+                            Continue to Payment
+                        </button>
                     </div>
                 </div>
             </div>
@@ -655,12 +695,149 @@ function AccordionDetail({children, defaultOpen = false}) {
     );
 }
 
-function Form() {
-    const [isBookingForSomeoneElse, setIsBookingForSomeoneElse] =
-        useState(false);
+function Form({dealsData, selectedExtras, totalPrice, submitRef}) {
+    const {data: session} = useSession();
+
+    const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    const [state, setState] = useState(initState);
+    const {values, isLoading, error, success} = state;
+
+    const key = "6Ldt0ycpAAAAAJMNUgQfmilcJxBe4GGifNSglOtE";
+    // const key = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+    const [captchaIsDone, setCaptchaIsDone] = useState(false);
+
+    function onChange() {
+        setCaptchaIsDone(true);
+    }
+
+    const [bookingForOthers, setBookingForOthers] = useState(false);
+
+    const {
+        control,
+        handleSubmit,
+        setValue,
+        formState: {errors},
+    } = useForm();
+
+    useEffect(() => {
+        // Check if user is logged in
+        if (session && session.user) {
+            // Use setValue from react-hook-form to set the values
+            setValue("salutation", session.user.member_salutation || "Mr.");
+            setValue("firstname", session.user.member_firstname || "");
+            setValue("lastname", session.user.member_lastname || "");
+            setValue("email", session.user.member_email || "");
+            setValue("phone", session.user.member_phone || "");
+            console.log("Form values set from session:", session.user);
+        }
+    }, [session, setValue]);
+
+    const [checkoutData, setCheckoutData] = useState({
+        addons: selectedExtras,
+        dealsId: dealsData.deals_detail.deals_id,
+        totalPrice: totalPrice,
+    });
+
+    useEffect(() => {
+        setCheckoutData({
+            addons: selectedExtras,
+            totalPrice: totalPrice,
+            dealsId: dealsData.deals_detail.deals_id,
+        });
+    }, [selectedExtras, totalPrice]);
+
+    console.log("Checkout", checkoutData);
+
+    const onSubmit = async (data) => {
+        console.log("Form submitted:", data);
+        if (captchaIsDone) {
+            setState((prev) => ({
+                ...prev,
+                isLoading: true,
+            }));
+
+            const orderData = {...data, bookingForOthers: bookingForOthers};
+
+            if (bookingForOthers) {
+                orderData.other_firstname = data.other_firstname;
+                orderData.other_lastname = data.other_lastname;
+                orderData.other_email = data.other_email;
+                orderData.other_phone = data.other_phone;
+            }
+
+            orderData.member_id =
+                session && session.user ? session.user.member_id : null;
+
+            const payload = {
+                orderData: orderData,
+                checkoutData: checkoutData,
+            };
+
+            try {
+                const response = await fetch(
+                    "https://cms.pmgdeals.com/api/public/order",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify(payload),
+                    }
+                );
+
+                console.log("Fetch response:", response);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                console.log("Fetch result:", result);
+
+                // Check if the response body has the payment_url
+                if (result && result.payment_url) {
+                    // Redirect to the payment URL
+                    window.location.href = result.payment_url;
+                } else {
+                    // Handle the scenario where payment_url is not present
+                    console.error("No payment_url in response:", result);
+                    setState((prev) => ({
+                        ...prev,
+                        isLoading: false,
+                        error: "No payment URL provided.",
+                    }));
+                }
+            } catch (error) {
+                console.error("Submission error:", error);
+                alert("An error occurred during submission");
+                setState((prev) => ({
+                    ...prev,
+                    isLoading: false,
+                    error: error.message,
+                }));
+            }
+        } else {
+            console.error("Captcha not completed");
+            setState((prev) => ({
+                ...prev,
+                error: "Please complete the captcha.",
+            }));
+        }
+    };
+
+    useEffect(() => {
+        if (submitRef && submitRef.current) {
+            console.log("submitRef assigned:", submitRef.current);
+        } else {
+            console.log("submitRef is still undefined!");
+        }
+    }, [submitRef]);
 
     return (
-        <div className="">
+        <form ref={submitRef} onSubmit={handleSubmit(onSubmit)}>
             <h2 className="text-lg font-semibold mb-4">
                 Who are you booking for?
             </h2>
@@ -669,26 +846,26 @@ function Form() {
                     <input
                         type="radio"
                         name="bookingFor"
-                        checked={!isBookingForSomeoneElse}
-                        onChange={() => setIsBookingForSomeoneElse(false)}
+                        checked={!bookingForOthers}
+                        onChange={() => setBookingForOthers(false)}
                         className="mr-2"
                     />
-                    I’m the main guest
+                    I'm the main guest
                 </label>
                 <label className="flex items-center">
                     <input
                         type="radio"
                         name="bookingFor"
-                        checked={isBookingForSomeoneElse}
-                        onChange={() => setIsBookingForSomeoneElse(true)}
+                        checked={bookingForOthers}
+                        onChange={() => setBookingForOthers(true)}
                         className="mr-2"
                     />
-                    I’m booking for someone else
+                    I'm booking for someone else
                 </label>
             </div>
 
-            <form className="pt-20">
-                <div className="flex flex-col gap-6 lg:gap-8 pb-20">
+            <div className="pt-20">
+                <div className="flex flex-col gap-6 lg:gap-8 pb-10">
                     <div className="grid grid-cols-12 gap-4 gap-y-3">
                         <div className="col-span-12 lg:col-span-2 flex items-center">
                             <label className="font-light lg:text-[1.25rem]">
@@ -697,17 +874,45 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <div className="relative">
-                                <select
-                                    name=""
-                                    className="appearance-none w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
-                                >
-                                    <option value="Mr">Mr.</option>
-                                    <option value="Mrs">Mrs.</option>
-                                    <option value="Ms">Ms.</option>
-                                </select>
-                                <GoChevronDown className="absolute top-1/2 -translate-y-1/2 right-0 w-5 h-5 fill-gray-dark" />
-                            </div>
+                            <Controller
+                                control={control}
+                                name="salutation"
+                                rules={{
+                                    required: "Salutation is required.",
+                                }}
+                                defaultValue={
+                                    session?.user?.member_salutation || "Mr."
+                                }
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <div className="relative">
+                                            <select
+                                                value={value}
+                                                onChange={onChange}
+                                                onBlur={onBlur}
+                                                className="appearance-none w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                            >
+                                                <option value="Mr." selected>
+                                                    Mr.
+                                                </option>
+                                                <option value="Mrs.">
+                                                    Mrs.
+                                                </option>
+                                                <option value="Ms.">Ms.</option>
+                                            </select>
+                                            <GoChevronDown className="absolute top-1/2 -translate-y-1/2 right-0 w-5 h-5 fill-gray-dark" />
+                                        </div>
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
+                            />
                         </div>
                     </div>
                     <div className="grid grid-cols-12 gap-4 gap-y-3">
@@ -718,11 +923,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="First Name"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="firstname"
+                                rules={{
+                                    required: "First Name is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="First Name"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -734,11 +960,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Last Name"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="lastname"
+                                rules={{
+                                    required: "Last Name is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Last Name"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -750,11 +997,36 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="E-mail"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="email"
+                                rules={{
+                                    required: "E-mail is required.",
+                                    pattern: {
+                                        value: EMAIL_REGEX,
+                                        message: "Wrong e-mail format.",
+                                    },
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="E-mail"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -766,11 +1038,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Phone"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="phone"
+                                rules={{
+                                    required: "Phone is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="number"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Phone"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -782,11 +1075,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Address"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="address"
+                                rules={{
+                                    required: "Address is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Address"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -798,11 +1112,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="City"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="city"
+                                rules={{
+                                    required: "City is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="City"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -814,11 +1149,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Zipcode"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="zipcode"
+                                rules={{
+                                    required: "Zipcode is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Zipcode"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -830,11 +1186,32 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Country"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                            <Controller
+                                control={control}
+                                name="country"
+                                rules={{
+                                    required: "Country is required.",
+                                }}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Country"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
@@ -846,16 +1223,37 @@ function Form() {
                         </div>
 
                         <div className="col-span-12 lg:col-span-10">
-                            <textarea
+                            <Controller
+                                control={control}
                                 name="note"
-                                placeholder="Note"
-                                className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                rules={{}}
+                                defaultValue={""}
+                                render={({
+                                    field: {value, onChange, onBlur},
+                                    fieldState: {error},
+                                }) => (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={value}
+                                            onChange={onChange}
+                                            onBlur={onBlur}
+                                            placeholder="Note"
+                                            className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                        />
+                                        {error && (
+                                            <p className="text-[#eb4034]">
+                                                {error.message || "Error"}
+                                            </p>
+                                        )}
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
                 </div>
 
-                {isBookingForSomeoneElse && (
+                {bookingForOthers && (
                     <div>
                         <p className="font-semibold lg:text-[1.5rem] pb-10">
                             Give as a gift
@@ -868,11 +1266,33 @@ function Form() {
                                     </label>
                                 </div>
                                 <div className="col-span-12 lg:col-span-10">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder="First Name"
-                                        className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                    <Controller
+                                        control={control}
+                                        name="other_firstname"
+                                        rules={{
+                                            required: "First Name is required.",
+                                        }}
+                                        render={({
+                                            field: {value, onChange, onBlur},
+                                            fieldState: {error},
+                                        }) => (
+                                            <>
+                                                <input
+                                                    type="text"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    onBlur={onBlur}
+                                                    placeholder="First Name"
+                                                    className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                                />
+                                                {error && (
+                                                    <p className="text-[#eb4034]">
+                                                        {error.message ||
+                                                            "Error"}
+                                                    </p>
+                                                )}
+                                            </>
+                                        )}
                                     />
                                 </div>
                             </div>
@@ -883,11 +1303,33 @@ function Form() {
                                     </label>
                                 </div>
                                 <div className="col-span-12 lg:col-span-10">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder="Last Name"
-                                        className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                    <Controller
+                                        control={control}
+                                        name="other_lastname"
+                                        rules={{
+                                            required: "Last Name is required.",
+                                        }}
+                                        render={({
+                                            field: {value, onChange, onBlur},
+                                            fieldState: {error},
+                                        }) => (
+                                            <>
+                                                <input
+                                                    type="text"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    onBlur={onBlur}
+                                                    placeholder="Last Name"
+                                                    className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                                />
+                                                {error && (
+                                                    <p className="text-[#eb4034]">
+                                                        {error.message ||
+                                                            "Error"}
+                                                    </p>
+                                                )}
+                                            </>
+                                        )}
                                     />
                                 </div>
                             </div>
@@ -898,11 +1340,37 @@ function Form() {
                                     </label>
                                 </div>
                                 <div className="col-span-12 lg:col-span-10">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder="E-mail"
-                                        className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                    <Controller
+                                        control={control}
+                                        name="other_email"
+                                        rules={{
+                                            required: "E-mail is required.",
+                                            pattern: {
+                                                value: EMAIL_REGEX,
+                                                message: "Wrong e-mail format.",
+                                            },
+                                        }}
+                                        render={({
+                                            field: {value, onChange, onBlur},
+                                            fieldState: {error},
+                                        }) => (
+                                            <>
+                                                <input
+                                                    type="text"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    onBlur={onBlur}
+                                                    placeholder="E-mail"
+                                                    className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                                />
+                                                {error && (
+                                                    <p className="text-[#eb4034]">
+                                                        {error.message ||
+                                                            "Error"}
+                                                    </p>
+                                                )}
+                                            </>
+                                        )}
                                     />
                                 </div>
                             </div>
@@ -913,19 +1381,44 @@ function Form() {
                                     </label>
                                 </div>
                                 <div className="col-span-12 lg:col-span-10">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder="Phone"
-                                        className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                    <Controller
+                                        control={control}
+                                        name="other_phone"
+                                        rules={{
+                                            required: "Phone is required.",
+                                        }}
+                                        render={({
+                                            field: {value, onChange, onBlur},
+                                            fieldState: {error},
+                                        }) => (
+                                            <>
+                                                <input
+                                                    type="text"
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    onBlur={onBlur}
+                                                    placeholder="Phone"
+                                                    className="block w-full lg:h-10 focus:outline-none font-light lg:text-[1.25rem] placeholder:lg:text-[1.25rem] border-b border-gray-dark"
+                                                />
+                                                {error && (
+                                                    <p className="text-[#eb4034]">
+                                                        {error.message ||
+                                                            "Error"}
+                                                    </p>
+                                                )}
+                                            </>
+                                        )}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
                 )}
-            </form>
-        </div>
+                <div className="mt-4">
+                    <ReCAPTCHA sitekey={key} onChange={onChange} />
+                </div>
+            </div>
+        </form>
     );
 }
 

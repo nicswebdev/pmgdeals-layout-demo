@@ -3,7 +3,7 @@ import {signIn, useSession} from "next-auth/react";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import {useEffect, useMemo, useState} from "react";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {FaCheck} from "react-icons/fa6";
 import {FcGoogle} from "react-icons/fc";
 
@@ -145,65 +145,135 @@ export default function Login({homepageDeals}) {
                                 />
                             </div>
 
-                            <div className="flex flex-col gap-10">
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="flex flex-col gap-10">
-                                    <input
-                                        type="text"
-                                        name="fullName"
-                                        placeholder="Full Name"
-                                        className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                                    />
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                                    />
+                                    <div className="flex flex-col gap-10">
+                                        <Controller
+                                            control={control}
+                                            name="email"
+                                            rules={{
+                                                required: "E-mail is required.",
+                                                pattern: {
+                                                    value: EMAIL_REGEX,
+                                                    message:
+                                                        "Wrong e-mail format.",
+                                                },
+                                            }}
+                                            render={({
+                                                field: {
+                                                    value,
+                                                    onChange,
+                                                    onBlur,
+                                                },
+                                                fieldState: {error},
+                                            }) => (
+                                                <>
+                                                    <input
+                                                        type="text"
+                                                        value={value}
+                                                        onChange={onChange}
+                                                        onBlur={onBlur}
+                                                        placeholder="E-mail"
+                                                        className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                                                    />
+                                                    {error && (
+                                                        <p className="text-[#eb4034]">
+                                                            {error.message ||
+                                                                "Error"}
+                                                        </p>
+                                                    )}
+                                                </>
+                                            )}
+                                        />
 
-                                    <div className="flex flex-wrap items-center justify-between gap-y-4 mb-4">
-                                        <label className="flex items-center gap-4 cursor-pointer">
-                                            <input
-                                                type="checkbox"
-                                                className="peer hidden"
-                                            />
-                                            <span className="relative w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
-                                                <FaCheck className="absolute w-4 h-4 fill-[inherit]" />
-                                            </span>
-                                            <span className="">
-                                                Keep me logged in
-                                            </span>
-                                        </label>
+                                        <Controller
+                                            control={control}
+                                            name="password"
+                                            rules={{
+                                                required:
+                                                    "Password is required.",
+                                            }}
+                                            render={({
+                                                field: {
+                                                    value,
+                                                    onChange,
+                                                    onBlur,
+                                                },
+                                                fieldState: {error},
+                                            }) => (
+                                                <>
+                                                    <input
+                                                        type="password"
+                                                        value={value}
+                                                        onChange={onChange}
+                                                        onBlur={onBlur}
+                                                        placeholder="Password"
+                                                        className=" lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                                                    />
+                                                    {error && (
+                                                        <p className="text-[#eb4034]">
+                                                            {error.message ||
+                                                                "Error"}
+                                                        </p>
+                                                    )}
+                                                </>
+                                            )}
+                                        />
 
-                                        <a
-                                            href="#"
-                                            className="transition-all duration-300 hover:underline text-[#7F7F7F]"
+                                        <div className="flex flex-wrap items-center justify-between gap-y-4 mb-4">
+                                            {/* <label className="flex items-center gap-4 cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    className="peer hidden"
+                                                />
+                                                <span className="relative w-4 h-4 bg-[#D9D9D9] fill-[#D9D9D9] peer-checked:!fill-primary">
+                                                    <FaCheck className="absolute w-4 h-4 fill-[inherit]" />
+                                                </span>
+                                                <span className="">
+                                                    Keep me logged in
+                                                </span>
+                                            </label> */}
+
+                                            <a
+                                                href="/forgot-password"
+                                                className="transition-all duration-300 hover:underline text-[#7F7F7F]"
+                                            >
+                                                Forgot Password?
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col gap-4  lg:max-w-[60%] mx-auto">
+                                        {error && (
+                                            <div className="text-[#eb4034] text-center mt-2">
+                                                {error}
+                                            </div>
+                                        )}
+                                        <button
+                                            type="submit"
+                                            class="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer text-white bg-primary rounded-full"
                                         >
-                                            Forgot Password?
-                                        </a>
+                                            {isLoading ? "LOADING..." : "LOGIN"}
+                                        </button>
+
+                                        <div className="flex justify-center items-center">
+                                            {/* <div className="flex-1 border-t border-gray-300"></div> */}
+                                            <span className="px-2 text-gray-600">
+                                                Or
+                                            </span>
+                                            {/* <div className="flex-1 border-t border-gray-300"></div> */}
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer bg-[#D9D9D9] rounded-full"
+                                            onClick={handleGoogleSignIn}
+                                        >
+                                            <FcGoogle className="w-5 h-5" />
+                                            <span>LOGIN WITH GOOGLE</span>
+                                        </button>
                                     </div>
                                 </div>
-
-                                <div className="flex flex-col gap-4  lg:max-w-[60%] mx-auto">
-                                    <ButtonBasic element="button" rounded>
-                                        LOGIN
-                                    </ButtonBasic>
-
-                                    <div className="flex justify-center items-center">
-                                        {/* <div className="flex-1 border-t border-gray-300"></div> */}
-                                        <span className="px-2 text-gray-600">
-                                            Or
-                                        </span>
-                                        {/* <div className="flex-1 border-t border-gray-300"></div> */}
-                                    </div>
-                                    <button
-                                        class="w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer bg-[#D9D9D9] rounded-full"
-                                        // onClick={handleGoogleSignIn}
-                                    >
-                                        <FcGoogle className="w-5 h-5" />
-                                        <span>LOGIN WITH GOOGLE</span>
-                                    </button>
-                                </div>
-                            </div>
+                            </form>
 
                             <p className="text-center text-sm text-gray-600 mt-4">
                                 Not a member?{" "}

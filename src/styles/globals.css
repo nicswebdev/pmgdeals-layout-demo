@@ -11,4 +11,8 @@
     .details ul {
         @apply pl-6 list-disc font-light lg:text-[1.25rem];
     }
+
+    .react-datepicker-wrapper {
+        @apply w-full;
+    }
 }

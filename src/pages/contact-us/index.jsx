@@ -1,5 +1,14 @@
 import {Hero, SectionHeading} from "@/components";
 
+const initValues = {
+    name: "",
+    email: "",
+    // phone: "",
+    // reason: "",
+    message: "",
+};
+const initState = {values: initValues};
+
 export default function ContactUs({staticPage, defaultImage}) {
     return (
         <main>
@@ -57,16 +66,55 @@ import {useState} from "react";
 import {IoLogoWhatsapp, IoMdSend} from "react-icons/io";
 import {FaEnvelope} from "react-icons/fa6";
 import Head from "next/head";
+import {sendContactForm} from "@/lib/apideals";
+import {Controller, useForm} from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
 function ContactForm() {
-    const [form, setForm] = useState({fullName: "", email: "", message: ""});
+    const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    const handleChange = (e) => {
-        setForm({...form, [e.target.name]: e.target.value});
-    };
+    const [state, setState] = useState(initState);
+    const {values, isLoading, error, success} = state;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form submitted", form);
+    const key = "6Ldt0ycpAAAAAJMNUgQfmilcJxBe4GGifNSglOtE";
+    // const key = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+    const [captchaIsDone, setCaptchaIsDone] = useState(false);
+
+    function onChange() {
+        setCaptchaIsDone(true);
+    }
+
+    const {
+        control,
+        handleSubmit,
+        formState: {errors},
+    } = useForm();
+
+    const onSubmit = async (data) => {
+        if (captchaIsDone) {
+            setState((prev) => ({
+                ...prev,
+                isLoading: true,
+            }));
+
+            const contactData = {...data};
+
+            try {
+                await sendContactForm(contactData);
+
+                setState(initState);
+                setState((prev) => ({
+                    ...prev,
+                    isLoading: false,
+                    success: true,
+                }));
+            } catch (error) {
+                setState((prev) => ({
+                    ...prev,
+                    isLoading: false,
+                    error: error.message,
+                }));
+            }
+        }
     };
 
     return (
@@ -111,46 +159,116 @@ function ContactForm() {
                 </div>
             </div>
             <form
-                onSubmit={handleSubmit}
-                className="lg:w-2/3 lg:pl-32 space-y-6 lg:space-y-32"
+                onSubmit={handleSubmit(onSubmit)}
+                className="lg:w-2/3 lg:pl-32 space-y-6 lg:space-y-8"
             >
                 <p className="font-medium text-[1.5rem] lg:text-[2rem] text-[#660000]">
                     Contact Us
                 </p>
                 <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
-                    <input
-                        type="text"
-                        name="fullName"
-                        placeholder="Full Name"
-                        className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                        value={form.fullName}
-                        onChange={handleChange}
+                    <Controller
+                        control={control}
+                        name="name"
+                        rules={{
+                            required: "Full name is required.",
+                        }}
+                        render={({
+                            field: {value, onChange, onBlur},
+                            fieldState: {error},
+                        }) => (
+                            <>
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    placeholder="Full Name"
+                                    className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                                />
+                                {error && (
+                                    <p className="text-[#eb4034]">
+                                        {error.message || "Error"}
+                                    </p>
+                                )}
+                            </>
+                        )}
                     />
-                    <input
-                        type="email"
+
+                    <Controller
+                        control={control}
                         name="email"
-                        placeholder="Email"
-                        className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                        value={form.email}
-                        onChange={handleChange}
+                        rules={{
+                            required: "E-mail is required.",
+                            pattern: {
+                                value: EMAIL_REGEX,
+                                message: "Wrong e-mail format.",
+                            },
+                        }}
+                        render={({
+                            field: {value, onChange, onBlur},
+                            fieldState: {error},
+                        }) => (
+                            <>
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    placeholder="Email"
+                                    className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                                />
+                                {error && (
+                                    <p className="text-[#eb4034]">
+                                        {error.message || "Error"}
+                                    </p>
+                                )}
+                            </>
+                        )}
                     />
                 </div>
 
-                <textarea
+                <Controller
+                    control={control}
                     name="message"
-                    placeholder="Message"
-                    className="w-full xl:min-h-40 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                    rows="3"
-                    value={form.message}
-                    onChange={handleChange}
-                ></textarea>
+                    rules={{
+                        required: "Message is required.",
+                    }}
+                    render={({
+                        field: {value, onChange, onBlur},
+                        fieldState: {error},
+                    }) => (
+                        <>
+                            <textarea
+                                value={value}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                placeholder="Message"
+                                className="w-full xl:min-h-40 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                                rows="3"
+                            />
+                            {error && (
+                                <p className="text-[#eb4034]">
+                                    {error.message || "Error"}
+                                </p>
+                            )}
+                        </>
+                    )}
+                />
+                <ReCAPTCHA sitekey={key} onChange={onChange} />
                 <button
                     type="submit"
+                    disabled={captchaIsDone ? false : true}
                     className="leading-none lg:text-[1.25rem] text-white px-6 py-3 lg:py-4 flex items-center space-x-2 bg-primary"
                 >
-                    <span>SEND</span>
+                    <span>{isLoading ? "LOADING..." : "SEND"}</span>
                     <IoMdSend className="w-5 h-5" />
                 </button>
+                {error && <div className="text-[#eb4034] mt-2">{error}</div>}
+                {success && (
+                    <div className="text-[#34eb65] mt-2">
+                        Your inquiry has been sent successfully
+                    </div>
+                )}
             </form>
         </div>
     );

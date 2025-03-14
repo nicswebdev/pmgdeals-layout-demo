@@ -210,7 +210,9 @@ export default function Description({
                             {/* End - Title */}
 
                             <div className="shrink-0 flex items-center h-[2.25rem] lg:h-[3.75rem]">
-                                <ButtonHeart />
+                                <ButtonHeart
+                                    dealsId={dealsData.deals_detail.deals_id}
+                                />
                             </div>
                         </div>
 
