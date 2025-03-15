@@ -30,7 +30,7 @@ export default function Footer() {
         },
         {
             href: "https://mozzarella-resto.com",
-            image: "/images/footer/mozzarella-restaurant-bar.png",
+            image: "/images/footer/logo-mozzarella.png",
         },
         {
             href: "https://mozzarella-resto.com",

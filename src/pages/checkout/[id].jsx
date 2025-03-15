@@ -415,10 +415,22 @@ function PaymentSummary({
         setSelectedExtras((prev) => prev.filter((e) => e.addonId !== addonId));
     };
 
+    // const handleSubmitClick = () => {
+    //     if (submitRef.current) {
+    //         console.log("Submitting form:", submitRef.current); // Debugging
+    //         submitRef.current.requestSubmit();
+    //     } else {
+    //         console.error("submitRef is not assigned yet!");
+    //     }
+    // };
+
     const handleSubmitClick = () => {
         if (submitRef.current) {
-            console.log("Submitting form:", submitRef.current); // Debugging
-            submitRef.current.requestSubmit();
+            const event = new Event("submit", {
+                bubbles: true,
+                cancelable: true,
+            });
+            submitRef.current.dispatchEvent(event);
         } else {
             console.error("submitRef is not assigned yet!");
         }
@@ -774,11 +786,14 @@ function Form({dealsData, selectedExtras, totalPrice, submitRef}) {
                 checkoutData: checkoutData,
             };
 
+            console.log(payload);
+
             try {
                 const response = await fetch(
                     "https://cms.pmgdeals.com/api/public/order",
                     {
                         method: "POST",
+                        mode: "cors",
                         headers: {
                             "Content-Type": "application/json",
                             Accept: "application/json",
@@ -793,7 +808,20 @@ function Form({dealsData, selectedExtras, totalPrice, submitRef}) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const result = await response.json();
+                // const result = await response.json();
+                const responseText = await response.text();
+                let result = {};
+                try {
+                    result = responseText ? JSON.parse(responseText) : {};
+                } catch (err) {
+                    console.error("Failed to parse JSON:", err, responseText);
+                    setState((prev) => ({
+                        ...prev,
+                        isLoading: false,
+                        error: "Failed to parse response from the server.",
+                    }));
+                    return;
+                }
 
                 console.log("Fetch result:", result);
 

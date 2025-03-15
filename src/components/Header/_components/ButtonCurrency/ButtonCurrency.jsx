@@ -71,6 +71,20 @@ export default function ButtonCurrency() {
         setCurrency(newCurrency);
     };
 
+    useEffect(() => {
+        if (currency === "IDR") {
+            setSelected(currencies[0]);
+        } else if (currency === "AUD") {
+            setSelected(currencies[1]);
+        } else if (currency === "USD") {
+            setSelected(currencies[2]);
+        } else if (currency === "SGD") {
+            setSelected(currencies[3]);
+        } else if (currency === "GBP") {
+            setSelected(currencies[4]);
+        }
+    }, [currency]);
+
     return (
         <div className="relative" id="currencyOptions">
             <button
