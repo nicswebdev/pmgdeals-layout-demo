@@ -40,6 +40,7 @@ export default function MenuMobile({isOpen, close}) {
                         <li key={`menu-mobile-${item.id}`}>
                             <a
                                 href={item.url}
+                                target={item.target}
                                 className="font-bold text-[1rem] transition-all duration-300 hover:opacity-70 text-[#660000]"
                             >
                                 {item.title}

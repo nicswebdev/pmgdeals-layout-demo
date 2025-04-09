@@ -14,7 +14,7 @@ export default function Footer() {
         },
         {
             href: "https://themagani.com",
-            image: "/images/footer/the-magani.png",
+            image: "/images/footer/magani2.png",
         },
         {
             href: "https://thebandha.com",
@@ -134,38 +134,6 @@ export default function Footer() {
                                             hello@pmgdeals.com
                                         </a>
                                     </p>
-
-                                    <ul className="flex max-lg:justify-center items-center gap-4">
-                                        {[
-                                            {
-                                                href: "https://www.facebook.com/pmghotelsresorts/",
-                                                icon: (
-                                                    <FaFacebookF className="w-6 lg:w-8 h-6 lg:h-8" />
-                                                ),
-                                            },
-                                            {
-                                                href: "https://www.instagram.com/pmghotelsresortsbali/",
-                                                icon: (
-                                                    <FaInstagram className="w-6 lg:w-8 h-6 lg:h-8" />
-                                                ),
-                                            },
-                                            {
-                                                href: "https://wa.me/6281510449090",
-                                                icon: (
-                                                    <FaWhatsapp className="w-6 lg:w-8 h-6 lg:h-8" />
-                                                ),
-                                            },
-                                        ].map((item, index) => (
-                                            <li key={`social-${index}`}>
-                                                <a
-                                                    href={item.href}
-                                                    target="_blank"
-                                                >
-                                                    {item.icon}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
                                 </div>
                             </div>
 
@@ -264,6 +232,35 @@ export default function Footer() {
                                     />
                                 )}
                             </form>
+
+                            <ul className="mt-8 flex max-lg:justify-center items-center gap-4">
+                                {[
+                                    {
+                                        href: "https://www.facebook.com/pmghotelsresorts/",
+                                        icon: (
+                                            <FaFacebookF className="w-6 lg:w-8 h-6 lg:h-8" />
+                                        ),
+                                    },
+                                    {
+                                        href: "https://www.instagram.com/pmghotelsresortsbali/",
+                                        icon: (
+                                            <FaInstagram className="w-6 lg:w-8 h-6 lg:h-8" />
+                                        ),
+                                    },
+                                    {
+                                        href: "https://wa.me/6281510449090",
+                                        icon: (
+                                            <FaWhatsapp className="w-6 lg:w-8 h-6 lg:h-8" />
+                                        ),
+                                    },
+                                ].map((item, index) => (
+                                    <li key={`social-${index}`}>
+                                        <a href={item.href} target="_blank">
+                                            {item.icon}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -272,7 +269,7 @@ export default function Footer() {
             <div className="py-10 lg:py-20">
                 <div className="w-full flex items-center pb-20">
                     <div className="flex-grow border-t border-[#BCBCBC]"></div>
-                    <span className="px-4 font-open-sans font-bold lg:text-[2rem] uppercase">
+                    <span className="px-4 font-open-sans lg:text-[2rem] uppercase">
                         Explore Our Brands
                     </span>
                     <div className="flex-grow border-t border-[#BCBCBC]"></div>
@@ -283,7 +280,7 @@ export default function Footer() {
                         {brands.map((item, index) => (
                             <li
                                 key={`footer-brand-${index}`}
-                                className="basis-6/12 md:basis-4/12 xl:basis-3/12"
+                                className="flex items-center justify-center basis-6/12 md:basis-4/12 xl:basis-3/12"
                             >
                                 <a href={item.href} target="_blank">
                                     <img src={item.image} alt="" />

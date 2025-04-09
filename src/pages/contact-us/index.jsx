@@ -165,67 +165,65 @@ function ContactForm() {
                 <p className="font-medium text-[1.5rem] lg:text-[2rem] text-[#660000]">
                     Contact Us
                 </p>
-                <div className="flex max-lg:flex-col gap-6 lg:gap-x-16 lg:gap-y-32">
-                    <Controller
-                        control={control}
-                        name="name"
-                        rules={{
-                            required: "Full name is required.",
-                        }}
-                        render={({
-                            field: {value, onChange, onBlur},
-                            fieldState: {error},
-                        }) => (
-                            <>
-                                <input
-                                    type="text"
-                                    value={value}
-                                    onChange={onChange}
-                                    onBlur={onBlur}
-                                    placeholder="Full Name"
-                                    className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                                />
-                                {error && (
-                                    <p className="text-[#eb4034]">
-                                        {error.message || "Error"}
-                                    </p>
-                                )}
-                            </>
-                        )}
-                    />
+                <Controller
+                    control={control}
+                    name="name"
+                    rules={{
+                        required: "Full name is required.",
+                    }}
+                    render={({
+                        field: {value, onChange, onBlur},
+                        fieldState: {error},
+                    }) => (
+                        <>
+                            <input
+                                type="text"
+                                value={value}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                placeholder="Full Name"
+                                className="w-full lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                            />
+                            {error && (
+                                <p className="text-[#eb4034]">
+                                    {error.message || "Error"}
+                                </p>
+                            )}
+                        </>
+                    )}
+                />
 
-                    <Controller
-                        control={control}
-                        name="email"
-                        rules={{
-                            required: "E-mail is required.",
-                            pattern: {
-                                value: EMAIL_REGEX,
-                                message: "Wrong e-mail format.",
-                            },
-                        }}
-                        render={({
-                            field: {value, onChange, onBlur},
-                            fieldState: {error},
-                        }) => (
-                            <>
-                                <input
-                                    type="text"
-                                    value={value}
-                                    onChange={onChange}
-                                    onBlur={onBlur}
-                                    placeholder="Email"
-                                    className="w-full lg:w-1/2 lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
-                                />
-                                {error && (
-                                    <p className="text-[#eb4034]">
-                                        {error.message || "Error"}
-                                    </p>
-                                )}
-                            </>
-                        )}
-                    />
-                </div>
+                <Controller
+                    control={control}
+                    name="email"
+                    rules={{
+                        required: "E-mail is required.",
+                        pattern: {
+                            value: EMAIL_REGEX,
+                            message: "Wrong e-mail format.",
+                        },
+                    }}
+                    render={({
+                        field: {value, onChange, onBlur},
+                        fieldState: {error},
+                    }) => (
+                        <>
+                            <input
+                                type="text"
+                                value={value}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                placeholder="Email"
+                                className="w-full lg:h-12 focus:outline-none lg:text-[1.5rem] placeholder:lg:text-[1.5rem]  border-b border-gray-dark"
+                            />
+                            {error && (
+                                <p className="text-[#eb4034]">
+                                    {error.message || "Error"}
+                                </p>
+                            )}
+                        </>
+                    )}
+                />
 
                 <Controller
                     control={control}
