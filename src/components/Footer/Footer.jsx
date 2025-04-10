@@ -10,31 +10,31 @@ export default function Footer() {
     const brands = [
         {
             href: "https://baliniksoma.com",
-            image: "/images/footer/bali-niksoma.png",
+            image: "/images/footer/logo/niksomae-logo-white.png",
         },
         {
             href: "https://themagani.com",
-            image: "/images/footer/magani2.png",
+            image: "/images/footer/logo/themagani-logo-white.png",
         },
         {
             href: "https://thebandha.com",
-            image: "/images/footer/the-bandha.png",
+            image: "/images/footer/logo/thebandha-logo-white.png",
         },
         {
             href: "https://royalsuitesatthebandha.com",
-            image: "/images/footer/royal-suites.png",
+            image: "/images/footer/logo/royal-suite-logo-white.png",
         },
         {
             href: "https://visalaspa.com",
-            image: "/images/footer/visala-spa.png",
+            image: "/images/footer/logo/visalaspa-logo-white.png",
         },
         {
             href: "https://mozzarella-resto.com",
-            image: "/images/footer/logo-mozzarella.png",
+            image: "/images/footer/logo/mozzarellarestandbar-logo-white.png",
         },
         {
             href: "https://mozzarella-resto.com",
-            image: "/images/footer/mozzarella-by-the-sea.png",
+            image: "/images/footer/logo/mozzarellabythesea-logo-white.png",
         },
     ];
 
@@ -282,8 +282,16 @@ export default function Footer() {
                                 key={`footer-brand-${index}`}
                                 className="flex items-center justify-center basis-6/12 md:basis-4/12 xl:basis-3/12"
                             >
-                                <a href={item.href} target="_blank">
-                                    <img src={item.image} alt="" />
+                                <a
+                                    href={item.href}
+                                    target="_blank"
+                                    className="flex items-center justify-center"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt=""
+                                        className="w-[75%]"
+                                    />
                                 </a>
                             </li>
                         ))}
