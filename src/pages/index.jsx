@@ -129,9 +129,9 @@ export default function Home({
                         <MonthPicks deals={filteredHighlightDeals} />
                     )}
 
-                    <div className="py-20">
+                    <div className="py-20 max-md:py-10">
                         <div className="container">
-                            <div className="pb-10">
+                            <div className="pb-10 max-md:pb-0">
                                 <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#660000]">
                                     Unbeatable PMG Deals!
                                 </p>

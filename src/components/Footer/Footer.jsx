@@ -94,7 +94,7 @@ export default function Footer() {
                                 />
                             </div> */}
 
-                            <div className="max-lg:pb-8">
+                            <div className="max-lg:pb-8 max-md:pt-8">
                                 <div className="max-lg:text-center">
                                     <p className="pb-4 lg:pb-6 font-open-sans font-bold lg:text-[2rem]">
                                         GET IN TOUCH

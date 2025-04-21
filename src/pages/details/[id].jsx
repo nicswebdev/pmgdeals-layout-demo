@@ -194,9 +194,9 @@ export default function Description({
                 image={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
             />
 
-            <div className="py-32 details">
+            <div className="py-32 max-md:py-8 details">
                 <div className="container">
-                    <div className="flex flex-wrap justify-between gap-y-10 py-20">
+                    <div className="flex flex-wrap justify-between gap-y-10 py-20 max-md:py-0">
                         <div className="max-md:basis-full flex gap-4 lg:gap-8 xl:gap-12">
                             {/* Title */}
                             <div>

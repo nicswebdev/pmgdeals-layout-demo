@@ -95,7 +95,7 @@ export default function Description({
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <div className="py-32 bg-white">
+            <div className="py-32 max-md:py-8 bg-white">
                 <div className="container">
                     <div className="pb-10">
                         <a
