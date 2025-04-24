@@ -4,6 +4,7 @@ import {useEffect, useMemo, useState} from "react";
 import {useCurrency} from "@/context/CurrencyContext";
 import {signIn, useSession} from "next-auth/react";
 import he from "he";
+import Link from "next/link";
 
 export default function CardMonthPick({deals}) {
     const randomString = Math.random().toString(36).substring(2, 9);
@@ -225,7 +226,7 @@ export default function CardMonthPick({deals}) {
                         </p>
                     </div>
                     <div className="flex gap-3">
-                        <div className="flex items-center">
+                        {/* <div className="flex items-center">
                             {[1, 2, 3, 4].map((item) => (
                                 <FaStar
                                     className="w-3 lg:w-5 h-3 lg:h-5"
@@ -240,7 +241,43 @@ export default function CardMonthPick({deals}) {
                         </div>
                         <p className="font-medium max-lg:text-[0.75rem]">
                             1,922
-                        </p>
+                        </p> */}
+                        {deals.widget_icon ? (
+                            <>
+                                {deals.widget_link ? (
+                                    <Link
+                                        href={deals.widget_link}
+                                        target="_blank"
+                                    >
+                                        <img
+                                            src={`https://cms.pmgdeals.com/uploads/widget/${deals.widget_icon}`}
+                                            alt="tripadvisor"
+                                            className="w-[7rem] lg:w-[9rem] object-contain"
+                                        />
+                                    </Link>
+                                ) : (
+                                    <img
+                                        src={`https://cms.pmgdeals.com/uploads/widget/${deals.widget_icon}`}
+                                        alt="tripadvisor"
+                                        className="w-[7rem] lg:w-[9rem] object-contain"
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {deals.badge && (
+                                    <>
+                                        {decodedHtml && (
+                                            <div
+                                                dangerouslySetInnerHTML={{
+                                                    __html: decodedHtml,
+                                                }}
+                                            />
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        )}
                     </div>
                 </div>
             </a>
