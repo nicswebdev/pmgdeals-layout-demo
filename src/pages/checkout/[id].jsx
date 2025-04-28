@@ -789,18 +789,11 @@ function Form({dealsData, selectedExtras, totalPrice, submitRef}) {
             console.log(payload);
 
             try {
-                const response = await fetch(
-                    "https://cms.pmgdeals.com/api/public/order",
-                    {
-                        method: "POST",
-                        mode: "cors",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                        body: JSON.stringify(payload),
-                    }
-                );
+                const response = await fetch("/api/order", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(payload),
+                });
 
                 console.log("Fetch response:", response);
 
