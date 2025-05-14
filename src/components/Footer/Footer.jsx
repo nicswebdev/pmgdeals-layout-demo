@@ -36,6 +36,10 @@ export default function Footer() {
             href: "https://mozzarella-resto.com",
             image: "/images/footer/logo/mozzarellabythesea-logo-white.png",
         },
+        {
+            href: "https://hitanarestaurant.com",
+            image: "/images/footer/logo/logo-hitana-white.png",
+        },
     ];
 
     const [email, setEmail] = useState("");
