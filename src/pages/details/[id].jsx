@@ -4,6 +4,7 @@ import {useSession} from "next-auth/react";
 import Head from "next/head";
 import {useEffect, useMemo, useState} from "react";
 import parse from "html-react-parser";
+import HeroDetails from "@/components/HeroDetails/HeroDetails";
 
 export default function Description({
     dealsData,
@@ -190,7 +191,7 @@ export default function Description({
                     content={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
                 />
             </Head>
-            <Hero
+            <HeroDetails
                 image={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
             />
 

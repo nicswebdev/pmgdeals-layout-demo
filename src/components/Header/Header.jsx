@@ -52,7 +52,7 @@ export default function Header() {
     return (
         <>
             <div
-                className="group fixed top-0 inset-x-0 z-[100] transition-all duration-300 pt-4 lg:pt-10 pb-4 lg:pb-10 [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
+                className="group fixed top-0 inset-x-0 z-[100] bg-gradient-to-b from-black/75 to-transparent transition-all duration-300 pt-4 lg:pt-10 pb-4 lg:pb-10 [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
                 id="header"
             >
                 {/* Background white */}
