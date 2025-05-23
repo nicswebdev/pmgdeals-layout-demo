@@ -189,7 +189,7 @@ export default function Home({
                                     {
                                         id: 3,
                                         icon: "/images/home/why-choose-pmg-deals/3.png",
-                                        label: "Find deals from all three of our\n properties in one place",
+                                        label: "Find deals from all four of our\n properties in one place",
                                     },
                                 ].map(({id, icon, label}) => (
                                     <div
