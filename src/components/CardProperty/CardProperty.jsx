@@ -173,7 +173,7 @@ export default function CardProperty({deals}) {
                     <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
                         {deals.property_name}
                     </p>
-                    <p className="pb-4 font-bold lg:text-[1.5rem]">
+                    <p className="pb-4 font-bold lg:text-[1.5rem] min-h-[4rem] lg:min-h-[5.5rem]">
                         {deals.deals_name}
                     </p>
                     <div className="pb-4 lg:pb-6 flex flex-wrap gap-2">
@@ -226,22 +226,6 @@ export default function CardProperty({deals}) {
                         </p>
                     </div>
                     <div className="flex gap-3">
-                        {/* <div className="flex items-center">
-                            {[1, 2, 3, 4].map((item) => (
-                                <FaStar
-                                    className="w-3 lg:w-5 h-3 lg:h-5"
-                                    key={`month-pick-star-${randomString}-${item}`}
-                                    color="#DBA527"
-                                />
-                            ))}
-                            <FaRegStar
-                                className="w-3 lg:w-5 h-3 lg:h-5"
-                                color="#DBA527"
-                            />
-                        </div>
-                        <p className="font-medium max-lg:text-[0.75rem]">
-                            1,922
-                        </p> */}
                         {deals.widget_icon ? (
                             <>
                                 {deals.widget_link ? (
@@ -280,6 +264,110 @@ export default function CardProperty({deals}) {
                         )}
                     </div>
                 </div>
+
+                {/* <div className="pt-4">
+                    <p className="pb-2 lg:pb-4 font-medium max-lg:text-[0.75rem]">
+                        {deals.property_name}
+                    </p>
+                    <div className="grid grid-rows-[auto_auto]">
+                        <p className="font-bold lg:text-[1.5rem] min-h-[5.5rem] flex items-start">
+                            {deals.deals_name}
+                        </p>
+                        <div className="flex flex-col gap-0">
+                            <div className="pb-4 lg:pb-1 flex flex-wrap gap-2">
+                                <p className="lg:text-[1.5rem]">
+                                    {currency}{" "}
+                                    {currency === "IDR"
+                                        ? idrFormatter.format(
+                                              rates[currency]
+                                                  ? (
+                                                        deals.deals_promo_price *
+                                                        rates[currency]
+                                                    ).toFixed(2)
+                                                  : deals.deals_promo_price
+                                          )
+                                        : formatter.format(
+                                              rates[currency]
+                                                  ? (
+                                                        deals.deals_promo_price *
+                                                        rates[currency]
+                                                    ).toFixed(2)
+                                                  : deals.deals_promo_price
+                                          )}
+                                </p>
+                                <p className="relative px-2 lg:text-[1.5rem]">
+                                    <span>
+                                        {deals.deals_base_price && (
+                                            <span>
+                                                {currency}{" "}
+                                                {currency === "IDR"
+                                                    ? idrFormatter.format(
+                                                          rates[currency]
+                                                              ? (
+                                                                    deals.deals_base_price *
+                                                                    rates[
+                                                                        currency
+                                                                    ]
+                                                                ).toFixed(2)
+                                                              : deals.deals_base_price
+                                                      )
+                                                    : formatter.format(
+                                                          rates[currency]
+                                                              ? (
+                                                                    deals.deals_base_price *
+                                                                    rates[
+                                                                        currency
+                                                                    ]
+                                                                ).toFixed(2)
+                                                              : deals.deals_base_price
+                                                      )}
+                                            </span>
+                                        )}
+                                    </span>
+                                    <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[0.0625rem] bg-red"></span>
+                                </p>
+                            </div>
+                            <div className="flex gap-3">
+                                {deals.widget_icon ? (
+                                    <>
+                                        {deals.widget_link ? (
+                                            <Link
+                                                href={deals.widget_link}
+                                                target="_blank"
+                                            >
+                                                <img
+                                                    src={`https://cms.pmgdeals.com/uploads/widget/${deals.widget_icon}`}
+                                                    alt="tripadvisor"
+                                                    className="w-[7rem] lg:w-[8.7rem] object-contain"
+                                                />
+                                            </Link>
+                                        ) : (
+                                            <img
+                                                src={`https://cms.pmgdeals.com/uploads/widget/${deals.widget_icon}`}
+                                                alt="tripadvisor"
+                                                className="w-[7rem] lg:w-[8.7rem] object-contain"
+                                            />
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        {deals.badge && (
+                                            <>
+                                                {decodedHtml && (
+                                                    <div
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: decodedHtml,
+                                                        }}
+                                                    />
+                                                )}
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
             </a>
             <div className="absolute top-6 lg:top-10 right-6 lg:right-10">
                 <ButtonHeart dealsId={deals.deals_id} />
