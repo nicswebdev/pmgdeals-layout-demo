@@ -85,7 +85,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="pt-0 lg:pt-20 bg-gray-dark text-white ">
+        <footer className="pt-0 lg:pt-20 bg-[#887564] text-white ">
             <div className="container 4xl:max-w-[126.875rem]">
                 <div className="flex max-lg:flex-col gap-4 pb-10">
                     <div className="shrink-0 grow-0 basis-full lg:basis-8/12">
@@ -209,7 +209,7 @@ export default function Footer() {
                                     />
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 font-open-sans text-white bg-primary"
+                                        className="px-4 py-2 font-open-sans text-white bg-[#d29752]"
                                     >
                                         SUBSCRIBE
                                     </button>

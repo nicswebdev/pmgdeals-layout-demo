@@ -1,8 +1,9 @@
 import Head from "next/head";
-import {PropertyFilter, SwiperPropertyList} from "@/components";
+import {Hero, PropertyFilter, SwiperPropertyList} from "@/components";
 import {useEffect, useState} from "react";
 import MonthPicks from "./_home/_sections/MonthPicks";
 import {useCurrency} from "@/context/CurrencyContext";
+import {HeroDetails} from "@/components/HeroDetails";
 
 export default function Home({
     categoryData,
@@ -125,17 +126,19 @@ export default function Home({
                         />
                     </Head>
 
-                    {filteredHighlightDeals && (
+                    <HeroDetails />
+
+                    {/* {filteredHighlightDeals && (
                         <MonthPicks deals={filteredHighlightDeals} />
-                    )}
+                    )} */}
 
                     <div className="py-20 max-md:py-10">
                         <div className="container">
-                            <div className="pb-10 max-md:pb-0">
+                            {/* <div className="pb-10 max-md:pb-0">
                                 <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#660000]">
                                     Unbeatable PMG Deals!
                                 </p>
-                            </div>
+                            </div> */}
 
                             <PropertyFilter
                                 currency={currency}
@@ -145,10 +148,10 @@ export default function Home({
                         </div>
                     </div>
 
-                    <div className="pb-10">
+                    <div className="pb-20">
                         <div className="container">
-                            <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                                {homepageDeals.homepage.section1_title}
+                            <p className="uppercase pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[1.7rem] text-[#9f9284]">
+                                Hotel
                             </p>
                         </div>
                         {filteredSection1Deals && (
@@ -156,10 +159,10 @@ export default function Home({
                         )}
                     </div>
 
-                    <div className="pb-10">
+                    <div className="pb-20">
                         <div className="container">
-                            <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                                {homepageDeals.homepage.section2_title}
+                            <p className="uppercase pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[1.7rem] text-[#9f9284]">
+                                Food & Beverages
                             </p>
                         </div>
                         {filteredSection2Deals && (
@@ -167,7 +170,7 @@ export default function Home({
                         )}
                     </div>
 
-                    <div className="pb-14 xl:pb-20">
+                    {/* <div className="pb-14 xl:pb-20">
                         <div className="container">
                             <div className="pb-10">
                                 <p className="font-medium text-[1.25rem] lg:text-[2.25rem] text-[#660000]">
@@ -214,7 +217,7 @@ export default function Home({
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </>
             )}
         </>

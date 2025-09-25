@@ -220,14 +220,14 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
                     </button>
                 </div>
 
-                <div className="flex gap-4 overflow-x-auto">
-                    <button
+                <div className="flex gap-4 justify-center items-center">
+                    {/* <button
                         id="openModalFilterDesktop"
                         className={`max-lg:hidden ${settingButtonClassName}`}
                         onClick={() => setOpenModal(true)}
                     >
                         <VscSettings className={iconClassName} />
-                    </button>
+                    </button> */}
 
                     {categories.map(({id, label, link, icon}) => (
                         <ButtonCategory

@@ -20,22 +20,22 @@ export default function Header() {
 
     const router = useRouter();
     // Check on scroll
-    useEffect(() => {
-        const handleScroll = () => {
-            const header = document.querySelector("#header");
-            if (window.scrollY > 0) {
-                header.classList.add("active-scroll");
-            } else {
-                header.classList.remove("active-scroll");
-            }
-        };
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const header = document.querySelector("#header");
+    //         if (window.scrollY > 0) {
+    //             header.classList.add("active-scroll");
+    //         } else {
+    //             header.classList.remove("active-scroll");
+    //         }
+    //     };
 
-        window.addEventListener("scroll", handleScroll);
+    //     window.addEventListener("scroll", handleScroll);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("scroll", handleScroll);
+    //     };
+    // }, []);
 
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
@@ -52,38 +52,38 @@ export default function Header() {
     return (
         <>
             <div
-                className="group fixed top-0 inset-x-0 z-[100] bg-gradient-to-b from-black/75 to-transparent transition-all duration-300 pt-4 lg:pt-10 pb-4 lg:pb-10 [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
+                className="group bg-white [&.active-scroll]:lg:pt-10 [&.active-scroll]:lg:pb-10"
                 id="header"
             >
                 {/* Background white */}
                 <span className="absolute inset-0 transition-all duration-500 -translate-y-[120%] group-[.active-scroll]:translate-y-0 bg-[#660000]"></span>
 
-                <div className="relative container">
-                    <div className="flex flex-wrap justify-between items-start gap-4">
-                        <div className="relative max-sm:w-12 w-20 xl:w-[11.875rem]">
-                            <div className="absolute inset-0">
+                <div className="relative container h-[10vh]">
+                    <div className="h-full flex flex-wrap justify-between items-start gap-4">
+                        <div className="h-full relative max-sm:w-12 w-20 xl:w-[11.875rem]">
+                            <div className="h-full inset-0">
                                 <Link href={`/`}>
                                     <img
-                                        src="/logo-white.png"
+                                        src="/deals-logo-brown.png"
                                         alt="Logo"
-                                        className="transition-all duration-300 w-full"
+                                        className="transition-all duration-300 w-full h-full object-cover"
                                     />
                                 </Link>
                             </div>
                         </div>
 
-                        <div className="xl:mt-3 flex items-center gap-4 lg:gap-6 lg:order-last">
+                        <div className="flex items-center h-full lg:order-last">
                             {/* Currency Button */}
-                            <div className="lg:order-last">
+                            <div className="lg:order-last h-full bg-[#f4f4f4] px-4">
                                 <ButtonCurrency />
                             </div>
 
-                            <div className="flex items-center gap-6 xl:gap-8">
+                            <div className="h-full flex items-center">
                                 {/* Heart Button */}
-                                <div className="group-[.active-scroll_a]:bg-gray-dark">
+                                <div className="group-[.active-scroll_a]:bg-gray-dark h-full">
                                     <a
                                         href="/favorite"
-                                        className="flex justify-center items-center aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+                                        className="h-full flex justify-center items-center aspect-square w-8 lg:w-16 transition-all duration-300 hover:opacity-70 bg-primary"
                                     >
                                         <div className="shrink-0">
                                             <LuHeart
@@ -95,21 +95,23 @@ export default function Header() {
                                 </div>
 
                                 {!session ? (
-                                    <div className="hidden lg:flex items-center gap-3 max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
+                                    <div className="hidden h-full lg:flex items-center max-lg:[&_a:first-child]:border-[0.0625rem] [&_a:first-child]:border-transparent group-[.active-scroll_a:first-child]:border-gray-dark group-[.active-scroll_a]:bg-gray-dark group-[.active-scroll_a]:text-white">
                                         {/* Login Button */}
                                         <ButtonBasic
                                             href="/login"
-                                            variant="white"
-                                            rounded
+                                            variant="orange"
                                         >
-                                            <FaUser className="w-4 h-4" />
+                                            {/* <FaUser className="w-4 h-4" /> */}
                                             <span className="shrink-0">
                                                 LOGIN
                                             </span>
                                         </ButtonBasic>
 
                                         {/* Sign Up Button */}
-                                        <ButtonBasic href="/register" rounded>
+                                        <ButtonBasic
+                                            href="/register"
+                                            variant="brown"
+                                        >
                                             <span className="shrink-0">
                                                 SIGN UP
                                             </span>
@@ -159,10 +161,10 @@ export default function Header() {
                             </div>
                         </div>
 
-                        <div className="sm:mt-4 lg:mt-3 xl:mt-4 px-6 w-full lg:w-1/2 xl:w-[42rem]">
-                            <SearchBar />
+                        <div className=" px-6 w-full h-full lg:w-1/2 xl:w-[42rem]">
+                            {/* <SearchBar /> */}
 
-                            <div className="max-lg:hidden">
+                            <div className="max-lg:hidden h-full">
                                 <MenuDesktop />
                             </div>
                         </div>
