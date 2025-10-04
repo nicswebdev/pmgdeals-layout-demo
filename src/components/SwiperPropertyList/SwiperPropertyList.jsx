@@ -47,7 +47,7 @@ export default function SwiperPropertyList({deals}) {
                             spaceBetween: 12,
                         },
                         [screenSizes["lg"]]: {
-                            slidesPerView: 1,
+                            slidesPerView: 3,
                             spaceBetween: 8,
                         },
                     }}
@@ -62,7 +62,7 @@ export default function SwiperPropertyList({deals}) {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                {deals.length > 1 && (
+                {deals.length > 3 && (
                     <>
                         <SwiperButtonPrevious
                             onClick={handlePrev}

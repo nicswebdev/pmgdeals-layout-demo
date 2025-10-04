@@ -41,6 +41,20 @@ function MyApp({Component, pageProps: {session, ...pageProps}}) {
                     `}
                         </Script>
 
+                        <Script
+                            strategy="afterInteractive"
+                            id="quicktext-widget"
+                            src="https://cdn.quicktext.im/widget.min.js"
+                            data-license="9moat-3GnS"
+                        />
+                        <noscript
+                            dangerouslySetInnerHTML={{
+                                __html: `<a href="https://www.quicktext.im/" title="Hotel AI Chatbot and Guest Communication">
+                    Quicktext hotel chatbot
+                 </a>`,
+                            }}
+                        />
+
                         <Header />
                         <Component {...pageProps} />
                         <Footer />

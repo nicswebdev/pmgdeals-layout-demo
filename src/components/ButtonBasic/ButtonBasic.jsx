@@ -9,7 +9,7 @@ export default function ButtonBasic({
     const Element = ["a", "button"].includes(element) ? element : "a";
 
     const buttonClassNames = [
-        "w-full h-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
+        "w-full flex justify-center items-center gap-2 md:gap-4 2xl:gap-6 py-3 px-4 xl:px-8 transition-all duration-300 hover:opacity-70 hover:cursor-pointer",
     ];
 
     //   Handle variants
@@ -23,10 +23,6 @@ export default function ButtonBasic({
         buttonClassNames.push("text-white bg-gray-dark");
     } else if (variant === "gray-light") {
         buttonClassNames.push("bg-[#D9D9D9]");
-    } else if (variant === "orange") {
-        buttonClassNames.push("bg-[#dba628] text-white font-bold");
-    } else if (variant === "brown") {
-        buttonClassNames.push("bg-[#705f4d] text-white font-bold");
     }
 
     if (rounded) {
