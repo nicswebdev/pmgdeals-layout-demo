@@ -1,3 +1,4 @@
+// Menu.desktop.jsx
 import {menuItems} from "./Menu.const";
 
 export default function MenuDesktop() {
@@ -26,25 +27,21 @@ export default function MenuDesktop() {
                         );
                     }
 
-                    // Parent with dropdown
                     return (
                         <li
                             key={`menu-desktop-${item.id}`}
-                            className="relative group"
+                            className="relative group/deals" // <-- named group
                         >
-                            {/* Parent button (no navigation) */}
                             <button
                                 type="button"
                                 className="font-regular uppercase text-[1.3rem] transition-all duration-300 hover:opacity-70 text-[#d29752] inline-flex items-center gap-2"
                                 aria-haspopup="menu"
-                                aria-expanded="false"
                             >
                                 {item.title}
                                 <svg
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                     className="w-4 h-4 translate-y-[1px]"
-                                    aria-hidden="true"
                                 >
                                     <path
                                         fillRule="evenodd"
@@ -54,10 +51,17 @@ export default function MenuDesktop() {
                                 </svg>
                             </button>
 
-                            {/* Dropdown menu */}
                             <ul
                                 role="menu"
-                                className="absolute left-0 top-full mt-3 w-96 bg-white shadow-lg ring-1 ring-black/5 opacity-0 pointer-events-none translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 z-50"
+                                className="
+    absolute left-0 top-full w-96 bg-white z-50
+    opacity-0 pointer-events-none translate-y-2 transition-all duration-200
+    group-hover/deals:opacity-1 group-hover/deals:opacity-100 group-hover/deals:pointer-events-auto group-hover/deals:translate-y-0
+    group-focus-within/deals:opacity-100 group-focus-within/deals:pointer-events-auto group-focus-within/deals:translate-y-0
+
+    /* Hover bridge (optional, for a tiny visual gap without losing hover) */
+    before:content-[''] before:absolute before:inset-x-0 before:-top-3 before:h-3 before:block
+  "
                             >
                                 {item.children.map((child) => (
                                     <li
