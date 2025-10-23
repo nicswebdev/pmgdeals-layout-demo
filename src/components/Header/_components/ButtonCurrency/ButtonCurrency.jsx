@@ -86,25 +86,25 @@ export default function ButtonCurrency() {
     }, [currency]);
 
     return (
-        <div className="relative" id="currencyOptions">
+        <div className="relative h-full" id="currencyOptions">
             <button
-                className="flex items-center gap-2 sm:gap-4 text-white transition-all duration-300"
+                className="h-full flex items-center gap-2 sm:gap-4 text-white transition-all duration-300"
                 onClick={() => setOpen(!open)}
             >
                 <div className="shrink-0 grow-0 w-4 lg:w-8 aspect-square rounded-full overflow-hidden">
                     {selected.icon}
                 </div>
-                <span className="font-inter font-semibold text-[0.75rem] lg:text-[1rem]">
+                <span className="font-inter font-semibold text-[0.75rem] lg:text-[1rem] text-black">
                     {selected.label}
                 </span>
-                <GoChevronDown className="w-3 lg:w-4 h-3 lg:h-4" />
+                <GoChevronDown className="w-3 lg:w-4 h-3 lg:h-4 text-black" />
             </button>
             {open && (
                 <div className="absolute z-20 mt-2 w-24 lg:w-32 rounded-md shadow-md border border-gray-300 bg-white">
                     {currencies.map((currency) => (
                         <button
                             key={currency.label}
-                            className="flex items-center gap-2 lg:gap-4 w-full text-left px-4 py-2 hover:bg-gray-100"
+                            className="flex items-center gap-2 text-black lg:gap-4 w-full text-left px-4 py-2 hover:bg-gray-100"
                             onClick={() => {
                                 setSelected(currency);
                                 setOpen(false);

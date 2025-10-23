@@ -20,9 +20,9 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
     useEffect(() => {
         const path = router.asPath; // Get full path
         if (path === "/") {
-            setSelectedCategory(0); // Default to Highlight if on homepage
+            setSelectedCategory(1); // Default to Highlight if on homepage
         } else {
-            const match = path.match(/^\/category\/(\d+)$/); // Match `/category/{id}`
+            const match = path.match(/^\/property\/(\d+)$/); // Match `/category/{id}`
             if (match) {
                 setSelectedCategory(parseInt(match[1], 10)); // Set selected category from URL
             } else {
@@ -47,16 +47,16 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
 
     const categories = [
         {
-            id: 0,
-            label: "Highlight",
+            id: 1,
+            label: "Bali Niksoma Boutique Beach Resort",
             link: "/",
-            value: "highlight",
+            value: "bali_niksoma",
         },
         {
-            id: 1,
-            label: "Hotel",
-            link: "/category/1",
-            value: "hotel",
+            id: 2,
+            label: "The Magani Hotel and Spa",
+            link: "/property/2",
+            value: "the_magani",
             icon: (
                 <div className={iconWrapperClassName}>
                     <img
@@ -73,10 +73,10 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
             ),
         },
         {
-            id: 2,
-            label: "Food & Beverage",
-            link: "/category/2",
-            value: "food_beverage",
+            id: 3,
+            label: "The Bandha Hotel & Suites",
+            link: "/property/3",
+            value: "the_bandha",
             icon: (
                 <div className={iconWrapperClassName}>
                     <img
@@ -86,66 +86,6 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
                     />
                     <img
                         src="/images/icons/restaurant-white.png"
-                        alt="Icon"
-                        className={iconWhiteClassName}
-                    />
-                </div>
-            ),
-        },
-        {
-            id: 3,
-            label: "Spa",
-            link: "/category/3",
-            value: "spa",
-            icon: (
-                <div className={iconWrapperClassName}>
-                    <img
-                        src="/images/icons/spa-gray.png"
-                        alt="Icon"
-                        className={iconGrayClassName}
-                    />
-                    <img
-                        src="/images/icons/spa-white.png"
-                        alt="Icon"
-                        className={iconWhiteClassName}
-                    />
-                </div>
-            ),
-        },
-        {
-            id: 10,
-            label: "Activity",
-            link: "/category/10",
-            value: "activity",
-            icon: (
-                <div className={iconWrapperClassName}>
-                    <img
-                        src="/images/icons/jogging-gray.png"
-                        alt="Icon"
-                        className={iconGrayClassName}
-                    />
-                    <img
-                        src="/images/icons/jogging-white.png"
-                        alt="Icon"
-                        className={iconWhiteClassName}
-                    />
-                </div>
-            ),
-        },
-        {
-            id: 11,
-            label: "Entertainment",
-            link: "/category/11",
-            value: "entertainment",
-            icon: (
-                <div className={iconWrapperClassName}>
-                    <img
-                        src="/images/icons/confetti-gray.png"
-                        alt="Icon"
-                        className={iconGrayClassName}
-                    />
-                    <img
-                        src="/images/icons/confetti-white.png"
                         alt="Icon"
                         className={iconWhiteClassName}
                     />
@@ -220,14 +160,14 @@ export default function PropertyFilter({onPriceChange, currency, rates}) {
                     </button>
                 </div>
 
-                <div className="flex gap-4 overflow-x-auto">
-                    <button
+                <div className="flex gap-4 justify-center items-center">
+                    {/* <button
                         id="openModalFilterDesktop"
                         className={`max-lg:hidden ${settingButtonClassName}`}
                         onClick={() => setOpenModal(true)}
                     >
                         <VscSettings className={iconClassName} />
-                    </button>
+                    </button> */}
 
                     {categories.map(({id, label, link, icon}) => (
                         <ButtonCategory

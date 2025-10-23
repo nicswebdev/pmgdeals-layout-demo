@@ -1,7 +1,8 @@
 import {CardProperty, Hero, PropertyFilter, SectionHeading} from "@/components";
+import {HeroDetails} from "@/components/HeroDetails";
 import {useCurrency} from "@/context/CurrencyContext";
 import Head from "next/head";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function HotelsCategory({
     dealsData,
@@ -24,8 +25,12 @@ export default function HotelsCategory({
         }
     };
 
-    const [filteredDeals, setFilteredDeals] = useState(dealsData.deals);
+    const [filteredDeals, setFilteredDeals] = useState([]);
     const [priceRange, setPriceRange] = useState({min: 0, max: 50000000});
+
+    useEffect(() => {
+        setFilteredDeals(dealsData.deals);
+    }, dealsData.deals);
 
     const filterDealsByPrice = (minPrice, maxPrice) => {
         const filtered = dealsData.deals.filter((deal) => {
@@ -68,8 +73,8 @@ export default function HotelsCategory({
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
-            <div className="py-32">
+            <HeroDetails />
+            <div className="py-20">
                 <div className="container">
                     <div className="pb-20">
                         <PropertyFilter
@@ -79,13 +84,13 @@ export default function HotelsCategory({
                         />
                     </div>
                     <div>
-                        <div className="[&>p]:pb-0 pb-10 lg:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">
+                        {/* <div className="[&>p]:pb-0 pb-10 lg:pb-16 pl-5 xl:pl-10 flex justify-between max-md:flex-col">
                             <SectionHeading>
                                 {propertyData.property_detail.property_name}
                             </SectionHeading>
-                        </div>
+                        </div> */}
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-1 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-20">
                             {filteredDeals.map((item) => (
                                 <CardProperty
                                     key={`recommendation-card-property-${item}`}

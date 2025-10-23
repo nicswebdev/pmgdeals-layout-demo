@@ -1,8 +1,14 @@
 import Head from "next/head";
-import {PropertyFilter, SwiperPropertyList} from "@/components";
+import {
+    CardProperty,
+    Hero,
+    PropertyFilter,
+    SwiperPropertyList,
+} from "@/components";
 import {useEffect, useState} from "react";
 import MonthPicks from "./_home/_sections/MonthPicks";
 import {useCurrency} from "@/context/CurrencyContext";
+import {HeroDetails} from "@/components/HeroDetails";
 
 export default function Home({
     categoryData,
@@ -11,6 +17,7 @@ export default function Home({
     randomDeals2,
     randomDeals3,
     randomDeals4,
+    dealsData,
 }) {
     const {currency, rates} = useCurrency();
 
@@ -18,6 +25,8 @@ export default function Home({
     const [filteredSection2Deals, setFilteredSection2Deals] = useState([]);
     const [filteredSection3Deals, setFilteredSection3Deals] = useState([]);
     const [filteredHighlightDeals, setFilteredHighlightDeals] = useState([]);
+
+    const [filteredDeals, setFilteredDeals] = useState(dealsData.deals);
 
     useEffect(() => {
         if (!homepageDeals || !homepageDeals.homepage) return;
@@ -53,6 +62,14 @@ export default function Home({
             const price = parseInt(deal.deals_promo_price);
             return price >= minPrice && price <= maxPrice;
         });
+    };
+
+    const filterDealsByPrice = (minPrice, maxPrice) => {
+        const filtered = dealsData.deals.filter((deal) => {
+            const dealPrice = parseInt(deal.deals_promo_price, 10);
+            return dealPrice >= minPrice && dealPrice <= maxPrice;
+        });
+        setFilteredDeals(filtered);
     };
 
     // Callback function to handle price range changes from RangeSlider
@@ -125,17 +142,19 @@ export default function Home({
                         />
                     </Head>
 
-                    {filteredHighlightDeals && (
+                    <HeroDetails />
+
+                    {/* {filteredHighlightDeals && (
                         <MonthPicks deals={filteredHighlightDeals} />
-                    )}
+                    )} */}
 
                     <div className="py-20 max-md:py-10">
                         <div className="container">
-                            <div className="pb-10 max-md:pb-0">
+                            {/* <div className="pb-10 max-md:pb-0">
                                 <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#660000]">
-                                    Unbeatable PMG Deals
+                                    Unbeatable PMG Deals!
                                 </p>
-                            </div>
+                            </div> */}
 
                             <PropertyFilter
                                 currency={currency}
@@ -145,29 +164,20 @@ export default function Home({
                         </div>
                     </div>
 
-                    <div className="pb-10">
+                    <div className="pb-20">
                         <div className="container">
-                            <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                                {homepageDeals.homepage.section1_title}
-                            </p>
+                            <div className="grid grid-cols-1 lg:grid-cols-1 gap-x-1 md:gap-x-3 lg:gap-x-2 gap-y-20">
+                                {filteredDeals.map((item) => (
+                                    <CardProperty
+                                        key={`recommendation-card-property-${item}`}
+                                        deals={item}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                        {filteredSection1Deals && (
-                            <SwiperPropertyList deals={filteredSection1Deals} />
-                        )}
                     </div>
 
-                    <div className="pb-10">
-                        <div className="container">
-                            <p className="pl-5 xl:pl-10 pb-5 font-medium text-[1.125rem] lg:text-[2.25rem] text-[#660000]">
-                                {homepageDeals.homepage.section2_title}
-                            </p>
-                        </div>
-                        {filteredSection2Deals && (
-                            <SwiperPropertyList deals={filteredSection2Deals} />
-                        )}
-                    </div>
-
-                    <div className="pb-14 xl:pb-20">
+                    {/* <div className="pb-14 xl:pb-20">
                         <div className="container">
                             <div className="pb-10">
                                 <p className="font-medium text-[1.25rem] lg:text-[2.25rem] text-[#660000]">
@@ -214,7 +224,7 @@ export default function Home({
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </>
             )}
         </>
@@ -246,6 +256,10 @@ export async function getServerSideProps() {
         `https://cms.pmgdeals.com/api/public/deals/randomdealshighlight`
     ).then((res) => res.json());
 
+    const dealsData = await fetch(
+        `https://cms.pmgdeals.com/api/public/deals/property?id=1`
+    ).then((res) => res.json());
+
     return {
         props: {
             categoryData,
@@ -254,6 +268,7 @@ export async function getServerSideProps() {
             randomDeals2,
             randomDeals3,
             randomDeals4,
+            dealsData,
         },
     };
 }

@@ -136,7 +136,7 @@ export default function ButtonHeart({filled = false, dealsId}) {
 
     return (
         <button
-            className="flex justify-center items-center aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-primary"
+            className="flex justify-center items-center aspect-square w-8 lg:w-16 rounded-full transition-all duration-300 hover:opacity-70 bg-[#705f4d]"
             onClick={handleFavoriteClick}
         >
             <div className="shrink-0">

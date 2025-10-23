@@ -5,7 +5,7 @@
 @layer base {
     html,
     body {
-        @apply font-inter font-normal text-[16px] lg:text-[12px] xl:text-[0.85vw] 2xl:text-[0.7335vw];
+        @apply font-inter font-normal text-[16px] lg:text-[12px] xl:text-[0.85vw] 2xl:text-[0.7335vw] bg-[#f5f5f5];
     }
 
     .details ul {
