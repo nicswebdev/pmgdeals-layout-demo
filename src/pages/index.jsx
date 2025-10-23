@@ -133,7 +133,7 @@ export default function Home({
                         <div className="container">
                             <div className="pb-10 max-md:pb-0">
                                 <p className="font-medium text-[1.25rem] lg:text-[3rem] text-[#660000]">
-                                    Unbeatable PMG Deals!
+                                    Unbeatable PMG Deals
                                 </p>
                             </div>
 
