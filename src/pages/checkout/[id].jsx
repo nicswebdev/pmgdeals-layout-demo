@@ -71,7 +71,7 @@ export default function Description({
     const totalPrice = basePrice + extrasTotal;
 
     return (
-        <main className="pt-28 sm:pt-40 lg:pt-56 bg-gray-dark">
+        <main className="pt-28 sm:pt-40 lg:pt-0 bg-gray-dark">
             <Head>
                 <title>{staticPage.content.checkout_seo_title}</title>
                 <meta

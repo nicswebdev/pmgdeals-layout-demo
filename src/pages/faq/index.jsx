@@ -1,4 +1,5 @@
 import {AccordionBasic, CardProperty, Hero, SectionHeading} from "@/components";
+import {HeroDetails} from "@/components/HeroDetails";
 import Head from "next/head";
 import {useEffect, useState} from "react";
 
@@ -142,7 +143,7 @@ export default function Faq({
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
+            <HeroDetails />
             <div className="py-32">
                 <div className="container">
                     <SectionHeading style={{textAlign: "center"}}>

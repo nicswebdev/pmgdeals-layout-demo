@@ -1,4 +1,5 @@
 import {ButtonBasic, Hero, SectionHeading} from "@/components";
+import {HeroDetails} from "@/components/HeroDetails";
 import {signIn, useSession} from "next-auth/react";
 import Head from "next/head";
 import {useRouter} from "next/router";
@@ -124,7 +125,7 @@ export default function Login({homepageDeals}) {
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
+            <HeroDetails />
             <div className="py-32">
                 <div className="container">
                     <div className="pb-10">

@@ -14,6 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import Head from "next/head";
 import axios from "axios";
+import {HeroDetails} from "@/components/HeroDetails";
 
 const initValues = {
     salutation: "",
@@ -175,7 +176,7 @@ export default function Register({homepageDeals}) {
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
+            <HeroDetails />
             <div className="py-32">
                 <div className="container xl:max-2xl:max-w-[61.25rem]">
                     <div className="pb-20">

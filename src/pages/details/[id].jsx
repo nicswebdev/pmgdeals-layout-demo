@@ -5,6 +5,8 @@ import Head from "next/head";
 import {useEffect, useMemo, useState} from "react";
 import parse from "html-react-parser";
 import HeroDetails from "@/components/HeroDetails/HeroDetails";
+import {BsHourglass} from "react-icons/bs";
+import {IoLocationOutline} from "react-icons/io5";
 
 export default function Description({
     dealsData,
@@ -191,37 +193,105 @@ export default function Description({
                     content={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
                 />
             </Head>
-            <HeroDetails
+            <Hero
                 image={`https://cms.pmgdeals.com/uploads/deals/${dealsData.deals_detail.deals_image}`}
             />
 
             <div className="py-32 max-md:py-8 details">
                 <div className="container">
-                    <div className="flex flex-wrap justify-between gap-y-10 py-20 max-md:py-0">
-                        <div className="max-md:basis-full flex gap-4 lg:gap-8 xl:gap-12">
-                            {/* Title */}
-                            <div>
-                                <h2 className="font-medium text-[1.5rem] lg:text-[2.5rem] text-[#660000]">
-                                    {dealsData.deals_detail.deals_name}
-                                </h2>
-                                <p className="font-medium text-[1rem] lg:text-[1.25rem]">
-                                    {dealsData.deals_detail.property_name}
-                                </p>
-                            </div>
-                            {/* End - Title */}
+                    <div class="grid grid-cols-[15%_55%_30%] gap-4">
+                        <div className="flex items-start justify-start">
+                            <img
+                                src={`https://cms.pmgdeals.com/uploads/property/${dealsData.deals_detail.logo}`}
+                                alt=""
+                                className="w-[10rem] object-contain"
+                            />
+                        </div>
+                        <div className="flex flex-wrap justify-between gap-y-10 px-8 max-md:py-0">
+                            <div className="max-md:basis-full flex gap-4 lg:gap-8 xl:gap-12">
+                                {/* Title */}
+                                <div>
+                                    <div className="flex items-center gap-4 text-xl mb-4">
+                                        <IoLocationOutline
+                                            className="w-5 lg:w-8 h-5 lg:h-8"
+                                            color="#b58a25"
+                                        />
+                                        Legian, Bali - Indonesia
+                                    </div>
+                                    <h2 className="font-medium text-[1.5rem] lg:text-[2.5rem] text-[#660000]">
+                                        {dealsData.deals_detail.deals_name}
+                                    </h2>
+                                    {/* <p className="font-medium text-[1rem] lg:text-[1.25rem]">
+                                        {dealsData.deals_detail.property_name}
+                                    </p> */}
+                                </div>
+                                {/* End - Title */}
 
-                            <div className="shrink-0 flex items-center h-[2.25rem] lg:h-[3.75rem]">
-                                <ButtonHeart
-                                    dealsId={dealsData.deals_detail.deals_id}
-                                />
+                                {/* <div className="shrink-0 flex items-center h-[2.25rem] lg:h-[3.75rem]">
+                                    <ButtonHeart
+                                        dealsId={
+                                            dealsData.deals_detail.deals_id
+                                        }
+                                    />
+                                </div> */}
                             </div>
+
+                            <div className="pb-10">
+                                <p className="pb-4 font-bold lg:text-[1.25rem]">
+                                    Description
+                                </p>
+                                <div className="font-light lg:text-[1.25rem]">
+                                    {parse(
+                                        dealsData.deals_detail
+                                            .deals_descriptions
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="pb-10">
+                                <h3 className="pb-4 font-bold lg:text-[1.25rem]">
+                                    Package Inclusions
+                                </h3>
+                                <div className="font-light lg:text-[1.25rem]">
+                                    {parse(
+                                        dealsData.deals_detail.deals_inclusions
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="pb-10">
+                                <h3 className="pb-4 font-bold lg:text-[1.25rem]">
+                                    Voucher Utilization
+                                </h3>
+                                <div className="font-light lg:text-[1.25rem]">
+                                    {parse(dealsData.deals_detail.voucher_util)}
+                                </div>
+                            </div>
+
+                            {/* <div className="flex">
+                                <div className="w-full max-w-[22.75rem] max-lg:mx-auto lg:ml-auto">
+                                    <ButtonBasic
+                                        href={`/checkout/${dealsData.deals_detail.deals_id}`}
+                                        rounded
+                                    >
+                                        BOOK NOW
+                                    </ButtonBasic>
+                                </div>
+                            </div> */}
                         </div>
 
-                        {/* Price */}
-                        <div className="max-md:basis-full flex flex-col items-start">
-                            <p className="font-medium text-[1.5rem] lg:text-[2.5rem] text-[#660000]">
-                                {currency === "IDR"
-                                    ? `${currency}
+                        <div>
+                            <div className="bg-[#887564] p-4">
+                                <div className="bg-[#dba628] flex items-center justify-center h-20 text-white text-xl font-bold">
+                                    End in 0 Days 16 Hours
+                                </div>
+                                <div className="bg-white px-4 h-28 flex items-start border-b-2 border-[#d9d9d9] flex-col justify-center">
+                                    <span className="text-lg text-[#999999]">
+                                        Price
+                                    </span>
+                                    <p className="font-bold text-[1.5rem] lg:text-[1.8rem] text-black">
+                                        {currency === "IDR"
+                                            ? `${currency}
                                                 ${idrFormatter.format(
                                                     rates[currency]
                                                         ? (
@@ -233,7 +303,7 @@ export default function Description({
                                                         : dealsData.deals_detail
                                                               .deals_promo_price
                                                 )}`
-                                    : `${currency}
+                                            : `${currency}
                                                 ${formatter.format(
                                                     rates[currency]
                                                         ? (
@@ -245,14 +315,17 @@ export default function Description({
                                                         : dealsData.deals_detail
                                                               .deals_promo_price
                                                 )}`}
-                            </p>
-                            <p className="relative font-medium text-[1rem] lg:text-[1.25rem] px-2 lg:px-4">
-                                <span>
-                                    {dealsData.deals_detail
-                                        .deals_base_price && (
-                                        <span>
-                                            {currency === "IDR"
-                                                ? `${currency}
+                                    </p>
+                                </div>
+                                <div className="bg-white px-4 h-28 flex items-center justify-between">
+                                    <div>
+                                        <p className="relative font-bold text-[1rem] lg:text-[1.25rem] px-2 lg:px-4">
+                                            <span>
+                                                {dealsData.deals_detail
+                                                    .deals_base_price && (
+                                                    <span>
+                                                        {currency === "IDR"
+                                                            ? `${currency}
                                                     ${idrFormatter.format(
                                                         rates[currency]
                                                             ? (
@@ -267,7 +340,7 @@ export default function Description({
                                                                   .deals_detail
                                                                   .deals_base_price
                                                     )}`
-                                                : `${currency}
+                                                            : `${currency}
                                                     ${formatter.format(
                                                         rates[currency]
                                                             ? (
@@ -282,50 +355,40 @@ export default function Description({
                                                                   .deals_detail
                                                                   .deals_base_price
                                                     )}`}
+                                                    </span>
+                                                )}
+                                            </span>
+                                            <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[0.0625rem] bg-red"></span>
+                                        </p>
+                                    </div>
+                                    <div className="text-lg text-center">
+                                        <span className="text-[#999999]">
+                                            You Save
                                         </span>
-                                    )}
-                                </span>
-                                <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[0.0625rem] bg-red"></span>
-                            </p>
-                        </div>
-                        {/* End - Price */}
-                    </div>
-
-                    <div className="pb-10">
-                        <p className="pb-4 font-bold lg:text-[1.25rem]">
-                            Description
-                        </p>
-                        <div className="font-light lg:text-[1.25rem]">
-                            {parse(dealsData.deals_detail.deals_descriptions)}
-                        </div>
-                    </div>
-
-                    <div className="pb-10">
-                        <h3 className="pb-4 font-bold lg:text-[1.25rem]">
-                            Package Inclusions
-                        </h3>
-                        <div className="font-light lg:text-[1.25rem]">
-                            {parse(dealsData.deals_detail.deals_inclusions)}
-                        </div>
-                    </div>
-
-                    <div className="pb-10">
-                        <h3 className="pb-4 font-bold lg:text-[1.25rem]">
-                            Voucher Utilization
-                        </h3>
-                        <div className="font-light lg:text-[1.25rem]">
-                            {parse(dealsData.deals_detail.voucher_util)}
-                        </div>
-                    </div>
-
-                    <div className="flex">
-                        <div className="w-full max-w-[22.75rem] max-lg:mx-auto lg:ml-auto">
-                            <ButtonBasic
-                                href={`/checkout/${dealsData.deals_detail.deals_id}`}
-                                rounded
-                            >
-                                BOOK NOW
-                            </ButtonBasic>
+                                        <br />
+                                        <span className="font-bold">
+                                            {(
+                                                ((dealsData.deals_detail
+                                                    .deals_base_price -
+                                                    dealsData.deals_detail
+                                                        .deals_promo_price) /
+                                                    dealsData.deals_detail
+                                                        .deals_base_price) *
+                                                100
+                                            ).toFixed(1)}
+                                            %
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="bg-[#705f4d] flex items-center justify-center h-20 text-white text-2xl font-bold">
+                                    <ButtonBasic
+                                        href={`/checkout/${dealsData.deals_detail.deals_id}`}
+                                        variant="brown"
+                                    >
+                                        BOOK NOW
+                                    </ButtonBasic>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

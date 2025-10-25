@@ -1,4 +1,5 @@
 import {CardProperty, Hero, SectionHeading} from "@/components";
+import {HeroDetails} from "@/components/HeroDetails";
 import parse from "html-react-parser";
 import Head from "next/head";
 import {useEffect, useState} from "react";
@@ -29,7 +30,7 @@ export default function Privacy({staticPage, defaultImage}) {
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
+            <HeroDetails />
             <div className="py-32">
                 <div className="container">
                     <SectionHeading style={{textAlign: "center"}}>

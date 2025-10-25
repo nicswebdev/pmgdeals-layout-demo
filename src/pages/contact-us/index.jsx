@@ -35,7 +35,7 @@ export default function ContactUs({staticPage, defaultImage}) {
                     content={`https://cms.pmgdeals.com/uploads/og-image.png`}
                 />
             </Head>
-            <Hero />
+            <HeroDetails />
             <div className="py-32">
                 <div className="container">
                     <div className="pb-20">
@@ -69,6 +69,7 @@ import Head from "next/head";
 import {sendContactForm} from "@/lib/apideals";
 import {Controller, useForm} from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
+import {HeroDetails} from "@/components/HeroDetails";
 function ContactForm() {
     const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
